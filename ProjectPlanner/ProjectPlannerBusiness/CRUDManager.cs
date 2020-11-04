@@ -6,7 +6,7 @@ using ProjectPlannerModel;
 
 namespace ProjectPlannerBusiness
 {
-    class CRUDManager
+    public class CRUDManager
     {
         public Project SelectedProject { get; set; }
         public Feature SelectedFeature { get; set; }
