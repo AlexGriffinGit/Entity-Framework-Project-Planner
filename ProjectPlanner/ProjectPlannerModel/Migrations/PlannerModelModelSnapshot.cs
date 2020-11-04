@@ -7,7 +7,7 @@ using ProjectPlannerModel;
 
 namespace ProjectPlannerModel.Migrations
 {
-    [DbContext(typeof(PlannerModel))]
+    [DbContext(typeof(PlannerContext))]
     partial class PlannerModelModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

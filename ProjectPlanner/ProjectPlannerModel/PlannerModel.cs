@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ProjectPlannerModel
 {
-    public class PlannerModel : DbContext
+    public class PlannerContext : DbContext
     {
         public DbSet<Project> Projects { get; set; }
         public DbSet<Feature> Features { get; set; }

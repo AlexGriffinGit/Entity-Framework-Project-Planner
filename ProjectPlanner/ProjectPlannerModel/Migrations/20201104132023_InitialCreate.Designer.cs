@@ -8,7 +8,7 @@ using ProjectPlannerModel;
 
 namespace ProjectPlannerModel.Migrations
 {
-    [DbContext(typeof(PlannerModel))]
+    [DbContext(typeof(PlannerContext))]
     [Migration("20201104132023_InitialCreate")]
     partial class InitialCreate
     {
