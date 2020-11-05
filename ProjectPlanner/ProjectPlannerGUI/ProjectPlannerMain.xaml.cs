@@ -97,6 +97,12 @@ namespace ProjectPlannerGUI
                 ButtonDeselected(NotesHeaderButton);
 
                 ProjectHeaderButton.FontSize = 55; NotesHeaderButton.FontSize = 45;
+
+                ShowProjectComboBox();
+                ShowProjectSubheadingButtons();
+
+                HideNoteList();
+                HideNoteFields();
             }
         }
 
@@ -115,6 +121,15 @@ namespace ProjectPlannerGUI
 
                 ResetFeatureLists();
                 ResetIssueLists();
+
+                HideProjectComboBox();
+                HideProjectSubheadingButtons();
+
+                HideProjectFields();
+
+                PopulateNoteList();
+
+                ShowNoteList();
             }
         }
 
@@ -130,8 +145,7 @@ namespace ProjectPlannerGUI
 
                 ProjectOverviewButton.FontSize = 45; ProjectFeaturesButton.FontSize = 37; ProjectIssuesButton.FontSize = 37;
 
-                ProjectScrollView.Visibility = Visibility.Visible;
-
+                ShowProjectFields();
                 HideFeatureFields();
                 HideFeatureLists();
                 HideIssueFields();
@@ -156,14 +170,17 @@ namespace ProjectPlannerGUI
 
                 ProjectFeaturesButton.FontSize = 45; ProjectOverviewButton.FontSize = 37; ProjectIssuesButton.FontSize = 37;
 
-                ProjectScrollView.Visibility = Visibility.Hidden;
-
-                _currentView = "f";
-
                 ShowFeatureLists();
+
+                HideFeatureFields();
+                HideProjectFields();
+                HideIssueFields();
+                HideIssueLists();
 
                 PopulateFeatureLists();
                 ResetIssueLists();
+
+                _currentView = "f";
             }
         }
 
@@ -181,10 +198,15 @@ namespace ProjectPlannerGUI
 
                 ShowIssueLists();
 
-                _currentView = "i";
+                HideIssueFields();
+                HideProjectFields();
+                HideFeatureFields();
+                HideFeatureLists();
 
                 ResetFeatureLists();
                 PopulateIssueLists();
+
+                _currentView = "i";
             }
         }
 
@@ -206,30 +228,24 @@ namespace ProjectPlannerGUI
             switch (_currentView)
             {
                 case "p":
-                    ProjectScrollView.Visibility = Visibility.Visible;
-
+                    ShowProjectFields();
                     HideAddAndDeleteButtons();
-
-                    ConfirmButton.Visibility = Visibility.Visible;
-                    Cancelbutton.Visibility = Visibility.Visible;
+                    ShowConfirmAndCancelButtons();
                     break;
                 case "f":
-                    FeatureScrollView.Visibility = Visibility.Visible;
-
+                    ShowFeatureFields();
                     HideAddAndDeleteButtons();
-
-                    ConfirmButton.Visibility = Visibility.Visible;
-                    Cancelbutton.Visibility = Visibility.Visible;
+                    ShowConfirmAndCancelButtons();
                     break;
                 case "i":
-                    IssueScrollView.Visibility = Visibility.Visible;
-
+                    ShowIssueFields();
                     HideAddAndDeleteButtons();
-
-                    ConfirmButton.Visibility = Visibility.Visible;
-                    Cancelbutton.Visibility = Visibility.Visible;
+                    ShowConfirmAndCancelButtons();
                     break;
                 case "n":
+                    ShowNoteFields();
+                    HideAddAndDeleteButtons();
+                    ShowConfirmAndCancelButtons();
                     break;
                 default:
                     break;
@@ -237,9 +253,11 @@ namespace ProjectPlannerGUI
 
             HideFeatureLists();
             HideIssueLists();
+            HideNoteList();
 
             ResetFeatureLists();
             ResetIssueLists();
+            ResetNoteList();
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
@@ -253,7 +271,7 @@ namespace ProjectPlannerGUI
                         _isAdding = false;
 
                         PopulateComboBox();
-                        ProjectScrollView.Visibility = Visibility.Hidden;
+                        HideProjectFields();
                         break;
                     case "f":
                         if (Int32.TryParse(FeaturePriorityTextBox.Text, out int _featurePriority) == true)
@@ -261,7 +279,9 @@ namespace ProjectPlannerGUI
                             _crudManager.CreateNewFeature(FeatureTitleTextBox.Text, FeatureDescriptionTextBox.Text, FeatureStatusComboBox.SelectedIndex, _featurePriority, FeatureNotesTextBox.Text);
                             _isAdding = false;
 
-                            FeatureScrollView.Visibility = Visibility.Hidden;
+                            HideFeatureFields();
+                            PopulateFeatureLists();
+                            ShowFeatureLists();
                         }
                         else
                         {
@@ -274,7 +294,9 @@ namespace ProjectPlannerGUI
                             _crudManager.CreateNewIssue(IssueTitleTextBox.Text, IssueDescriptionTextBox.Text, IssueStatusComboBox.SelectedIndex, _issuePriority, IssueNotesTextBox.Text);
                             _isAdding = false;
 
-                            IssueScrollView.Visibility = Visibility.Hidden;
+                            HideIssueFields();
+                            PopulateIssueLists();
+                            ShowIssueLists();
                         }
                         else
                         {
@@ -282,6 +304,12 @@ namespace ProjectPlannerGUI
                         }
                         break;
                     case "n":
+                        _crudManager.CreateNewNote(NoteTitleTextBox.Text, NoteBodyTextBox.Text);
+                        _isAdding = false;
+
+                        HideNoteFields();
+                        PopulateNoteList();
+                        ShowNoteList();
                         break;
                     default:
                         break;

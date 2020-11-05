@@ -28,6 +28,20 @@ namespace ProjectPlannerModel
         public string Link { get; set; }
         public List<Feature> Features { get; } = new List<Feature>();
         public List<Issue> Issues { get; } = new List<Issue>();
+
+        private List<string> _projectStatus = new List<string>()
+        {
+            "Planning",
+            "In Progress",
+            "Testing",
+            "Releasing",
+            "Complete"
+        };
+
+        public override string ToString()
+        {
+            return $"{ ProjectId } - { Title } - { _projectStatus[Status] }";
+        }
     }
 
     public class Feature
