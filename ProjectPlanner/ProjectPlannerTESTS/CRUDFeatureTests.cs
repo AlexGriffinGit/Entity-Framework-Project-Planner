@@ -33,7 +33,7 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                _crudManager.SetSelectedProject(_tempProj);
+                _crudManager.SelectedProject = _tempProj;
             }
         }
 
@@ -133,6 +133,31 @@ namespace ProjectPlannerTESTS
                 _featureList = _crudManager.RetrieveAllFeatures();
 
                 Assert.IsNotEmpty(_featureList);
+            }
+        }
+
+        [Test]
+        public void WhenAFeatureIsSelectedMakeSureItIsTheSelectedFeatureInTheApplication()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Feature _testFeat = new Feature()
+                {
+                    Title = "TestFeat",
+                    Description = "This is a test feature",
+                    Status = 1,
+                    Priority = 1,
+                    Notes = "No notes needed",
+                    ProjectId = _crudManager.SelectedProject.ProjectId
+                };
+
+                pc.Features.Add(_testFeat);
+
+                pc.SaveChanges();
+
+                _crudManager.SetSelectedFeature(_testFeat);
+
+                Assert.AreEqual(_testFeat, _crudManager.SelectedFeature);
             }
         }
     }

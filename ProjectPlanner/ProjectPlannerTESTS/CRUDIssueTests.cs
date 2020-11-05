@@ -32,7 +32,7 @@ namespace ProjectPlannerTESTS
                 pc.Projects.Add(_tempProj);
 
                 pc.SaveChanges();
-                _crudManager.SetSelectedProject(_tempProj);
+                _crudManager.SelectedProject = _tempProj;
             }
         }
 
@@ -132,6 +132,31 @@ namespace ProjectPlannerTESTS
                 _issueList = _crudManager.RetrieveAllIssues();
 
                 Assert.IsNotEmpty(_issueList);
+            }
+        }
+
+        [Test]
+        public void WhenAIssueIsSelectedMakeSureItIsTheSelectedIssueInTheApplication()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Issue _testIssue = new Issue()
+                {
+                    Title = "TestIssue",
+                    Description = "This is a test issue",
+                    Status = 1,
+                    Priority = 1,
+                    Notes = "No notes needed",
+                    ProjectId = _crudManager.SelectedProject.ProjectId
+                };
+
+                pc.Issues.Add(_testIssue);
+
+                pc.SaveChanges();
+
+                _crudManager.SetSelectedIssue(_testIssue);
+
+                Assert.AreEqual(_testIssue, _crudManager.SelectedIssue);
             }
         }
     }

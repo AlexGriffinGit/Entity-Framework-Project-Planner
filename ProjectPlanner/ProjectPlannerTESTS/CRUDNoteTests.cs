@@ -108,5 +108,26 @@ namespace ProjectPlannerTESTS
                 Assert.IsNotEmpty(_noteList);
             }
         }
+
+        [Test]
+        public void WhenANoteIsSelectedMakeSureItIsTheSelectedNoteInTheApplication()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Note _testNote = new Note()
+                {
+                    Title = "TestNote",
+                    Body = "A test note",
+                };
+
+                pc.Notes.Add(_testNote);
+
+                pc.SaveChanges();
+
+                _crudManager.SetSelectedNote(_testNote);
+
+                Assert.AreEqual(_testNote, _crudManager.SelectedNote);
+            }
+        }
     }
 }

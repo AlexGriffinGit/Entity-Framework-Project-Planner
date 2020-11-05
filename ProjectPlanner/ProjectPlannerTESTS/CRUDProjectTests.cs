@@ -114,5 +114,28 @@ namespace ProjectPlannerTESTS
                 Assert.IsNotEmpty(_projectList);
             }
         }
+
+        [Test]
+        public void WhenAProjectIsSelectedMakeSureItIsTheSelectedProjectInTheApplication()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Project _testProj = new Project()
+                {
+                    Title = "TestProj",
+                    Description = "A blank test project",
+                    Status = 1,
+                    Link = "No Link"
+                };
+
+                pc.Projects.Add(_testProj);
+
+                pc.SaveChanges();
+
+                _crudManager.SetSelectedProject(_testProj);
+
+                Assert.AreEqual(_testProj, _crudManager.SelectedProject);
+            }
+        }
     }
 }
