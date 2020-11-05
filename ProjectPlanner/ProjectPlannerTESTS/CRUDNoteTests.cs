@@ -2,6 +2,7 @@
 using ProjectPlannerModel;
 using ProjectPlannerBusiness;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace ProjectPlannerTESTS
 {
@@ -14,12 +15,12 @@ namespace ProjectPlannerTESTS
         {
             using (PlannerContext pc = new PlannerContext())
             {
-                var selectedNote =
+                var _selectedNote =
                    from n in pc.Notes
                    where n.Title == "TestNote"
                    select n;
 
-                pc.Notes.RemoveRange(selectedNote);
+                pc.Notes.RemoveRange(_selectedNote);
 
                 pc.SaveChanges();
             }
@@ -30,12 +31,12 @@ namespace ProjectPlannerTESTS
         {
             using (PlannerContext pc = new PlannerContext())
             {
-                var selectedNote =
+                var _selectedNote =
                    from n in pc.Notes
                    where n.Title == "TestNote"
                    select n;
 
-                pc.Notes.RemoveRange(selectedNote);
+                pc.Notes.RemoveRange(_selectedNote);
 
                 pc.SaveChanges();
             }
@@ -48,11 +49,11 @@ namespace ProjectPlannerTESTS
             {
                 _crudManager.CreateNewNote("TestNote", "A test note");
 
-                var noteCount =
+                var _noteCount =
                     from n in pc.Notes
                     select n;
 
-                Assert.AreEqual(1, noteCount.Count());
+                Assert.AreEqual(1, _noteCount.Count());
             }
         }
 
@@ -63,25 +64,48 @@ namespace ProjectPlannerTESTS
             {
                 _crudManager.CreateNewNote("TestNote", "A test note");
 
-                var noteDetails =
+                var _noteDetails =
                    from n in pc.Notes
                    where n.Title == "TestNote"
                    select n;
 
-                string title = "", body = "";
+                string _title = "", _body = "";
 
-                foreach (var item in noteDetails)
+                foreach (var item in _noteDetails)
                 {
-                    title = item.Title;
-                    body = item.Body;
+                    _title = item.Title;
+                    _body = item.Body;
                 }
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual("TestNote", title);
-                    Assert.AreEqual("A test note", body);
+                    Assert.AreEqual("TestNote", _title);
+                    Assert.AreEqual("A test note", _body);
 
                 });
+            }
+        }
+
+        [Test]
+        public void WhenAListOfNotesIsRetrievedMakeSureItIsNotEmptyIfThereAreNotesInTheDatabase()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Note _testNote = new Note()
+                {
+                    Title = "TestNote",
+                    Body = "A test note",
+                };
+
+                pc.Notes.Add(_testNote);
+
+                pc.SaveChanges();
+
+                List<Note> _noteList = new List<Note>();
+
+                _noteList = _crudManager.RetrieveAllNotes();
+
+                Assert.IsNotEmpty(_noteList);
             }
         }
     }

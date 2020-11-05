@@ -2,6 +2,7 @@
 using ProjectPlannerModel;
 using ProjectPlannerBusiness;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace ProjectPlannerTESTS
 {
@@ -14,12 +15,12 @@ namespace ProjectPlannerTESTS
         {
             using (PlannerContext pc = new PlannerContext())
             {
-                var selectedFeature =
+                var _selectedFeature =
                    from f in pc.Features
                    where f.Title == "TestFeat"
                    select f;
 
-                Project TempProj = new Project()
+                Project _tempProj = new Project()
                 {
                     Title = "temp",
                     Description = "Temp Temp",
@@ -27,12 +28,12 @@ namespace ProjectPlannerTESTS
                     Link = "Temporary"
                 };
 
-                pc.Features.RemoveRange(selectedFeature);
-                pc.Projects.Add(TempProj);
+                pc.Features.RemoveRange(_selectedFeature);
+                pc.Projects.Add(_tempProj);
 
                 pc.SaveChanges();
 
-                _crudManager.SetSelectedProject(TempProj);
+                _crudManager.SetSelectedProject(_tempProj);
             }
         }
 
@@ -41,18 +42,18 @@ namespace ProjectPlannerTESTS
         {
             using (PlannerContext pc = new PlannerContext())
             {
-                var selectedFeature =
+                var _selectedFeature =
                    from f in pc.Features
                    where f.Title == "TestFeat"
                    select f;
 
-                var selectedProject =
+                var _selectedProject =
                     from p in pc.Projects
                     where p.Title == "temp"
                     select p;
 
-                pc.Projects.RemoveRange(selectedProject);
-                pc.Features.RemoveRange(selectedFeature);
+                pc.Projects.RemoveRange(_selectedProject);
+                pc.Features.RemoveRange(_selectedFeature);
 
                 pc.SaveChanges();
             }
@@ -65,11 +66,11 @@ namespace ProjectPlannerTESTS
             {
                 _crudManager.CreateNewFeature("TestFeat", "This is a test feature", 1, 1, "No notes needed");
 
-                var featureCount =
+                var _featureCount =
                     from f in pc.Features
                     select f;
 
-                Assert.AreEqual(1, featureCount.Count());
+                Assert.AreEqual(1, _featureCount.Count());
             }
         }
 
@@ -80,31 +81,58 @@ namespace ProjectPlannerTESTS
             {
                 _crudManager.CreateNewFeature("TestFeat", "This is a test feature", 1, 1, "No notes needed");
 
-                var featureDetails =
+                var _featureDetails =
                    from f in pc.Features
                    where f.Title == "TestFeat"
                    select f;
 
-                string title = "", description = "", notes = "";
-                int status = -5, priority = -5;
+                string _title = "", _description = "", _notes = "";
+                int _status = -5, _priority = -5;
 
-                foreach (var item in featureDetails)
+                foreach (var item in _featureDetails)
                 {
-                    title = item.Title;
-                    description = item.Description;
-                    status = item.Status;
-                    priority = item.Priority;
-                    notes = item.Notes;
+                    _title = item.Title;
+                    _description = item.Description;
+                    _status = item.Status;
+                    _priority = item.Priority;
+                    _notes = item.Notes;
                 }
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual("TestFeat", title);
-                    Assert.AreEqual("This is a test feature", description);
-                    Assert.AreEqual(1, status);
-                    Assert.AreEqual(1, priority);
-                    Assert.AreEqual("No notes needed", notes);
+                    Assert.AreEqual("TestFeat", _title);
+                    Assert.AreEqual("This is a test feature", _description);
+                    Assert.AreEqual(1, _status);
+                    Assert.AreEqual(1, _priority);
+                    Assert.AreEqual("No notes needed", _notes);
                 });
+            }
+        }
+
+        [Test]
+        public void WhenAListOfFeaturesIsRetrievedMakeSureItIsNotEmptyIfThereAreFeaturesInTheDatabase()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Feature _testFeat = new Feature()
+                {
+                    Title = "TestFeat",
+                    Description = "This is a test feature",
+                    Status = 1,
+                    Priority = 1,
+                    Notes = "No notes needed",
+                    ProjectId = _crudManager.SelectedProject.ProjectId
+                };
+
+                pc.Features.Add(_testFeat);
+
+                pc.SaveChanges();
+
+                List<Feature> _featureList = new List<Feature>();
+
+                _featureList = _crudManager.RetrieveAllFeatures();
+
+                Assert.IsNotEmpty(_featureList);
             }
         }
     }

@@ -26,7 +26,7 @@ namespace ProjectPlannerBusiness
             }
         }
 
-        public List<Feature> RetieveAllFeatures()
+        public List<Feature> RetrieveAllFeatures()
         {
             using (PlannerContext pc = new PlannerContext())
             {
@@ -34,7 +34,7 @@ namespace ProjectPlannerBusiness
             }
         }
 
-        public List<Issue> RetieveAllIssues()
+        public List<Issue> RetrieveAllIssues()
         {
             using (PlannerContext pc = new PlannerContext())
             {
@@ -42,7 +42,7 @@ namespace ProjectPlannerBusiness
             }
         }
 
-        public List<Note> RetieveAllNotes()
+        public List<Note> RetrieveAllNotes()
         {
             using (PlannerContext pc = new PlannerContext())
             {
