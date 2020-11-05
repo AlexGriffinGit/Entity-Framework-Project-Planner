@@ -59,6 +59,7 @@ namespace ProjectPlannerBusiness
                 var _featureIDs =
                     from f in pc.Features
                     where f.ProjectId == SelectedProject.ProjectId
+                    orderby f.Priority
                     select f;
 
                 foreach (var item in _featureIDs)
@@ -78,7 +79,7 @@ namespace ProjectPlannerBusiness
 
                 var _featureIDs =
                     from f in pc.Features
-                    where f.ProjectId == SelectedProject.ProjectId && f.Status == 3 //temp num
+                    where f.ProjectId == SelectedProject.ProjectId && f.Status == 3
                     select f;
 
                 foreach (var item in _featureIDs)
@@ -98,7 +99,8 @@ namespace ProjectPlannerBusiness
 
                 var _featureIDs =
                     from f in pc.Features
-                    where f.ProjectId == SelectedProject.ProjectId && f.Status != 3 //temp num
+                    where f.ProjectId == SelectedProject.ProjectId && f.Status != 3
+                    orderby f.Priority
                     select f;
 
                 foreach (var item in _featureIDs)
@@ -118,7 +120,8 @@ namespace ProjectPlannerBusiness
 
                 var _issueIDs =
                     from i in pc.Issues
-                    where i.ProjectId == SelectedProject.ProjectId && i.Status != 3 //temp num
+                    where i.ProjectId == SelectedProject.ProjectId && i.Status != 3
+                    orderby i.Priority
                     select i;
 
                 foreach (var item in _issueIDs)

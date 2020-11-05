@@ -6,6 +6,7 @@
         mc:Ignorable="d"
         MinHeight="800" MaxHeight="800" MinWidth="1200" MaxWidth="1200"
         FontFamily="Drugs"
+        FontSize="20"
         Title="Project Planner">
     <Window.Resources>
         <Style x:Key="FocusVisual">
@@ -118,8 +119,267 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <SolidColorBrush x:Key="Expander.Static.Circle.Stroke" Color="#605F60"/>
+        <SolidColorBrush x:Key="Expander.Static.Circle.Fill" Color="Transparent"/>
+        <SolidColorBrush x:Key="Expander.Static.Arrow.Stroke" Color="#D2D1D3"/>
+        <SolidColorBrush x:Key="Expander.MouseOver.Circle.Stroke" Color="#777677"/>
+        <SolidColorBrush x:Key="Expander.MouseOver.Circle.Fill" Color="Transparent"/>
+        <SolidColorBrush x:Key="Expander.MouseOver.Arrow.Stroke" Color="#BFBEBF"/>
+        <SolidColorBrush x:Key="Expander.Pressed.Circle.Stroke" Color="#000000"/>
+        <SolidColorBrush x:Key="Expander.Pressed.Circle.Fill" Color="Transparent"/>
+        <SolidColorBrush x:Key="Expander.Pressed.Arrow.Stroke" Color="#EFEFEF"/>
+        <SolidColorBrush x:Key="Expander.Disabled.Circle.Stroke" Color="#FFBCBCBC"/>
+        <SolidColorBrush x:Key="Expander.Disabled.Circle.Fill" Color="#FFE6E6E6"/>
+        <SolidColorBrush x:Key="Expander.Disabled.Arrow.Stroke" Color="#FF707070"/>
+        <Style x:Key="ExpanderHeaderFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border>
+                            <Rectangle Margin="0" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="Black"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ExpanderDownHeaderStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border Padding="{TemplateBinding Padding}">
+                            <Grid Background="Transparent" SnapsToDevicePixels="False">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="19"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Ellipse x:Name="circle" Fill="{StaticResource Expander.Static.Circle.Fill}" HorizontalAlignment="Center" Height="19" Stroke="{StaticResource Expander.Static.Circle.Stroke}" VerticalAlignment="Center" Width="19"/>
+                                <Path x:Name="arrow" Data="M 1,0 L 3.5,4.5 L 6,0" HorizontalAlignment="Center" SnapsToDevicePixels="false" StrokeThickness="6" Stroke="{StaticResource Expander.Static.Arrow.Stroke}" VerticalAlignment="Center" Margin="1.5,1.5,0,0"/>
+                                <ContentPresenter Grid.Column="1" HorizontalAlignment="Left" Margin="4,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Data" TargetName="arrow" Value="M 1,4.5  L 4.5,1  L 8,4.5"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.MouseOver.Arrow.Stroke}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Stroke}"/>
+                                <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Pressed.Arrow.Stroke}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ExpanderUpHeaderStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border Padding="{TemplateBinding Padding}">
+                            <Grid Background="Transparent" SnapsToDevicePixels="False">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="19"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid>
+                                    <Grid.LayoutTransform>
+                                        <TransformGroup>
+                                            <TransformGroup.Children>
+                                                <TransformCollection>
+                                                    <RotateTransform Angle="180"/>
+                                                </TransformCollection>
+                                            </TransformGroup.Children>
+                                        </TransformGroup>
+                                    </Grid.LayoutTransform>
+                                    <Ellipse x:Name="circle" Fill="{StaticResource Expander.Static.Circle.Fill}" HorizontalAlignment="Center" Height="19" Stroke="{StaticResource Expander.Static.Circle.Stroke}" VerticalAlignment="Center" Width="19"/>
+                                    <Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" StrokeThickness="4" Stroke="{StaticResource Expander.Static.Arrow.Stroke}" VerticalAlignment="Center"/>
+                                </Grid>
+                                <ContentPresenter Grid.Column="1" HorizontalAlignment="Left" Margin="4,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Data" TargetName="arrow" Value="M 1,4.5  L 4.5,1  L 8,4.5"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.MouseOver.Arrow.Stroke}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Stroke}"/>
+                                <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Pressed.Arrow.Stroke}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ExpanderLeftHeaderStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border Padding="{TemplateBinding Padding}">
+                            <Grid Background="Transparent" SnapsToDevicePixels="False">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="19"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid>
+                                    <Grid.LayoutTransform>
+                                        <TransformGroup>
+                                            <TransformGroup.Children>
+                                                <TransformCollection>
+                                                    <RotateTransform Angle="90"/>
+                                                </TransformCollection>
+                                            </TransformGroup.Children>
+                                        </TransformGroup>
+                                    </Grid.LayoutTransform>
+                                    <Ellipse x:Name="circle" Fill="{StaticResource Expander.Static.Circle.Fill}" HorizontalAlignment="Center" Height="19" Stroke="{StaticResource Expander.Static.Circle.Stroke}" VerticalAlignment="Center" Width="19"/>
+                                    <Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" StrokeThickness="2" Stroke="{StaticResource Expander.Static.Arrow.Stroke}" VerticalAlignment="Center"/>
+                                </Grid>
+                                <ContentPresenter HorizontalAlignment="Center" Margin="0,4,0,0" RecognizesAccessKey="True" Grid.Row="1" SnapsToDevicePixels="True" VerticalAlignment="Top"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Data" TargetName="arrow" Value="M 1,4.5  L 4.5,1  L 8,4.5"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.MouseOver.Arrow.Stroke}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Stroke}"/>
+                                <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Pressed.Arrow.Stroke}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ExpanderRightHeaderStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border Padding="{TemplateBinding Padding}">
+                            <Grid Background="Transparent" SnapsToDevicePixels="False">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="19"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid>
+                                    <Grid.LayoutTransform>
+                                        <TransformGroup>
+                                            <TransformGroup.Children>
+                                                <TransformCollection>
+                                                    <RotateTransform Angle="-90"/>
+                                                </TransformCollection>
+                                            </TransformGroup.Children>
+                                        </TransformGroup>
+                                    </Grid.LayoutTransform>
+                                    <Ellipse x:Name="circle" Fill="{StaticResource Expander.Static.Circle.Fill}" HorizontalAlignment="Center" Height="19" Stroke="{StaticResource Expander.Static.Circle.Stroke}" VerticalAlignment="Center" Width="19"/>
+                                    <Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" StrokeThickness="2" Stroke="{StaticResource Expander.Static.Arrow.Stroke}" VerticalAlignment="Center"/>
+                                </Grid>
+                                <ContentPresenter HorizontalAlignment="Center" Margin="0,4,0,0" RecognizesAccessKey="True" Grid.Row="1" SnapsToDevicePixels="True" VerticalAlignment="Top"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Data" TargetName="arrow" Value="M 1,4.5  L 4.5,1  L 8,4.5"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.MouseOver.Arrow.Stroke}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Stroke}"/>
+                                <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Pressed.Arrow.Stroke}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ExpanderStyle" TargetType="{x:Type Expander}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Expander}">
+                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="3" SnapsToDevicePixels="true">
+                            <DockPanel>
+                                <ToggleButton x:Name="HeaderSite" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}" DockPanel.Dock="Top" FontStyle="{TemplateBinding FontStyle}" FontStretch="{TemplateBinding FontStretch}" FontWeight="{TemplateBinding FontWeight}" FocusVisualStyle="{StaticResource ExpanderHeaderFocusVisual}" FontFamily="{TemplateBinding FontFamily}" Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" MinHeight="0" MinWidth="0" Margin="1" Padding="{TemplateBinding Padding}" Style="{StaticResource ExpanderDownHeaderStyle}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                <ContentPresenter x:Name="ExpandSite" DockPanel.Dock="Bottom" Focusable="false" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="Collapsed"/>
+                            </DockPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsExpanded" Value="true">
+                                <Setter Property="Visibility" TargetName="ExpandSite" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="ExpandDirection" Value="Right">
+                                <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Right"/>
+                                <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Left"/>
+                                <Setter Property="Style" TargetName="HeaderSite" Value="{StaticResource ExpanderRightHeaderStyle}"/>
+                            </Trigger>
+                            <Trigger Property="ExpandDirection" Value="Up">
+                                <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Top"/>
+                                <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Bottom"/>
+                                <Setter Property="Style" TargetName="HeaderSite" Value="{StaticResource ExpanderUpHeaderStyle}"/>
+                            </Trigger>
+                            <Trigger Property="ExpandDirection" Value="Left">
+                                <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Left"/>
+                                <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Right"/>
+                                <Setter Property="Style" TargetName="HeaderSite" Value="{StaticResource ExpanderLeftHeaderStyle}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
-    <Grid Background="#908F91">
+    <Grid Background="#908F91" Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -148,11 +408,12 @@
         <ComboBox Name="ProjectComboBox" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"  SelectionChanged="ProjectComboBox_SelectionChanged" Grid.Row="1" Grid.Column="0" Width="225" Height="50" FontSize="25"/>
 
         <!--Add, confirm, cancel and delete buttons-->
-        <Button Name="AddButton" Content="Add" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="0" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#908F91"/>
-        <Button Name="ConfirmButton" Content="Confirm" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="1" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#908F91"/>
-        <Button Name="Cancelbutton" Content="Cancel" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="2" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#908F91"/>
-        <Button Name="DeleteButton" Content="Delete" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="3" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#908F91"/>
-
+        <Button Name="AddButton" Content="Add" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="0" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#908F91" Click="AddButton_Click"/>
+        <Button Name="ConfirmButton" Content="Confirm" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="1" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#908F91" Click="ConfirmButton_Click" Visibility="Hidden"/>
+        <Button Name="Cancelbutton" Content="Cancel" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="2" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#908F91" Click="Cancelbutton_Click" Visibility="Hidden"/>
+        <Button Name="DeleteButton" Content="Delete" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="3" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#908F91" Click="DeleteButton_Click" Visibility="Hidden"/>
+        
+        <!--Project Fields contained in a scroll view-->
         <ScrollViewer Name="ProjectScrollView" Grid.ColumnSpan="4" Margin="38,112,38,0" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
@@ -165,10 +426,10 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Name="ProjectDescriptionLabel" Content="Project Description: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
-                    <TextBox Name="ProjectDescriptionTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="250"/>
+                    <TextBox Name="ProjectDescriptionTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="250" TextWrapping="Wrap"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Name="ProjectStatusLabel" Content="Project Description: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <Label Name="ProjectStatusLabel" Content="Project Status: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
                     <ComboBox Name="ProjectStatusComboBox" Width="500" Height="50" Margin="-140,10,0,0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -177,26 +438,120 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Name="ProjectCompletedLabel" Content="Finished Features: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
-                    <Label Name="ProjectCompletedText" Content="" HorizontalAlignment="Left" Height="150" Margin="-140,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <TextBlock Name="ProjectCompletedText" Text="" HorizontalAlignment="Left" Height="150" Margin="-140,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30" TextWrapping="Wrap"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Name="ProjectToDoLabel" Content="Project To Do: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
-                    <Label Name="ProjectToDoText" Content="" HorizontalAlignment="Left" Height="150" Margin="-140,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <TextBlock Name="ProjectToDoText" Text="" HorizontalAlignment="Left" Height="150" Margin="-140,10,0,0" VerticalAlignment="Top" Width="750" Foreground="#D2D1D3" FontSize="30" TextWrapping="Wrap"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Name="ProjectIssuesLabel" Content="Unresolved Issues: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
-                    <Label Name="ProjectIssuesText" Content="" HorizontalAlignment="Left" Height="150" Margin="-140,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <TextBlock Name="ProjectIssuesText" Text="" HorizontalAlignment="Left" Height="150" Margin="-140,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30" TextWrapping="Wrap"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Name="ProjectProgressLabel" Content="Project Progress: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
                     <ProgressBar Name="ProjectProgressBar" Width="775" Height="50" Margin="-140,10,0,0"/>
+                    <TextBlock Name="ProgressBarValue" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35" Margin="-725,12,0,0"/>
+                    </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!--Feature Fields contained in a scroll view-->
+        <ScrollViewer Name="FeatureScrollView" Grid.ColumnSpan="4" Margin="38,112,38,0" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="FeatureIDLabel" Content="Feature ID: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <Label Name="FeatureIDText" Content="" HorizontalAlignment="Left" Height="50" Margin="-140,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="FeatureTitleLabel" Content="Feature Title: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <TextBox Name="FeatureTitleTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="50"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="FeatureDescriptionLabel" Content="Feature Description: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <TextBox Name="FeatureDescriptionTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="250" TextWrapping="Wrap"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="FeatureProjectIDLabel" Content="Project ID: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <Label Name="FeatureProjectIDText" Content="" HorizontalAlignment="Left" Height="150" Margin="-140,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="FeatureStatusLabel" Content="Feature Status: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <ComboBox Name="FeatureStatusComboBox" Width="500" Height="50" Margin="-140,10,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="FeaturePriorityLabel" Content="Feature Priority: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <TextBox Name="FeaturePriorityTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="50" InputScope="Number"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                <Label Name="FeatureNotesLabel" Content="Notes: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                <TextBox Name="FeatureNotesTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="250"/>
+            </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!--Feature lists populated by different stages of completion-->
+        <ScrollViewer Name="FeaturePlannedView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="0" Grid.RowSpan="4" Width="275" Visibility="Hidden">
+            <StackPanel Name="PlannedFeatures"/>
+        </ScrollViewer>
+        <ScrollViewer Name="FeatureInProgressView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" Width="275" Visibility="Hidden">
+            <StackPanel Name="InProgressFeatures"/>
+        </ScrollViewer>
+        <ScrollViewer Name="FeatureTestingView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="2" Grid.RowSpan="4" Width="275" Visibility="Hidden">
+            <StackPanel Name="TestingFeatures"/>
+        </ScrollViewer>
+        <ScrollViewer Name="FeatureCompleteView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="3" Grid.RowSpan="4" Width="275" Visibility="Hidden">
+            <StackPanel Name="CompleteFeatures"/>
+        </ScrollViewer>
+
+        <!--Issue Fields contained in a scroll view-->
+        <ScrollViewer Name="IssueScrollView" Grid.ColumnSpan="4" Margin="38,112,38,0" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="IssueIDLabel" Content="Issue ID: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <Label Name="IssueIDText" Content="" HorizontalAlignment="Left" Height="50" Margin="-140,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="IssueTitleLabel" Content="Issue Title: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <TextBox Name="IssueTitleTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="50"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="IssueDescriptionLabel" Content="Issue Description: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <TextBox Name="IssueDescriptionTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="250" TextWrapping="Wrap"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="IssueProjectIDLabel" Content="Project ID: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <Label Name="IssueProjectIDText" Content="" HorizontalAlignment="Left" Height="150" Margin="-140,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="IssueStatusLabel" Content="Issue Status: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <ComboBox Name="IssueStatusComboBox" Width="500" Height="50" Margin="-140,10,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="IssuePriorityLabel" Content="Issue Priority: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <TextBox Name="IssuePriorityTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="50" InputScope="Number"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="IssueNotesLabel" Content="Notes: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <TextBox Name="IssueNotesTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="250"/>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
 
+        <!--Feature lists populated by different stages of completion-->
+        <ScrollViewer Name="IssueKnownView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="0" Grid.RowSpan="4" Width="275" Visibility="Hidden">
+            <StackPanel Name="KnownIssues"/>
+        </ScrollViewer>
+        <ScrollViewer Name="IssueInProgressView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" Width="275" Visibility="Hidden">
+            <StackPanel Name="InProgressIssues"/>
+        </ScrollViewer>
+        <ScrollViewer Name="IssueTestingView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="2" Grid.RowSpan="4" Width="275" Visibility="Hidden">
+            <StackPanel Name="TestingIssues"/>
+        </ScrollViewer>
+        <ScrollViewer Name="IssueResolvedView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="3" Grid.RowSpan="4" Width="275" Visibility="Hidden">
+            <StackPanel Name="ResolvedIssues"/>
+        </ScrollViewer>
+        <Expander Style="{DynamicResource ExpanderStyle}" />
+        
     </Grid>
 </Window>
-
-
-
-
