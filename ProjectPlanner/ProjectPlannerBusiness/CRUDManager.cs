@@ -50,6 +50,86 @@ namespace ProjectPlannerBusiness
             }
         }
 
+        public List<Feature> RetrieveProjectFeatures()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                List<Feature> features = new List<Feature>();
+
+                var _featureIDs =
+                    from f in pc.Features
+                    where f.ProjectId == SelectedProject.ProjectId
+                    select f;
+
+                foreach (var item in _featureIDs)
+                {
+                    features.Add(item);
+                }
+
+                return features;
+            }
+        }
+
+        public List<Feature> RetrieveCompleteFeatures()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                List<Feature> features = new List<Feature>();
+
+                var _featureIDs =
+                    from f in pc.Features
+                    where f.ProjectId == SelectedProject.ProjectId && f.Status == 3 //temp num
+                    select f;
+
+                foreach (var item in _featureIDs)
+                {
+                    features.Add(item);
+                }
+
+                return features;
+            }
+        }
+
+        public List<Feature> RetrieveToDoFeatures()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                List<Feature> features = new List<Feature>();
+
+                var _featureIDs =
+                    from f in pc.Features
+                    where f.ProjectId == SelectedProject.ProjectId && f.Status != 3 //temp num
+                    select f;
+
+                foreach (var item in _featureIDs)
+                {
+                    features.Add(item);
+                }
+
+                return features;
+            }
+        }
+
+        public List<Issue> RetrieveProjectIssues()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                List<Issue> issues = new List<Issue>();
+
+                var _issueIDs =
+                    from i in pc.Issues
+                    where i.ProjectId == SelectedProject.ProjectId && i.Status != 3 //temp num
+                    select i;
+
+                foreach (var item in _issueIDs)
+                {
+                    issues.Add(item);
+                }
+
+                return issues;
+            }
+        }
+
         public void SetSelectedProject(object selected)
         {
             SelectedProject = (Project)selected;
@@ -74,7 +154,7 @@ namespace ProjectPlannerBusiness
         {
             using (PlannerContext pc = new PlannerContext())
             {
-                Project newProject = new Project()
+                Project _newProject = new Project()
                 {
                     Title = title,
                     Description = description,
@@ -82,7 +162,7 @@ namespace ProjectPlannerBusiness
                     Link = link
                 };
 
-                pc.Projects.Add(newProject);
+                pc.Projects.Add(_newProject);
 
                 pc.SaveChanges();
             }
@@ -92,7 +172,7 @@ namespace ProjectPlannerBusiness
         {
             using (PlannerContext pc = new PlannerContext())
             {
-                Feature newFeature = new Feature()
+                Feature _newFeature = new Feature()
                 {
                     Title = title,
                     Description = description,
@@ -103,7 +183,7 @@ namespace ProjectPlannerBusiness
                     ProjectId = SelectedProject.ProjectId
                 };
 
-                pc.Features.Add(newFeature);
+                pc.Features.Add(_newFeature);
 
                 pc.SaveChanges();
             }
@@ -113,7 +193,7 @@ namespace ProjectPlannerBusiness
         {
             using (PlannerContext pc = new PlannerContext())
             {
-                Issue newIssue = new Issue()
+                Issue _newIssue = new Issue()
                 {
                     Title = title,
                     Description = description,
@@ -124,7 +204,7 @@ namespace ProjectPlannerBusiness
                     ProjectId = SelectedProject.ProjectId
                 };
 
-                pc.Issues.Add(newIssue);
+                pc.Issues.Add(_newIssue);
 
                 pc.SaveChanges();
             }
@@ -134,13 +214,13 @@ namespace ProjectPlannerBusiness
         {
             using (PlannerContext pc = new PlannerContext())
             {
-                Note newNote = new Note()
+                Note _newNote = new Note()
                 {
                     Title = title,
                     Body = body
                 };
 
-                pc.Notes.Add(newNote);
+                pc.Notes.Add(_newNote);
 
                 pc.SaveChanges();
             }
