@@ -80,6 +80,26 @@ namespace ProjectPlannerGUI
             IssueResolvedView.Visibility = Visibility.Visible;
         }
 
+        private void HideNoteFields()
+        {
+            NoteScrollView.Visibility = Visibility.Hidden;
+        }
+
+        private void ShowNoteFields()
+        {
+            NoteScrollView.Visibility = Visibility.Visible;
+        }
+
+        private void HideNoteList()
+        {
+            NotesView.Visibility = Visibility.Hidden;
+        }
+
+        private void ShowNoteList()
+        {
+            NotesView.Visibility = Visibility.Visible;
+        }
+
         private void HideAddAndDeleteButtons()
         {
             AddButton.Visibility = Visibility.Hidden;
@@ -102,6 +122,30 @@ namespace ProjectPlannerGUI
         {
             ConfirmButton.Visibility = Visibility.Visible;
             Cancelbutton.Visibility = Visibility.Visible;
+        }
+
+        private void HideProjectComboBox()
+        {
+            ProjectComboBox.Visibility = Visibility.Hidden;
+        }
+
+        private void ShowProjectComboBox()
+        {
+            ProjectComboBox.Visibility = Visibility.Visible;
+        }
+
+        private void HideProjectSubheadingButtons()
+        {
+            ProjectOverviewButton.Visibility = Visibility.Hidden;
+            ProjectFeaturesButton.Visibility = Visibility.Hidden;
+            ProjectIssuesButton.Visibility = Visibility.Hidden;
+        }
+
+        private void ShowProjectSubheadingButtons()
+        {
+            ProjectOverviewButton.Visibility = Visibility.Visible;
+            ProjectFeaturesButton.Visibility = Visibility.Visible;
+            ProjectIssuesButton.Visibility = Visibility.Visible;
         }
     }
 }

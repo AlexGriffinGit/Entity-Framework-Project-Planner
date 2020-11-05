@@ -405,7 +405,8 @@
         <Button Name="ProjectIssuesButton" Style="{DynamicResource HeaderButtons}" Content="Issues" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="ProjectIssuesButton_Click" Width="250" Height="80" Grid.Row="1" Grid.Column="3" FontSize="37" Foreground="#D2D1D3"/>
 
         <!--Project Select Combo box-->
-        <ComboBox Name="ProjectComboBox" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"  SelectionChanged="ProjectComboBox_SelectionChanged" Grid.Row="1" Grid.Column="0" Width="225" Height="50" FontSize="25"/>
+        <ComboBox Name="ProjectComboBox" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"  SelectionChanged="ProjectComboBox_SelectionChanged" Grid.Row="1" Grid.Column="0" Width="250" Height="50" FontSize="23"/>
+
 
         <!--Add, confirm, cancel and delete buttons-->
         <Button Name="AddButton" Content="Add" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="0" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#908F91" Click="AddButton_Click"/>
@@ -551,7 +552,28 @@
         <ScrollViewer Name="IssueResolvedView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="3" Grid.RowSpan="4" Width="275" Visibility="Hidden">
             <StackPanel Name="ResolvedIssues"/>
         </ScrollViewer>
-        <Expander Style="{DynamicResource ExpanderStyle}" />
-        
+
+        <!--Note Fields contained in a scroll view-->
+        <ScrollViewer Name="NoteScrollView" Grid.ColumnSpan="4" Margin="38,112,38,0" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="NoteIDLabel" Content="Note ID: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <Label Name="NoteIDText" Content="" HorizontalAlignment="Left" Height="50" Margin="-140,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="NoteTitleLabel" Content="Note Title: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <TextBox Name="NoteTitleTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="100" TextWrapping="Wrap"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="NoteBodyLabel" Content="Note Body: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <TextBox Name="NoteBodyTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="750" TextWrapping="Wrap"/>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!--Note list-->
+        <ScrollViewer Name="NotesView" Margin="0,0,0,0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="5" Width="1100" Visibility="Hidden">
+            <StackPanel Name="NoteStackPanel"/>
+        </ScrollViewer>
     </Grid>
 </Window>

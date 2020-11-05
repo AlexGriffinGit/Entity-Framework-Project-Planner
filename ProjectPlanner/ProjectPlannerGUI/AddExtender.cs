@@ -86,5 +86,30 @@ namespace ProjectPlannerGUI
 
             panelToAddTo.Children.Add(_expander);
         }
+
+        private void CreateExpander(string title, string body)
+        {
+            Expander _expander = new Expander();
+
+            _expander.Header = title;
+            _expander.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF"));
+            _expander.Background = new SolidColorBrush(Colors.Transparent);
+            _expander.IsExpanded = false;
+            _expander.FontSize = 32;
+            _expander.Margin = Margin = new Thickness(0, 0, 0, 10);
+
+            Style style = this.FindResource("ExpanderStyle") as Style;
+            _expander.Style = style;
+
+            StackPanel _basestackPanel = new StackPanel { Name = "BaseStackPanel", Orientation = Orientation.Vertical };
+
+            TextBlock _noteBody = new TextBlock { Text = body, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), Margin = new Thickness(0, 10, 0, 0), FontSize = 29 };
+
+            _basestackPanel.Children.Add(_noteBody);
+
+            _expander.Content = _basestackPanel;
+
+            NoteStackPanel.Children.Add(_expander);
+        }
     }
 }

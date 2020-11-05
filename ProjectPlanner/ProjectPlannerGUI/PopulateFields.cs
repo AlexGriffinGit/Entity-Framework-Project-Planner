@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.EntityFrameworkCore.Query;
 using ProjectPlannerBusiness;
 
 namespace ProjectPlannerGUI
@@ -25,8 +26,6 @@ namespace ProjectPlannerGUI
 
         private void PopulateProjectFields()
         {
-            CalculateProgress calcProgress = new CalculateProgress();
-
             ProjectIDText.Content = _crudManager.SelectedProject.ProjectId;
             ProjectTitleTextBox.Text = _crudManager.SelectedProject.Title;
             ProjectDescriptionTextBox.Text = _crudManager.SelectedProject.Description;
@@ -161,6 +160,14 @@ namespace ProjectPlannerGUI
             }
         }
 
+        private void PopulateNoteList()
+        {
+            foreach (var item in _crudManager.RetrieveAllNotes())
+            {
+                CreateExpander(item.Title, item.Body);
+            }
+        }
+
         private void ResetFeatureLists()
         {
             PlannedFeatures.Children.Clear();
@@ -175,6 +182,11 @@ namespace ProjectPlannerGUI
             InProgressIssues.Children.Clear();
             TestingIssues.Children.Clear();
             ResolvedIssues.Children.Clear();
+        }
+
+        private void ResetNoteList()
+        {
+            NoteStackPanel.Children.Clear();
         }
     }
 }
