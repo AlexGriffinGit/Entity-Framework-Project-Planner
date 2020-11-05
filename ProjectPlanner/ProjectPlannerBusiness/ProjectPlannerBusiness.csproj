@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CalculateProgress.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ProjectPlannerModel\ProjectPlannerModel.csproj" />
   </ItemGroup>
 
