@@ -50,6 +50,8 @@ namespace ProjectPlannerGUI
         private void ProjectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _crudManager.SetSelectedProject(ProjectComboBox.SelectedItem);
+
+            ProjectScrollView.Visibility = Visibility.Visible;
         }
 
         private void ProjectHeaderButton_Click(object sender, RoutedEventArgs e)
@@ -147,7 +149,5 @@ namespace ProjectPlannerGUI
             button.FontWeight = FontWeights.Normal;
             button.Foreground = new System.Windows.Media.SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3"));
         }
-
-        
     }
 }

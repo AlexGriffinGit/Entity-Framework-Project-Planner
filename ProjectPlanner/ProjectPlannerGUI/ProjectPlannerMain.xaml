@@ -138,23 +138,62 @@
         <!--Project and Notes button-->
         <Button Name="ProjectHeaderButton" Style="{DynamicResource HeaderButtons}" Content="Projects" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="ProjectHeaderButton_Click" Width="250" Height="80" Grid.Row="0" Grid.Column="0" FontSize="45" Foreground="#D2D1D3"/>
         <Button Name="NotesHeaderButton" Style="{DynamicResource HeaderButtons}" Content="Notes" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="NotesHeaderButton_Click" Width="250" Height="80" Grid.Row="0" Grid.Column="1" FontSize="45" Foreground="#D2D1D3"/>
-        
+
         <!--Overview, features and issues buttons-->
         <Button Name="ProjectOverviewButton" Style="{DynamicResource HeaderButtons}" Content="Overview" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="ProjectOverviewButton_Click" Width="250" Height="80" Grid.Row="1" Grid.Column="1" FontSize="37" Foreground="#D2D1D3"/>
         <Button Name="ProjectFeaturesButton" Style="{DynamicResource HeaderButtons}" Content="Features" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="ProjectFeaturesButton_Click" Width="250" Height="80" Grid.Row="1" Grid.Column="2" FontSize="37" Foreground="#D2D1D3"/>
         <Button Name="ProjectIssuesButton" Style="{DynamicResource HeaderButtons}" Content="Issues" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="ProjectIssuesButton_Click" Width="250" Height="80" Grid.Row="1" Grid.Column="3" FontSize="37" Foreground="#D2D1D3"/>
-        
+
         <!--Project Select Combo box-->
-        <ComboBox Name="ProjectComboBox" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"  SelectionChanged="ProjectComboBox_SelectionChanged" Grid.Row="1" Grid.Column="0" Width="260" Height="50" FontSize="25"/>
-        
+        <ComboBox Name="ProjectComboBox" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"  SelectionChanged="ProjectComboBox_SelectionChanged" Grid.Row="1" Grid.Column="0" Width="225" Height="50" FontSize="25"/>
+
         <!--Add, confirm, cancel and delete buttons-->
         <Button Name="AddButton" Content="Add" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="0" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#908F91"/>
         <Button Name="ConfirmButton" Content="Confirm" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="1" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#908F91"/>
         <Button Name="Cancelbutton" Content="Cancel" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="2" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#908F91"/>
         <Button Name="DeleteButton" Content="Delete" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="3" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#908F91"/>
-        
-        <Label Name="ProjectIDLabel" Content="" Grid.Column="0" HorizontalAlignment="Left" Height="25" Margin="-158,75,0,0" VerticalAlignment="Top" Width="180"/>
-        
+
+        <ScrollViewer Name="ProjectScrollView" Grid.ColumnSpan="4" Margin="38,112,38,0" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="ProjectIDLabel" Content="Project ID: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <Label Name="ProjectIDText" Content="" HorizontalAlignment="Left" Height="50" Margin="-140,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="ProjectTitleLabel" Content="Project Title: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <TextBox Name="ProjectTitleTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="50"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="ProjectDescriptionLabel" Content="Project Description: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <TextBox Name="ProjectDescriptionTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="250"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="ProjectStatusLabel" Content="Project Description: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <ComboBox Name="ProjectStatusComboBox" Width="500" Height="50" Margin="-140,10,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="ProjectLinkLabel" Content="Project Link: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <TextBox Name="ProjectLinkTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="50"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="ProjectCompletedLabel" Content="Finished Features: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <Label Name="ProjectCompletedText" Content="" HorizontalAlignment="Left" Height="150" Margin="-140,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="ProjectToDoLabel" Content="Project To Do: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <Label Name="ProjectToDoText" Content="" HorizontalAlignment="Left" Height="150" Margin="-140,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="ProjectIssuesLabel" Content="Unresolved Issues: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <Label Name="ProjectIssuesText" Content="" HorizontalAlignment="Left" Height="150" Margin="-140,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="ProjectProgressLabel" Content="Project Progress: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
+                    <ProgressBar Name="ProjectProgressBar" Width="775" Height="50" Margin="-140,10,0,0"/>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
     </Grid>
 </Window>
 
