@@ -273,6 +273,7 @@ namespace ProjectPlannerTESTS
                 Assert.Multiple(() =>
                 {
                     Assert.AreEqual(1, _crudManager.RetrieveProjectFeatures().Count);
+                    Assert.AreEqual("TestFeat2", _title);
                     Assert.AreEqual("This is the 2nd test feature", _desc);
                     Assert.AreEqual(2, _status);
                     Assert.AreEqual(2, _priority);
