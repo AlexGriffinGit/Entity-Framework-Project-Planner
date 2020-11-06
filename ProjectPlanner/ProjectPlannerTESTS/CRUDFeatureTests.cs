@@ -192,11 +192,11 @@ namespace ProjectPlannerTESTS
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual("TestFeat", _testFeat.Title);
-                    Assert.AreEqual("This is a test feature", _testFeat.Description);
-                    Assert.AreEqual(1, _testFeat.Status);
-                    Assert.AreEqual(1, _testFeat.Priority);
-                    Assert.AreEqual("No notes needed", _testFeat.Notes);
+                    Assert.AreEqual("TestFeat", _crudManager.SelectedFeature.Title);
+                    Assert.AreEqual("This is a test feature", _crudManager.SelectedFeature.Description);
+                    Assert.AreEqual(1, _crudManager.SelectedFeature.Status);
+                    Assert.AreEqual(1, _crudManager.SelectedFeature.Priority);
+                    Assert.AreEqual("No notes needed", _crudManager.SelectedFeature.Notes);
                 });
             }
         }
