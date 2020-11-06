@@ -47,13 +47,15 @@ namespace ProjectPlannerTESTS
         {
             using (PlannerContext pc = new PlannerContext())
             {
+                int numOfProjects = pc.Projects.ToList().Count;
+
                 _crudManager.CreateNewProject("TestProj", "A blank test project", 0, "No link");
 
                 var _projectCount =
                     from p in pc.Projects
                     select p;
 
-                Assert.AreEqual(1, _projectCount.Count());
+                Assert.AreEqual(numOfProjects + 1, _projectCount.Count());
             }
         }
 
@@ -135,6 +137,35 @@ namespace ProjectPlannerTESTS
                 _crudManager.SetSelectedProject(_testProj);
 
                 Assert.AreEqual(_testProj, _crudManager.SelectedProject);
+            }
+        }
+
+        [Test]
+        public void WhenAProjectIsSelectedMakeSureTheInformationIsCorrect()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Project _testProj = new Project()
+                {
+                    Title = "TestProj",
+                    Description = "A blank test project",
+                    Status = 1,
+                    Link = "No Link"
+                };
+
+                pc.Projects.Add(_testProj);
+
+                pc.SaveChanges();
+
+                _crudManager.SetSelectedProject(_testProj);
+
+                Assert.Multiple(() =>
+                {
+                    Assert.AreEqual("TestProj", _crudManager.SelectedProject.Title);
+                    Assert.AreEqual("A blank test project", _crudManager.SelectedProject.Description);
+                    Assert.AreEqual(1, _crudManager.SelectedProject.Status);
+                    Assert.AreEqual("No Link", _crudManager.SelectedProject.Link);
+                });
             }
         }
     }
