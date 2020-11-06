@@ -53,7 +53,7 @@ namespace ProjectPlannerTESTS
                     from n in pc.Notes
                     select n;
 
-                Assert.AreEqual(1, _noteCount.Count());
+                Assert.AreEqual(6, _noteCount.Count());
             }
         }
 
@@ -127,6 +127,31 @@ namespace ProjectPlannerTESTS
                 _crudManager.SetSelectedNote(_testNote);
 
                 Assert.AreEqual(_testNote, _crudManager.SelectedNote);
+            }
+        }
+
+        [Test]
+        public void WhenANoteIsSelectedMakeSureTheInformationIsCorrect()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Note _testNote = new Note()
+                {
+                    Title = "TestNote",
+                    Body = "A test note",
+                };
+
+                pc.Notes.Add(_testNote);
+
+                pc.SaveChanges();
+
+                _crudManager.SetSelectedNote(_testNote);
+
+                Assert.Multiple(() =>
+                {
+                    Assert.AreEqual("TestNote", _crudManager.SelectedNote.Title);
+                    Assert.AreEqual("A test note", _crudManager.SelectedNote.Body);
+                });
             }
         }
     }
