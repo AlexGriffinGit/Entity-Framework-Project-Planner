@@ -1,11 +1,11 @@
 # Entity Framework Project Planner #
 
 ## Table Of Contents ##
-* [Summary](link)
-* [Project Goal](link)
-* [Project Definition Of Done](link)
-* [User Story Definition Of Done](link)
-* [Sprints](link)
+* [Summary](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#summary)
+* [Project Goal](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#project-goal)
+* [Project Definition Of Done](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#project-definition-of-done)
+* [User Story Definition Of Done](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#user-story-definition-of-done)
+* [Sprints](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#sprints)
   * [Sprint 1](link)
     * [Sprint Goal](link)
     * [Sprint Review](link)
@@ -80,3 +80,44 @@ A user story is considered done when:
       * Finish testing all of my CRUD methods before moving on to the bigger tasks.
       * Make sure I've got unit tests for any CRUD methods I add before implementing them in the GUI.
       * Add the update and delete crud methods for all 4 tables.
+      
+* ### Sprint 2 ###
+  * #### Sprint Goal ####
+    
+   
+  * #### Sprint Review ####
+    Completed user stories:
+    
+
+    Not completed user stories:
+    
+  
+  * #### Sprint Retrospective ####
+    
+
+    * <b>What went well?</b>
+      
+    * <b>Improvements to make?</b>
+      
+    * <b>What will I be doing in the next sprint?</b>
+    
+* ### Sprint 3 ###
+  * #### Sprint Goal ####
+    
+   
+  * #### Sprint Review ####
+    Completed user stories:
+    
+
+    Not completed user stories:
+    
+  
+  * #### Sprint Retrospective ####
+    
+
+    * <b>What went well?</b>
+      
+    * <b>Improvements to make?</b>
+      
+    * <b>What will I be doing in the next sprint?</b>
+      
