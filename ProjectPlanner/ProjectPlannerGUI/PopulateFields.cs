@@ -91,6 +91,12 @@ namespace ProjectPlannerGUI
         {
             int progress = 0;
             int numOfFeatures = _crudManager.RetrieveCompleteFeatures().Count + _crudManager.RetrieveToDoFeatures().Count;
+
+            if (numOfFeatures == 0)
+            {
+                return 0;
+            }
+
             int featureWorth = 100 / numOfFeatures;
 
             foreach (var item in _crudManager.RetrieveToDoFeatures())

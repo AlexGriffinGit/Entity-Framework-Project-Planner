@@ -78,13 +78,23 @@ namespace ProjectPlannerGUI
         {
             _crudManager.SetSelectedProject(ProjectComboBox.SelectedItem);
 
-            ShowProjectFields();
             DeleteButton.Visibility = Visibility.Visible;
 
+            HideFeatureFields();
+            HideFeatureLists();
+            HideIssueFields();
+            HideIssueLists();
+            HideNoteFields();
+            HideNoteList();
+
             PopulateProjectFields();
+            ShowProjectFields();
 
             ButtonSelected(ProjectOverviewButton);
-            ProjectOverviewButton.FontSize = 45;
+            ButtonDeselected(ProjectFeaturesButton);
+            ButtonDeselected(ProjectIssuesButton);
+
+            ProjectOverviewButton.FontSize = 45; ProjectFeaturesButton.FontSize = 37; ProjectIssuesButton.FontSize = 37;
         }
 
         private void ProjectHeaderButton_Click(object sender, RoutedEventArgs e)
@@ -103,6 +113,21 @@ namespace ProjectPlannerGUI
 
                 HideNoteList();
                 HideNoteFields();
+                ResetNoteList();
+
+                _currentView = "p";
+
+                if (ProjectComboBox.SelectedItem != null)
+                {
+                    ShowProjectFields();
+                    PopulateProjectFields();
+
+                    ButtonSelected(ProjectOverviewButton);
+                    ButtonDeselected(ProjectFeaturesButton);
+                    ButtonDeselected(ProjectIssuesButton);
+
+                    ProjectOverviewButton.FontSize = 45; ProjectFeaturesButton.FontSize = 37; ProjectIssuesButton.FontSize = 37;
+                }
             }
         }
 
@@ -124,8 +149,13 @@ namespace ProjectPlannerGUI
 
                 HideProjectComboBox();
                 HideProjectSubheadingButtons();
-
                 HideProjectFields();
+
+                HideFeatureFields();
+                HideFeatureLists();
+
+                HideIssueFields();
+                HideIssueLists();
 
                 PopulateNoteList();
 

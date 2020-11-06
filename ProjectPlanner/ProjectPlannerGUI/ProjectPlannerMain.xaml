@@ -379,7 +379,7 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid Background="#908F91" Name="MainGrid">
+    <Grid Background="#59585a" Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
