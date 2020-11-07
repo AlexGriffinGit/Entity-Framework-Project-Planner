@@ -338,5 +338,23 @@ namespace ProjectPlannerBusiness
                 pc.SaveChanges();
             }
         }
+
+        public void DeleteFeature()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                var _deleteFeature =
+                    from f in pc.Features
+                    where f.FeatureId == SelectedFeature.FeatureId
+                    select f;
+
+                foreach (var item in _deleteFeature)
+                {
+                    pc.Features.Remove(item);
+
+                    pc.SaveChanges();
+                }
+            }
+        }
     }
 }
