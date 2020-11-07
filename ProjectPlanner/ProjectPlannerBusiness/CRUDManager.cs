@@ -244,6 +244,8 @@ namespace ProjectPlannerBusiness
                     project.Description = description;
                     project.Status = status;
                     project.Link = link;
+
+                    SelectedProject = project;
                 }
 
                 pc.SaveChanges();
@@ -266,6 +268,8 @@ namespace ProjectPlannerBusiness
                     feature.Status = status;
                     feature.Priority = priority;
                     feature.Notes = notes;
+
+                    SelectedFeature = feature;
                 }
 
                 pc.SaveChanges();
@@ -288,6 +292,8 @@ namespace ProjectPlannerBusiness
                     issue.Status = status;
                     issue.Priority = priority;
                     issue.Notes = notes;
+
+                    SelectedIssue = issue;
                 }
 
                 pc.SaveChanges();
@@ -307,6 +313,8 @@ namespace ProjectPlannerBusiness
                 {
                     note.Title = title;
                     note.Body = body;
+
+                    SelectedNote = note;
                 }
 
                 pc.SaveChanges();            
