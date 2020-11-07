@@ -36,7 +36,13 @@ namespace ProjectPlannerTESTS
                    where n.Title == "TestNote"
                    select n;
 
+                var _updatedNote =
+                    from n in pc.Notes
+                    where n.Title == "UpdatedTestNote"
+                    select n;
+
                 pc.Notes.RemoveRange(_selectedNote);
+                pc.Notes.RemoveRange(_updatedNote);
 
                 pc.SaveChanges();
             }
@@ -151,6 +157,96 @@ namespace ProjectPlannerTESTS
                 {
                     Assert.AreEqual("TestNote", _crudManager.SelectedNote.Title);
                     Assert.AreEqual("A test note", _crudManager.SelectedNote.Body);
+                });
+            }
+        }
+
+        [Test]
+        public void WhenUpdatingASinglePropertyOfANoteEnsureTheInformationHasBeenUpdated()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Note _testNote = new Note()
+                {
+                    Title = "TestNote",
+                    Body = "A test note",
+                };
+
+                pc.Notes.Add(_testNote);
+
+                pc.SaveChanges();
+
+                int key = _testNote.NoteId;
+
+                _crudManager.SelectedNote = _testNote;
+
+                _crudManager.UpdateNote("TestNote", "An updated test note");
+
+                Assert.Multiple(() =>
+                {
+                    Assert.AreEqual("TestNote", _crudManager.SelectedNote.Title);
+                    Assert.AreEqual("An updated test note", _crudManager.SelectedNote.Body);
+                    Assert.AreEqual(key, _crudManager.SelectedNote.NoteId);
+                });
+            }
+        }
+
+        [Test]
+        public void WhenUpdatingBothPropertiesOfANoteEnsureTheInformationHasBeenUpdated()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Note _testNote = new Note()
+                {
+                    Title = "TestNote",
+                    Body = "A test note",
+                };
+
+                pc.Notes.Add(_testNote);
+
+                pc.SaveChanges();
+
+                int key = _testNote.NoteId;
+
+                _crudManager.SelectedNote = _testNote;
+
+                _crudManager.UpdateNote("UpdatedTestNote", "An updated test note");
+
+                Assert.Multiple(() =>
+                {
+                    Assert.AreEqual("UpdatedTestNote", _crudManager.SelectedNote.Title);
+                    Assert.AreEqual("An updated test note", _crudManager.SelectedNote.Body);
+                    Assert.AreEqual(key, _crudManager.SelectedNote.NoteId);
+                });
+            }
+        }
+
+        [Test]
+        public void WhenNothingHasChangedWhenUpdateIsCalledEnsureTheInformationHasNotChanged()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Note _testNote = new Note()
+                {
+                    Title = "TestNote",
+                    Body = "A test note",
+                };
+
+                pc.Notes.Add(_testNote);
+
+                pc.SaveChanges();
+
+                int key = _testNote.NoteId;
+
+                _crudManager.SelectedNote = _testNote;
+
+                _crudManager.UpdateNote("TestNote", "A test note");
+
+                Assert.Multiple(() =>
+                {
+                    Assert.AreEqual("TestNote", _crudManager.SelectedNote.Title);
+                    Assert.AreEqual("A test note", _crudManager.SelectedNote.Body);
+                    Assert.AreEqual(key, _crudManager.SelectedNote.NoteId);
                 });
             }
         }
