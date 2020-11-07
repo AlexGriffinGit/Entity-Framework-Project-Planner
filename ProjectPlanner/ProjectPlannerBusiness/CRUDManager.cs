@@ -228,5 +228,26 @@ namespace ProjectPlannerBusiness
                 pc.SaveChanges();
             }
         }
+
+        public void UpdateProject(string title, string description, int status, string link)
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                var _updateProject =
+                    from p in pc.Projects
+                    where p.ProjectId == SelectedProject.ProjectId
+                    select p;
+
+                foreach (var project in _updateProject)
+                {
+                    project.Title = title;
+                    project.Description = description;
+                    project.Status = status;
+                    project.Link = link;
+                }
+
+                pc.SaveChanges();
+            }
+        }
     }
 }
