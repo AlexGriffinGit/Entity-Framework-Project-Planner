@@ -21,6 +21,17 @@ namespace ProjectPlannerGUI
         private void HideProjectFields()
         {
             ProjectScrollView.Visibility = Visibility.Hidden;
+            ProjectScrollView.ScrollToTop();
+
+            ProjectIDText.Content = String.Empty;
+            ProjectTitleTextBox.Text = String.Empty;
+            ProjectDescriptionTextBox.Text = String.Empty;
+            ProjectStatusComboBox.SelectedIndex = -1;
+            ProjectLinkTextBox.Text = String.Empty;
+            ProjectCompletedText.Text = String.Empty;
+            ProjectToDoText.Text = String.Empty;
+            ProjectIssuesText.Text = String.Empty;
+            ProjectProgressBar.Value = 0;
         }
 
         private void ShowProjectFields()
@@ -31,6 +42,15 @@ namespace ProjectPlannerGUI
         private void HideFeatureFields()
         {
             FeatureScrollView.Visibility = Visibility.Hidden;
+            FeatureScrollView.ScrollToTop();
+
+            FeatureIDText.Content = String.Empty;
+            FeatureTitleTextBox.Text = String.Empty;
+            FeatureDescriptionTextBox.Text = String.Empty;
+            FeatureProjectIDText.Content = String.Empty;
+            FeatureStatusComboBox.SelectedIndex = -1;
+            FeaturePriorityTextBox.Text = String.Empty;
+            FeatureNotesTextBox.Text = String.Empty;
         }
 
         private void ShowFeatureFields()
@@ -44,6 +64,11 @@ namespace ProjectPlannerGUI
             FeatureInProgressView.Visibility = Visibility.Hidden;
             FeatureTestingView.Visibility = Visibility.Hidden;
             FeatureCompleteView.Visibility = Visibility.Hidden;
+
+            PlannedFeatures.Children.Clear();
+            InProgressFeatures.Children.Clear();
+            TestingFeatures.Children.Clear();
+            CompleteFeatures.Children.Clear();
         }
 
         private void ShowFeatureLists()
@@ -57,6 +82,15 @@ namespace ProjectPlannerGUI
         private void HideIssueFields()
         {
             IssueScrollView.Visibility = Visibility.Hidden;
+            IssueScrollView.ScrollToTop();
+
+            IssueIDText.Content = String.Empty;
+            IssueTitleTextBox.Text = String.Empty;
+            IssueDescriptionTextBox.Text = String.Empty;
+            IssueProjectIDText.Content = String.Empty;
+            IssueStatusComboBox.SelectedIndex = -1;
+            IssuePriorityTextBox.Text = String.Empty;
+            IssueNotesTextBox.Text = String.Empty;
         }
 
         private void ShowIssueFields()
@@ -70,6 +104,11 @@ namespace ProjectPlannerGUI
             IssueInProgressView.Visibility = Visibility.Hidden;
             IssueTestingView.Visibility = Visibility.Hidden;
             IssueResolvedView.Visibility = Visibility.Hidden;
+
+            KnownIssues.Children.Clear();
+            InProgressIssues.Children.Clear();
+            TestingIssues.Children.Clear();
+            ResolvedIssues.Children.Clear();
         }
 
         private void ShowIssueLists()
@@ -83,6 +122,11 @@ namespace ProjectPlannerGUI
         private void HideNoteFields()
         {
             NoteScrollView.Visibility = Visibility.Hidden;
+            NoteScrollView.ScrollToTop();
+
+            NoteIDText.Content = String.Empty;
+            NoteTitleTextBox.Text = String.Empty;
+            NoteBodyTextBox.Text = String.Empty;
         }
 
         private void ShowNoteFields()
@@ -93,6 +137,7 @@ namespace ProjectPlannerGUI
         private void HideNoteList()
         {
             NotesView.Visibility = Visibility.Hidden;
+            NoteStackPanel.Children.Clear();
         }
 
         private void ShowNoteList()

@@ -87,6 +87,35 @@ namespace ProjectPlannerGUI
             ProgressBarValue.Text = CalculateProjectProgress().ToString() + "%";
         }
 
+        private void PopulateFeatureFields()
+        {
+            FeatureIDText.Content = _crudManager.SelectedFeature.FeatureId;
+            FeatureTitleTextBox.Text = _crudManager.SelectedFeature.Title;
+            FeatureDescriptionTextBox.Text = _crudManager.SelectedFeature.Description;
+            FeatureProjectIDText.Content = _crudManager.SelectedFeature.ProjectId;
+            FeatureStatusComboBox.SelectedIndex = _crudManager.SelectedFeature.Status;
+            FeaturePriorityTextBox.Text = _crudManager.SelectedFeature.Priority.ToString();
+            FeatureNotesTextBox.Text = _crudManager.SelectedFeature.Notes;
+        }
+
+        private void PopulateIssueFields()
+        {
+            IssueIDText.Content = _crudManager.SelectedIssue.IssueId;
+            IssueTitleTextBox.Text = _crudManager.SelectedIssue.Title;
+            IssueDescriptionTextBox.Text = _crudManager.SelectedIssue.Description;
+            IssueProjectIDText.Content = _crudManager.SelectedIssue.ProjectId;
+            IssueStatusComboBox.SelectedIndex = _crudManager.SelectedIssue.Status;
+            IssuePriorityTextBox.Text = _crudManager.SelectedIssue.Priority.ToString();
+            IssueNotesTextBox.Text = _crudManager.SelectedIssue.Notes;
+        }
+
+        private void PopulateNoteFields()
+        {
+            NoteIDText.Content = _crudManager.SelectedNote.NoteId;
+            NoteTitleTextBox.Text = _crudManager.SelectedNote.Title;
+            NoteBodyTextBox.Text = _crudManager.SelectedNote.Body;
+        }
+
         private int CalculateProjectProgress()
         {
             int progress = 0;
@@ -126,19 +155,19 @@ namespace ProjectPlannerGUI
             {
                 if (item.Status == 0)
                 {
-                    CreateExpander(item.FeatureId, item.Title, item.Description, item.ProjectId, item.Status, item.Priority, item.Notes, PlannedFeatures);
+                    CreateExpander(PlannedFeatures, item);
                 }
                 else if (item.Status == 1)
                 {
-                    CreateExpander(item.FeatureId, item.Title, item.Description, item.ProjectId, item.Status, item.Priority, item.Notes, InProgressFeatures);
+                    CreateExpander(InProgressFeatures, item);
                 }
                 else if (item.Status == 2)
                 {
-                    CreateExpander(item.FeatureId, item.Title, item.Description, item.ProjectId, item.Status, item.Priority, item.Notes, TestingFeatures);
+                    CreateExpander(TestingFeatures, item);
                 }
                 else
                 {
-                    CreateExpander(item.FeatureId, item.Title, item.Description, item.ProjectId, item.Status, item.Priority, item.Notes, CompleteFeatures);
+                    CreateExpander(CompleteFeatures, item);
                 }
             }
         }
@@ -149,19 +178,19 @@ namespace ProjectPlannerGUI
             {
                 if (item.Status == 0)
                 {
-                    CreateExpander(item.IssueId, item.Title, item.Description, item.ProjectId, item.Status, item.Priority, item.Notes, KnownIssues);
+                    CreateExpander(KnownIssues, item);
                 }
                 else if (item.Status == 1)
                 {
-                    CreateExpander(item.IssueId, item.Title, item.Description, item.ProjectId, item.Status, item.Priority, item.Notes, InProgressIssues);
+                    CreateExpander(InProgressIssues, item);
                 }
                 else if (item.Status == 2)
                 {
-                    CreateExpander(item.IssueId, item.Title, item.Description, item.ProjectId, item.Status, item.Priority, item.Notes, TestingIssues);
+                    CreateExpander(TestingIssues, item);
                 }
                 else
                 {
-                    CreateExpander(item.IssueId, item.Title, item.Description, item.ProjectId, item.Status, item.Priority, item.Notes, ResolvedIssues);
+                    CreateExpander(ResolvedIssues, item);
                 }
             }
         }
@@ -170,29 +199,8 @@ namespace ProjectPlannerGUI
         {
             foreach (var item in _crudManager.RetrieveAllNotes())
             {
-                CreateExpander(item.Title, item.Body);
+                CreateExpander(item);
             }
-        }
-
-        private void ResetFeatureLists()
-        {
-            PlannedFeatures.Children.Clear();
-            InProgressFeatures.Children.Clear();
-            TestingFeatures.Children.Clear();
-            CompleteFeatures.Children.Clear();
-        }
-
-        private void ResetIssueLists()
-        {
-            KnownIssues.Children.Clear();
-            InProgressIssues.Children.Clear();
-            TestingIssues.Children.Clear();
-            ResolvedIssues.Children.Clear();
-        }
-
-        private void ResetNoteList()
-        {
-            NoteStackPanel.Children.Clear();
         }
     }
 }

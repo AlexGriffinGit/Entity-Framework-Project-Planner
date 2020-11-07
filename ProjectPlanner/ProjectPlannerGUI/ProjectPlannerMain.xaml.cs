@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ProjectPlannerBusiness;
+using ProjectPlannerModel;
 
 namespace ProjectPlannerGUI
 {
@@ -31,8 +32,10 @@ namespace ProjectPlannerGUI
         private bool _issuesSelected = false;
 
         private bool _isAdding = false;
+        private bool _isUpdatingProject = false;
 
         private string _currentView = "p";
+        private string _updateView = "";
         // p denotes the program is in project view
         // f denotes the program is in feature view
         // i denotes the program is in issue view
@@ -68,6 +71,8 @@ namespace ProjectPlannerGUI
             InitializeComponent();
             PopulateComboBox();
             ButtonSelected(ProjectHeaderButton);
+            HideProjectSubheadingButtons();
+            AddButton.Visibility = Visibility.Visible;
 
             ProjectStatusComboBox.ItemsSource = _projectStatus;
             FeatureStatusComboBox.ItemsSource = _featureStatus;
@@ -76,25 +81,33 @@ namespace ProjectPlannerGUI
 
         private void ProjectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            _crudManager.SetSelectedProject(ProjectComboBox.SelectedItem);
+            if (_isAdding == false || _updateView == "p")
+            {
+                _isUpdatingProject = false;
+                _crudManager.SetSelectedProject(ProjectComboBox.SelectedItem);
 
-            DeleteButton.Visibility = Visibility.Visible;
+                DeleteButton.Visibility = Visibility.Visible;
 
-            HideFeatureFields();
-            HideFeatureLists();
-            HideIssueFields();
-            HideIssueLists();
-            HideNoteFields();
-            HideNoteList();
+                ShowProjectSubheadingButtons();
 
-            PopulateProjectFields();
-            ShowProjectFields();
+                HideFeatureFields();
+                HideFeatureLists();
+                HideIssueFields();
+                HideIssueLists();
+                HideNoteFields();
+                HideNoteList();
 
-            ButtonSelected(ProjectOverviewButton);
-            ButtonDeselected(ProjectFeaturesButton);
-            ButtonDeselected(ProjectIssuesButton);
+                PopulateProjectFields();
+                ShowProjectFields();
 
-            ProjectOverviewButton.FontSize = 45; ProjectFeaturesButton.FontSize = 37; ProjectIssuesButton.FontSize = 37;
+                ButtonSelected(ProjectOverviewButton);
+                ButtonDeselected(ProjectFeaturesButton);
+                ButtonDeselected(ProjectIssuesButton);
+
+                ProjectOverviewButton.FontSize = 45; ProjectFeaturesButton.FontSize = 37; ProjectIssuesButton.FontSize = 37;
+
+                _isUpdatingProject = true;
+            }
         }
 
         private void ProjectHeaderButton_Click(object sender, RoutedEventArgs e)
@@ -109,16 +122,16 @@ namespace ProjectPlannerGUI
                 ProjectHeaderButton.FontSize = 55; NotesHeaderButton.FontSize = 45;
 
                 ShowProjectComboBox();
-                ShowProjectSubheadingButtons();
-
+                
                 HideNoteList();
                 HideNoteFields();
-                ResetNoteList();
 
                 _currentView = "p";
 
                 if (ProjectComboBox.SelectedItem != null)
                 {
+                    ShowProjectSubheadingButtons();
+
                     ShowProjectFields();
                     PopulateProjectFields();
 
@@ -144,9 +157,6 @@ namespace ProjectPlannerGUI
 
                 _currentView = "n";
 
-                ResetFeatureLists();
-                ResetIssueLists();
-
                 HideProjectComboBox();
                 HideProjectSubheadingButtons();
                 HideProjectFields();
@@ -158,7 +168,6 @@ namespace ProjectPlannerGUI
                 HideIssueLists();
 
                 PopulateNoteList();
-
                 ShowNoteList();
             }
         }
@@ -182,9 +191,6 @@ namespace ProjectPlannerGUI
                 HideIssueLists();
                 
                 _currentView = "p";
-
-                ResetFeatureLists();
-                ResetIssueLists();
             }
         }
 
@@ -208,7 +214,6 @@ namespace ProjectPlannerGUI
                 HideIssueLists();
 
                 PopulateFeatureLists();
-                ResetIssueLists();
 
                 _currentView = "f";
             }
@@ -233,7 +238,6 @@ namespace ProjectPlannerGUI
                 HideFeatureFields();
                 HideFeatureLists();
 
-                ResetFeatureLists();
                 PopulateIssueLists();
 
                 _currentView = "i";
@@ -258,6 +262,7 @@ namespace ProjectPlannerGUI
             switch (_currentView)
             {
                 case "p":
+                    HideProjectFields();
                     ShowProjectFields();
                     HideAddAndDeleteButtons();
                     ShowConfirmAndCancelButtons();
@@ -284,10 +289,6 @@ namespace ProjectPlannerGUI
             HideFeatureLists();
             HideIssueLists();
             HideNoteList();
-
-            ResetFeatureLists();
-            ResetIssueLists();
-            ResetNoteList();
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
@@ -297,21 +298,39 @@ namespace ProjectPlannerGUI
                 switch (_currentView)
                 {
                     case "p":
-                        _crudManager.CreateNewProject(ProjectTitleTextBox.Text, ProjectDescriptionTextBox.Text, ProjectStatusComboBox.SelectedIndex, ProjectLinkTextBox.Text);
-                        _isAdding = false;
+                        if (ProjectStatusComboBox.SelectedIndex == -1)
+                        {
+                            MessageBox.Show("Please enter a status for this project");
+                        }
+                        else
+                        {
+                            _crudManager.CreateNewProject(ProjectTitleTextBox.Text, ProjectDescriptionTextBox.Text, ProjectStatusComboBox.SelectedIndex, ProjectLinkTextBox.Text);
+                            
+                            HideProjectFields();
+                            PopulateComboBox();
 
-                        PopulateComboBox();
-                        HideProjectFields();
+                            ShowAddAndDeleteButtons();
+                            HideConfirmAndCancelButtons();
+                        }
                         break;
                     case "f":
                         if (Int32.TryParse(FeaturePriorityTextBox.Text, out int _featurePriority) == true)
                         {
-                            _crudManager.CreateNewFeature(FeatureTitleTextBox.Text, FeatureDescriptionTextBox.Text, FeatureStatusComboBox.SelectedIndex, _featurePriority, FeatureNotesTextBox.Text);
-                            _isAdding = false;
+                            if (FeatureStatusComboBox.SelectedIndex == -1)
+                            {
+                                MessageBox.Show("Please enter a status for this feature");
+                            }
+                            else
+                            {
+                                _crudManager.CreateNewFeature(FeatureTitleTextBox.Text, FeatureDescriptionTextBox.Text, FeatureStatusComboBox.SelectedIndex, _featurePriority, FeatureNotesTextBox.Text);
 
-                            HideFeatureFields();
-                            PopulateFeatureLists();
-                            ShowFeatureLists();
+                                HideFeatureFields();
+                                PopulateFeatureLists();
+                                ShowFeatureLists();
+
+                                ShowAddAndDeleteButtons();
+                                HideConfirmAndCancelButtons();
+                            }
                         }
                         else
                         {
@@ -321,12 +340,21 @@ namespace ProjectPlannerGUI
                     case "i":
                         if (Int32.TryParse(IssuePriorityTextBox.Text, out int _issuePriority) == true)
                         {
-                            _crudManager.CreateNewIssue(IssueTitleTextBox.Text, IssueDescriptionTextBox.Text, IssueStatusComboBox.SelectedIndex, _issuePriority, IssueNotesTextBox.Text);
-                            _isAdding = false;
+                            if (IssueStatusComboBox.SelectedIndex == -1)
+                            {
+                                MessageBox.Show("Please enter a status for this feature");
+                            }
+                            else
+                            {
+                                _crudManager.CreateNewIssue(IssueTitleTextBox.Text, IssueDescriptionTextBox.Text, IssueStatusComboBox.SelectedIndex, _issuePriority, IssueNotesTextBox.Text);
 
-                            HideIssueFields();
-                            PopulateIssueLists();
-                            ShowIssueLists();
+                                HideIssueFields();
+                                PopulateIssueLists();
+                                ShowIssueLists();
+
+                                ShowAddAndDeleteButtons();
+                                HideConfirmAndCancelButtons();
+                            }
                         }
                         else
                         {
@@ -335,7 +363,95 @@ namespace ProjectPlannerGUI
                         break;
                     case "n":
                         _crudManager.CreateNewNote(NoteTitleTextBox.Text, NoteBodyTextBox.Text);
-                        _isAdding = false;
+
+                        HideNoteFields();
+                        PopulateNoteList();
+                        ShowNoteList();
+
+                        ShowAddAndDeleteButtons();
+                        HideConfirmAndCancelButtons();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                switch (_updateView)
+                {
+                    case "p":
+
+                        if (ProjectStatusComboBox.SelectedIndex == -1)
+                        {
+                            MessageBox.Show("Please enter a status for this project");
+                        }
+                        else
+                        {
+                            _crudManager.UpdateProject(ProjectTitleTextBox.Text, ProjectDescriptionTextBox.Text, ProjectStatusComboBox.SelectedIndex, ProjectLinkTextBox.Text);
+
+                            _isAdding = true;
+                            _updateView = "";
+                            _isUpdatingProject = false;
+
+                            HideProjectFields();
+                            PopulateComboBox();
+
+                            ShowAddAndDeleteButtons();
+                            HideConfirmAndCancelButtons();
+
+                            
+                        }
+                        break;
+                    case "f":
+                        if (Int32.TryParse(FeaturePriorityTextBox.Text, out int _featurePriority) == true)
+                        {
+                            if (FeatureStatusComboBox.SelectedIndex == -1)
+                            {
+                                MessageBox.Show("Please enter a status for this feature");
+                            }
+                            else
+                            {
+                                _crudManager.UpdateFeature(FeatureTitleTextBox.Text, FeatureDescriptionTextBox.Text, FeatureStatusComboBox.SelectedIndex, _featurePriority, FeatureNotesTextBox.Text);
+
+                                HideFeatureFields();
+                                ShowFeatureLists();
+                                PopulateFeatureLists();
+
+                                ShowAddAndDeleteButtons();
+                                HideConfirmAndCancelButtons();
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Priority has to be a valid number, you entered { FeaturePriorityTextBox.Text }");
+                        }
+                        break;
+                    case "i":
+                        if (Int32.TryParse(IssuePriorityTextBox.Text, out int _issuePriority) == true)
+                        {
+                            if (IssueStatusComboBox.SelectedIndex == -1)
+                            {
+                                MessageBox.Show("Please enter a status for this issue");
+                            }
+                            else
+                            {
+                                _crudManager.UpdateIssue(IssueTitleTextBox.Text, IssueDescriptionTextBox.Text, IssueStatusComboBox.SelectedIndex, _issuePriority, IssueNotesTextBox.Text);
+
+                                HideIssueFields();
+                                PopulateIssueLists();
+                                ShowIssueLists();
+
+                                ShowAddAndDeleteButtons();
+                                HideConfirmAndCancelButtons();
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Priority has to be a valid number, you entered { IssuePriorityTextBox.Text }");
+                        }
+                        break;
+                    case "n":
+                        _crudManager.UpdateNote(NoteTitleTextBox.Text, NoteBodyTextBox.Text);
 
                         HideNoteFields();
                         PopulateNoteList();
@@ -345,27 +461,169 @@ namespace ProjectPlannerGUI
                         break;
                 }
             }
-            else
-            {
-                //update
-            }
 
-            ResetFeatureLists();
-            ResetIssueLists();
-
-            ShowAddAndDeleteButtons();
-
-            HideConfirmAndCancelButtons();
+            _isAdding = false;
+            _updateView = "";
+            _isUpdatingProject = false;
         }
 
         private void Cancelbutton_Click(object sender, RoutedEventArgs e)
         {
+            if (_isAdding == true)
+            {
+                switch (_currentView)
+                {
+                    case "p":
+                        HideProjectFields();
+                        ShowAddAndDeleteButtons();
+                        HideConfirmAndCancelButtons();
+                        break;
+                    case "f":
+                        HideFeatureFields();
+                        PopulateFeatureLists();
+                        ShowFeatureLists();
+                        ShowAddAndDeleteButtons();
+                        HideConfirmAndCancelButtons();
+                        break;
+                    case "i":
+                        HideIssueFields();
+                        PopulateIssueLists();
+                        ShowIssueLists();
+                        ShowAddAndDeleteButtons();
+                        HideConfirmAndCancelButtons();
+                        break;
+                    case "n":
+                        HideNoteFields();
+                        PopulateNoteList();
+                        ShowNoteList();
+                        ShowAddAndDeleteButtons();
+                        HideConfirmAndCancelButtons();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                switch (_updateView)
+                {
+                    case "p":
+                        HideProjectFields();
+                        PopulateProjectFields();
+                        ShowProjectFields();
+                        ShowAddAndDeleteButtons();
+                        HideConfirmAndCancelButtons();
+                        break;
+                    case "f":
+                        HideFeatureFields();
+                        PopulateFeatureLists();
+                        ShowFeatureLists();
+                        ShowAddAndDeleteButtons();
+                        HideConfirmAndCancelButtons();
+                        break;
+                    case "i":
+                        HideIssueFields();
+                        PopulateIssueLists();
+                        ShowIssueLists();
+                        ShowAddAndDeleteButtons();
+                        HideConfirmAndCancelButtons();
+                        break;
+                    case "n":
+                        HideNoteFields();
+                        PopulateNoteList();
+                        ShowNoteList();
+                        ShowAddAndDeleteButtons();
+                        HideConfirmAndCancelButtons();
+                        break;
+                    default:
+                        break;
+                }
+            }
 
+            _isAdding = false;
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ButtonModifyFeature_Click(object sender, RoutedEventArgs e)
+        {
+            _updateView = "f";
+
+            _isAdding = false;
+
+            HideFeatureLists();
+            HideIssueLists();
+            HideNoteList();
+
+            ShowFeatureFields();
+            PopulateFeatureFields();
+            HideAddAndDeleteButtons();
+            ShowConfirmAndCancelButtons();
+        }
+
+        private void ButtonModifyIssue_Click(object sender, RoutedEventArgs e)
+        {
+            _updateView = "i";
+
+            _isAdding = false;
+
+            HideFeatureLists();
+            HideIssueLists();
+            HideNoteList();
+
+            ShowIssueFields();
+            PopulateIssueFields();
+            HideAddAndDeleteButtons();
+            ShowConfirmAndCancelButtons();
+        }
+
+        private void ButtonModifyNote_Click(object sender, RoutedEventArgs e)
+        {
+            _updateView = "n";
+
+            _isAdding = false;
+
+            HideFeatureLists();
+            HideIssueLists();
+            HideNoteList();
+
+            ShowNoteFields();
+            PopulateNoteFields();
+            HideAddAndDeleteButtons();
+            ShowConfirmAndCancelButtons();
+        }
+
+        private void ProjectDetailsChanged()
+        {
+            if (_isUpdatingProject == true)
+            {
+                ShowConfirmAndCancelButtons();
+                HideAddAndDeleteButtons();
+                _updateView = "p";
+            }
+        }
+
+        private void ProjectTitleTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ProjectDetailsChanged();
+        }
+
+        private void ProjectDescriptionTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ProjectDetailsChanged();
+        }
+
+        private void ProjectStatusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ProjectDetailsChanged();
+        }
+
+        private void ProjectLinkTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ProjectDetailsChanged();
         }
     }
 }

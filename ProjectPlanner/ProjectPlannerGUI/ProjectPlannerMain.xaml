@@ -407,7 +407,6 @@
         <!--Project Select Combo box-->
         <ComboBox Name="ProjectComboBox" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"  SelectionChanged="ProjectComboBox_SelectionChanged" Grid.Row="1" Grid.Column="0" Width="250" Height="50" FontSize="23"/>
 
-
         <!--Add, confirm, cancel and delete buttons-->
         <Button Name="AddButton" Content="Add" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="0" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#908F91" Click="AddButton_Click"/>
         <Button Name="ConfirmButton" Content="Confirm" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="1" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#908F91" Click="ConfirmButton_Click" Visibility="Hidden"/>
@@ -415,7 +414,7 @@
         <Button Name="DeleteButton" Content="Delete" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="3" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#908F91" Click="DeleteButton_Click" Visibility="Hidden"/>
         
         <!--Project Fields contained in a scroll view-->
-        <ScrollViewer Name="ProjectScrollView" Grid.ColumnSpan="4" Margin="38,112,38,0" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden">
+        <ScrollViewer Name="ProjectScrollView" Grid.ColumnSpan="4" Margin="38,112,38,0" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
                     <Label Name="ProjectIDLabel" Content="Project ID: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
@@ -423,19 +422,19 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Name="ProjectTitleLabel" Content="Project Title: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
-                    <TextBox Name="ProjectTitleTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="50"/>
+                    <TextBox Name="ProjectTitleTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="50" TextChanged="ProjectTitleTextBox_TextChanged"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Name="ProjectDescriptionLabel" Content="Project Description: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
-                    <TextBox Name="ProjectDescriptionTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="250" TextWrapping="Wrap"/>
+                    <TextBox Name="ProjectDescriptionTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="250" TextWrapping="Wrap" TextChanged="ProjectDescriptionTextBox_TextChanged"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Name="ProjectStatusLabel" Content="Project Status: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
-                    <ComboBox Name="ProjectStatusComboBox" Width="500" Height="50" Margin="-140,10,0,0"/>
+                    <ComboBox Name="ProjectStatusComboBox" Width="500" Height="50" Margin="-140,10,0,0" SelectionChanged="ProjectStatusComboBox_SelectionChanged"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Name="ProjectLinkLabel" Content="Project Link: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
-                    <TextBox Name="ProjectLinkTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="50"/>
+                    <TextBox Name="ProjectLinkTextBox" Width="775" HorizontalAlignment="Left" Margin="-140,10,0,0" Height="50" TextChanged="ProjectLinkTextBox_TextChanged"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Name="ProjectCompletedLabel" Content="Finished Features: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
@@ -458,7 +457,7 @@
         </ScrollViewer>
 
         <!--Feature Fields contained in a scroll view-->
-        <ScrollViewer Name="FeatureScrollView" Grid.ColumnSpan="4" Margin="38,112,38,0" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden">
+        <ScrollViewer Name="FeatureScrollView" Grid.ColumnSpan="4" Margin="38,112,38,0" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
                     <Label Name="FeatureIDLabel" Content="Feature ID: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
@@ -492,21 +491,21 @@
         </ScrollViewer>
 
         <!--Feature lists populated by different stages of completion-->
-        <ScrollViewer Name="FeaturePlannedView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="0" Grid.RowSpan="4" Width="275" Visibility="Hidden">
+        <ScrollViewer Name="FeaturePlannedView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="0" Grid.RowSpan="4" Width="275" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="PlannedFeatures"/>
         </ScrollViewer>
-        <ScrollViewer Name="FeatureInProgressView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" Width="275" Visibility="Hidden">
+        <ScrollViewer Name="FeatureInProgressView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" Width="275" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="InProgressFeatures"/>
         </ScrollViewer>
-        <ScrollViewer Name="FeatureTestingView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="2" Grid.RowSpan="4" Width="275" Visibility="Hidden">
+        <ScrollViewer Name="FeatureTestingView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="2" Grid.RowSpan="4" Width="275" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="TestingFeatures"/>
         </ScrollViewer>
-        <ScrollViewer Name="FeatureCompleteView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="3" Grid.RowSpan="4" Width="275" Visibility="Hidden">
+        <ScrollViewer Name="FeatureCompleteView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="3" Grid.RowSpan="4" Width="275" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="CompleteFeatures"/>
         </ScrollViewer>
 
         <!--Issue Fields contained in a scroll view-->
-        <ScrollViewer Name="IssueScrollView" Grid.ColumnSpan="4" Margin="38,112,38,0" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden">
+        <ScrollViewer Name="IssueScrollView" Grid.ColumnSpan="4" Margin="38,112,38,0" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
                     <Label Name="IssueIDLabel" Content="Issue ID: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
@@ -540,21 +539,21 @@
         </ScrollViewer>
 
         <!--Feature lists populated by different stages of completion-->
-        <ScrollViewer Name="IssueKnownView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="0" Grid.RowSpan="4" Width="275" Visibility="Hidden">
+        <ScrollViewer Name="IssueKnownView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="0" Grid.RowSpan="4" Width="275" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="KnownIssues"/>
         </ScrollViewer>
-        <ScrollViewer Name="IssueInProgressView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" Width="275" Visibility="Hidden">
+        <ScrollViewer Name="IssueInProgressView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" Width="275" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="InProgressIssues"/>
         </ScrollViewer>
-        <ScrollViewer Name="IssueTestingView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="2" Grid.RowSpan="4" Width="275" Visibility="Hidden">
+        <ScrollViewer Name="IssueTestingView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="2" Grid.RowSpan="4" Width="275" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="TestingIssues"/>
         </ScrollViewer>
-        <ScrollViewer Name="IssueResolvedView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="3" Grid.RowSpan="4" Width="275" Visibility="Hidden">
+        <ScrollViewer Name="IssueResolvedView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="3" Grid.RowSpan="4" Width="275" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="ResolvedIssues"/>
         </ScrollViewer>
 
         <!--Note Fields contained in a scroll view-->
-        <ScrollViewer Name="NoteScrollView" Grid.ColumnSpan="4" Margin="38,112,38,0" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden">
+        <ScrollViewer Name="NoteScrollView" Grid.ColumnSpan="4" Margin="38,112,38,0" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
                     <Label Name="NoteIDLabel" Content="Note ID: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#D2D1D3" FontSize="30"/>
@@ -572,7 +571,7 @@
         </ScrollViewer>
 
         <!--Note list-->
-        <ScrollViewer Name="NotesView" Margin="0,0,0,0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="5" Width="1100" Visibility="Hidden">
+        <ScrollViewer Name="NotesView" Margin="0,0,0,0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="5" Width="1100" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="NoteStackPanel"/>
         </ScrollViewer>
     </Grid>
