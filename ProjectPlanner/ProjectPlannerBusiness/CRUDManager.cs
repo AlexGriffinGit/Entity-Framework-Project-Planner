@@ -249,5 +249,27 @@ namespace ProjectPlannerBusiness
                 pc.SaveChanges();
             }
         }
+
+        public void UpdateFeature(string title, string description, int status, int priority, string notes)
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                var _updateFeature =
+                    from f in pc.Features
+                    where f.FeatureId == SelectedFeature.FeatureId
+                    select f;
+
+                foreach (var feature in _updateFeature)
+                {
+                    feature.Title = title;
+                    feature.Description = description;
+                    feature.Status = status;
+                    feature.Priority = priority;
+                    feature.Notes = notes;
+                }
+
+                pc.SaveChanges();
+            }
+        }
     }
 }
