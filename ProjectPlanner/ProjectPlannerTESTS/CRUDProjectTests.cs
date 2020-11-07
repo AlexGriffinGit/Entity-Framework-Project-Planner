@@ -270,5 +270,151 @@ namespace ProjectPlannerTESTS
                 });
             }
         }
+
+        [Test]
+        public void WhenAProjectIsDeletedMakeSureItIsRemovedFromTheDatabase()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Project _testProj = new Project()
+                {
+                    Title = "TestProj",
+                    Description = "A blank test project",
+                    Status = 1,
+                    Link = "No Link"
+                };
+
+                pc.Projects.Add(_testProj);
+
+                pc.SaveChanges();
+
+                int _key = 0;
+
+                _crudManager.SelectedProject = _testProj;
+
+                _crudManager.DeleteProject();
+
+                var _containsDeleted =
+                    from p in pc.Projects
+                    where p.ProjectId == _key
+                    select p;
+
+                Assert.IsEmpty(_containsDeleted);
+            }
+        }
+
+        [Test]
+        public void WhenAProjectIsDeletedMakeSureItsFeaturesAreRemovedFromTheDatabaseAsWell()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Project _testProj = new Project()
+                {
+                    Title = "TestProj",
+                    Description = "A blank test project",
+                    Status = 1,
+                    Link = "No Link"
+                };
+
+                pc.Projects.Add(_testProj);
+
+                pc.SaveChanges();
+
+                int _projectKey = _testProj.ProjectId;
+
+                _crudManager.SelectedProject = _testProj;
+
+                Feature _testFeat = new Feature()
+                {
+                    Title = "TestFeat",
+                    Description = "This is a test feature",
+                    Status = 1,
+                    Priority = 1,
+                    Notes = "No notes needed",
+                    ProjectId = _crudManager.SelectedProject.ProjectId
+                };
+
+                pc.Features.Add(_testFeat);
+
+                pc.SaveChanges();
+
+                int _featureKey = _testFeat.FeatureId;
+
+                _crudManager.DeleteProject();
+
+                var _containsFeatureID =
+                    from f in pc.Features
+                    where f.FeatureId == _featureKey
+                    select f;
+
+                var _containsFeatureProjectID =
+                    from f in pc.Features
+                    where f.ProjectId == _projectKey
+                    select f;
+
+                Assert.Multiple(() =>
+                {
+                    Assert.IsEmpty(_containsFeatureID);
+                    Assert.IsEmpty(_containsFeatureProjectID);
+                });
+            }
+        }
+
+        [Test]
+        public void WhenAProjectIsDeletedMakeSureItsIssuesAreRemovedFromTheDatabaseAsWell()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Project _testProj = new Project()
+                {
+                    Title = "TestProj",
+                    Description = "A blank test project",
+                    Status = 1,
+                    Link = "No Link"
+                };
+
+                pc.Projects.Add(_testProj);
+
+                pc.SaveChanges();
+
+                int _projectKey = _testProj.ProjectId;
+
+                _crudManager.SelectedProject = _testProj;
+
+                Issue _testIssue = new Issue()
+                {
+                    Title = "TestIssue",
+                    Description = "This is a test issue",
+                    Status = 1,
+                    Priority = 1,
+                    Notes = "No notes needed",
+                    ProjectId = _crudManager.SelectedProject.ProjectId
+                };
+
+                pc.Issues.Add(_testIssue);
+
+                pc.SaveChanges();
+
+                int _issueKey = _testIssue.IssueId;
+
+                _crudManager.DeleteProject();
+
+                var _containsIssueID =
+                    from i in pc.Issues
+                    where i.IssueId == _issueKey
+                    select i;
+
+                var _containsIssueProjectID =
+                    from i in pc.Issues
+                    where i.ProjectId == _projectKey
+                    select i;
+
+                Assert.Multiple(() =>
+                {
+                    Assert.IsEmpty(_containsIssueID);
+                    Assert.IsEmpty(_containsIssueProjectID);
+                });
+            }
+        }
     }
 }
