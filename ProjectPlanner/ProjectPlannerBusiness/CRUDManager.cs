@@ -294,6 +294,23 @@ namespace ProjectPlannerBusiness
             }
         }
 
+        public void UpdateNote(string title, string body)
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                var _updateNote =
+                    from n in pc.Notes
+                    where n.NoteId == SelectedNote.NoteId
+                    select n;
 
+                foreach (var note in _updateNote)
+                {
+                    note.Title = title;
+                    note.Body = body;
+                }
+
+                pc.SaveChanges();            
+            }
+        }
     }
 }
