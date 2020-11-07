@@ -271,5 +271,29 @@ namespace ProjectPlannerBusiness
                 pc.SaveChanges();
             }
         }
+
+        public void UpdateIssue(string title, string description, int status, int priority, string notes)
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                var _updateIssue =
+                    from i in pc.Issues
+                    where i.IssueId == SelectedIssue.IssueId
+                    select i;
+
+                foreach (var issue in _updateIssue)
+                {
+                    issue.Title = title;
+                    issue.Description = description;
+                    issue.Status = status;
+                    issue.Priority = priority;
+                    issue.Notes = notes;
+                }
+
+                pc.SaveChanges();
+            }
+        }
+
+
     }
 }
