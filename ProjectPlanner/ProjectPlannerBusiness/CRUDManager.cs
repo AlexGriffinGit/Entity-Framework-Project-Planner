@@ -374,5 +374,23 @@ namespace ProjectPlannerBusiness
                 }
             }
         }
+
+        public void DeleteNote()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                var _deleteNote =
+                    from n in pc.Notes
+                    where n.NoteId == SelectedNote.NoteId
+                    select n;
+
+                foreach (var item in _deleteNote)
+                {
+                    pc.Notes.Remove(item);
+
+                    pc.SaveChanges();
+                }
+            }
+        }
     }
 }
