@@ -356,5 +356,23 @@ namespace ProjectPlannerBusiness
                 }
             }
         }
+
+        public void DeleteIssue()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                var _deleteIssue =
+                    from i in pc.Issues
+                    where i.IssueId == SelectedIssue.IssueId
+                    select i;
+
+                foreach (var item in _deleteIssue)
+                {
+                    pc.Issues.Remove(item);
+
+                    pc.SaveChanges();
+                }
+            }
+        }
     }
 }
