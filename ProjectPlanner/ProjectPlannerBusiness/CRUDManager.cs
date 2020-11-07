@@ -320,5 +320,23 @@ namespace ProjectPlannerBusiness
                 pc.SaveChanges();            
             }
         }
+
+        public void DeleteProject()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                var _deleteProject =
+                    from p in pc.Projects
+                    where p.ProjectId == SelectedProject.ProjectId
+                    select p;
+
+                foreach (var item in _deleteProject)
+                {
+                    pc.RemoveRange(item);
+                }
+
+                pc.SaveChanges();
+            }
+        }
     }
 }
