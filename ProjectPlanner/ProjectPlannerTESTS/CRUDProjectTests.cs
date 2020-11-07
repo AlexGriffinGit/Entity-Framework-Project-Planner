@@ -236,5 +236,39 @@ namespace ProjectPlannerTESTS
                 });
             }
         }
+
+        [Test]
+        public void WhenNothingHasChangedWhenUpdateIsCalledEnsureTheInformationHasNotChanged()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Project _testProj = new Project()
+                {
+                    Title = "TestProj",
+                    Description = "A blank test project",
+                    Status = 1,
+                    Link = "No Link"
+                };
+
+                pc.Projects.Add(_testProj);
+
+                pc.SaveChanges();
+
+                int key = _testProj.ProjectId;
+
+                _crudManager.SelectedProject = _testProj;
+
+                _crudManager.UpdateProject("TestProj", "A blank test project", 1, "No Link");
+
+                Assert.Multiple(() =>
+                {
+                    Assert.AreEqual("TestProj", _crudManager.SelectedProject.Title);
+                    Assert.AreEqual("A blank test project", _crudManager.SelectedProject.Description);
+                    Assert.AreEqual(1, _crudManager.SelectedProject.Status);
+                    Assert.AreEqual("No Link", _crudManager.SelectedProject.Link);
+                    Assert.AreEqual(key, _crudManager.SelectedProject.ProjectId);
+                });
+            }
+        }
     }
 }

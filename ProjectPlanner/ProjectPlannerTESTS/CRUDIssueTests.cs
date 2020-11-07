@@ -281,5 +281,116 @@ namespace ProjectPlannerTESTS
                 });
             }
         }
+
+        [Test]
+        public void WhenUpdatingASinglePropertyOfAnIssueEnsureTheInformationHasBeenUpdated()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Issue _testIssue = new Issue()
+                {
+                    Title = "TestIssue",
+                    Description = "This is a test issue",
+                    Status = 1,
+                    Priority = 1,
+                    Notes = "No notes needed",
+                    ProjectId = _crudManager.SelectedProject.ProjectId
+                };
+
+                pc.Issues.Add(_testIssue);
+
+                pc.SaveChanges();
+
+                int key = _testIssue.IssueId;
+
+                _crudManager.SelectedIssue = _testIssue;
+
+                _crudManager.UpdateIssue("TestIssue", "This is an updated test issue", 1, 1, "No notes needed");
+
+                Assert.Multiple(() =>
+                {
+                    Assert.AreEqual("TestIssue", _crudManager.SelectedIssue.Title);
+                    Assert.AreEqual("This is an updated test issue", _crudManager.SelectedIssue.Description);
+                    Assert.AreEqual(1, _crudManager.SelectedIssue.Status);
+                    Assert.AreEqual(1, _crudManager.SelectedIssue.Priority);
+                    Assert.AreEqual("No notes needed", _crudManager.SelectedIssue.Notes);
+                    Assert.AreEqual(key, _crudManager.SelectedIssue.IssueId);
+                });
+            }
+        }
+
+        [Test]
+        public void WhenUpdatingMultiplePropertiesOfAnIssueEnsureTheInformationHasBeenUpdated()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Issue _testIssue = new Issue()
+                {
+                    Title = "TestIssue",
+                    Description = "This is a test issue",
+                    Status = 1,
+                    Priority = 1,
+                    Notes = "No notes needed",
+                    ProjectId = _crudManager.SelectedProject.ProjectId
+                };
+
+                pc.Issues.Add(_testIssue);
+
+                pc.SaveChanges();
+
+                int key = _testIssue.IssueId;
+
+                _crudManager.SelectedIssue = _testIssue;
+
+                _crudManager.UpdateIssue("TestIssue", "This is an updated test issue", 2, 2, "No notes here");
+
+                Assert.Multiple(() =>
+                {
+                    Assert.AreEqual("TestIssue", _crudManager.SelectedIssue.Title);
+                    Assert.AreEqual("This is an updated test issue", _crudManager.SelectedIssue.Description);
+                    Assert.AreEqual(2, _crudManager.SelectedIssue.Status);
+                    Assert.AreEqual(2, _crudManager.SelectedIssue.Priority);
+                    Assert.AreEqual("No notes here", _crudManager.SelectedIssue.Notes);
+                    Assert.AreEqual(key, _crudManager.SelectedIssue.IssueId);
+                });
+            }
+        }
+
+        [Test]
+        public void WhenNothingHasChangedWhenUpdateIsCalledEnsureTheInformationHasNotChanged()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Issue _testIssue = new Issue()
+                {
+                    Title = "TestIssue",
+                    Description = "This is a test issue",
+                    Status = 1,
+                    Priority = 1,
+                    Notes = "No notes needed",
+                    ProjectId = _crudManager.SelectedProject.ProjectId
+                };
+
+                pc.Issues.Add(_testIssue);
+
+                pc.SaveChanges();
+
+                int key = _testIssue.IssueId;
+
+                _crudManager.SelectedIssue = _testIssue;
+
+                _crudManager.UpdateIssue("TestIssue", "This is a test issue", 1, 1, "No notes needed");
+
+                Assert.Multiple(() =>
+                {
+                    Assert.AreEqual("TestIssue", _crudManager.SelectedIssue.Title);
+                    Assert.AreEqual("This is a test issue", _crudManager.SelectedIssue.Description);
+                    Assert.AreEqual(1, _crudManager.SelectedIssue.Status);
+                    Assert.AreEqual(1, _crudManager.SelectedIssue.Priority);
+                    Assert.AreEqual("No notes needed", _crudManager.SelectedIssue.Notes);
+                    Assert.AreEqual(key, _crudManager.SelectedIssue.IssueId);
+                });
+            }
+        }
     }
 }
