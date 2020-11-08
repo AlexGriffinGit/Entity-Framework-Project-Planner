@@ -54,10 +54,10 @@ namespace ProjectPlannerGUI
             TextBlock _PriorityText = new TextBlock { Text = relatedFeature.Priority.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _notesText = new TextBlock { Text = relatedFeature.Notes, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
 
-            Button _updateFeatureButton = new Button() { Content = "Update", FontSize = 26, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 225 };
+            Button _updateFeatureButton = new Button() { Content = "Update", FontSize = 26, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 225, Margin = new Thickness(0, 8, 0, 0) };
             _updateFeatureButton.Click += ButtonModifyFeature_Click;
 
-            Button _deleteFeatureButton = new Button() { Content = "Delete", FontSize = 26, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 225 };
+            Button _deleteFeatureButton = new Button() { Content = "Delete", FontSize = 26, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 225, Margin = new Thickness(0, 8, 0, 0) };
             _deleteFeatureButton.Click += ButtonDeleteFeature_Click;
 
             _basestackPanel.Children.Add(_idLabel);
@@ -116,8 +116,11 @@ namespace ProjectPlannerGUI
             TextBlock _PriorityText = new TextBlock { Text = relatedIssue.Priority.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _notesText = new TextBlock { Text = relatedIssue.Notes, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
 
-            Button _updateIssueButton = new Button() { Content = "Update", FontSize = 26, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 225 };
+            Button _updateIssueButton = new Button() { Content = "Update", FontSize = 26, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 225, Margin = new Thickness(0, 8, 0, 0) };
             _updateIssueButton.Click += ButtonModifyIssue_Click;
+
+            Button _deleteIssueButton = new Button() { Content = "Delete", FontSize = 26, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 225, Margin = new Thickness(0, 8, 0, 0) };
+            _deleteIssueButton.Click += ButtonDeleteIssue_Click;
 
             _basestackPanel.Children.Add(_idLabel);
             _basestackPanel.Children.Add(_idText);
@@ -134,6 +137,7 @@ namespace ProjectPlannerGUI
             _basestackPanel.Children.Add(_notesLabel);
             _basestackPanel.Children.Add(_notesText);
             _basestackPanel.Children.Add(_updateIssueButton);
+            _basestackPanel.Children.Add(_deleteIssueButton);
 
             _expander.Content = _basestackPanel;
 
