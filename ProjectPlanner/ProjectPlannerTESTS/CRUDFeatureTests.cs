@@ -412,7 +412,7 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                int key = _testFeat.FeatureId;
+                int _key = _testFeat.FeatureId;
 
                 _crudManager.SelectedFeature = _testFeat;
 
@@ -425,7 +425,7 @@ namespace ProjectPlannerTESTS
                     Assert.AreEqual(1, _crudManager.SelectedFeature.Status);
                     Assert.AreEqual(1, _crudManager.SelectedFeature.Priority);
                     Assert.AreEqual("No notes needed", _crudManager.SelectedFeature.Notes);
-                    Assert.AreEqual(key, _crudManager.SelectedFeature.FeatureId);
+                    Assert.AreEqual(_key, _crudManager.SelectedFeature.FeatureId);
                 });
             }
         }
@@ -449,7 +449,7 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                int key = _testFeat.FeatureId;
+                int _key = _testFeat.FeatureId;
 
                 _crudManager.SelectedFeature = _testFeat;
 
@@ -462,7 +462,7 @@ namespace ProjectPlannerTESTS
                     Assert.AreEqual(2, _crudManager.SelectedFeature.Status);
                     Assert.AreEqual(3, _crudManager.SelectedFeature.Priority);
                     Assert.AreEqual("No notes here", _crudManager.SelectedFeature.Notes);
-                    Assert.AreEqual(key, _crudManager.SelectedFeature.FeatureId);
+                    Assert.AreEqual(_key, _crudManager.SelectedFeature.FeatureId);
                 });
             }
         }
@@ -486,7 +486,7 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                int key = _testFeat.FeatureId;
+                int _key = _testFeat.FeatureId;
 
                 _crudManager.SelectedFeature = _testFeat;
 
@@ -499,8 +499,76 @@ namespace ProjectPlannerTESTS
                     Assert.AreEqual(1, _crudManager.SelectedFeature.Status);
                     Assert.AreEqual(1, _crudManager.SelectedFeature.Priority);
                     Assert.AreEqual("No notes needed", _crudManager.SelectedFeature.Notes);
-                    Assert.AreEqual(key, _crudManager.SelectedFeature.FeatureId);
+                    Assert.AreEqual(_key, _crudManager.SelectedFeature.FeatureId);
                 });
+            }
+        }
+
+        [Test]
+        public void WhenAFeatureIsDeletedMakeSureItIsRemovedFromTheDatabase()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Feature _testFeat = new Feature()
+                {
+                    Title = "TestFeat",
+                    Description = "This is a test feature",
+                    Status = 1,
+                    Priority = 1,
+                    Notes = "No notes needed",
+                    ProjectId = _crudManager.SelectedProject.ProjectId
+                };
+
+                pc.Features.Add(_testFeat);
+
+                pc.SaveChanges();
+
+                int _key = _testFeat.FeatureId;
+
+                _crudManager.SelectedFeature = _testFeat;
+
+                _crudManager.DeleteFeature();
+
+                var _containsDeleted =
+                    from f in pc.Features
+                    where f.FeatureId == _key
+                    select f;
+
+                Assert.IsEmpty(_containsDeleted);
+            }
+        }
+
+        [Test]
+        public void WhenAProjectIsDeletedMakeSureTheFeaturesAreRemovedFromTheDatabase()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Feature _testFeat = new Feature()
+                {
+                    Title = "TestFeat",
+                    Description = "This is a test feature",
+                    Status = 1,
+                    Priority = 1,
+                    Notes = "No notes needed",
+                    ProjectId = _crudManager.SelectedProject.ProjectId
+                };
+
+                pc.Features.Add(_testFeat);
+
+                pc.SaveChanges();
+
+                int _key = _testFeat.FeatureId;
+
+                _crudManager.SelectedFeature = _testFeat;
+
+                _crudManager.DeleteProject();
+
+                var _containsDeleted =
+                    from f in pc.Features
+                    where f.FeatureId == _key
+                    select f;
+
+                Assert.IsEmpty(_containsDeleted);
             }
         }
     }
