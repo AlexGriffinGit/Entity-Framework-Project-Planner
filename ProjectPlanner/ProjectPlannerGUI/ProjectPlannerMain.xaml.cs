@@ -613,6 +613,8 @@ namespace ProjectPlannerGUI
 
         private void ButtonModifyFeature_Click(object sender, RoutedEventArgs e)
         {
+            _crudManager.SetSelectedFeature(((Button)sender).Tag);
+
             _updateView = "f";
 
             _isAdding = false;
@@ -631,6 +633,8 @@ namespace ProjectPlannerGUI
 
         private void ButtonDeleteFeature_Click(object sender, RoutedEventArgs e)
         {
+            _crudManager.SetSelectedFeature(((Button)sender).Tag);
+
             _crudManager.DeleteFeature();
 
             HideFeatureLists();
@@ -640,6 +644,8 @@ namespace ProjectPlannerGUI
 
         private void ButtonModifyIssue_Click(object sender, RoutedEventArgs e)
         {
+            _crudManager.SetSelectedIssue(((Button)sender).Tag);
+
             _updateView = "i";
 
             _isAdding = false;
@@ -658,6 +664,8 @@ namespace ProjectPlannerGUI
 
         private void ButtonDeleteIssue_Click(object sender, RoutedEventArgs e)
         {
+            _crudManager.SetSelectedIssue(((Button)sender).Tag);
+
             _crudManager.DeleteIssue();
 
             HideIssueLists();
@@ -667,6 +675,8 @@ namespace ProjectPlannerGUI
 
         private void ButtonModifyNote_Click(object sender, RoutedEventArgs e)
         {
+            _crudManager.SetSelectedNote(((Button)sender).Tag);
+
             _updateView = "n";
 
             _isAdding = false;
@@ -681,6 +691,17 @@ namespace ProjectPlannerGUI
             HideCrudButtons();
             ConfirmButton.Visibility = Visibility.Visible;
             Cancelbutton.Visibility = Visibility.Visible;
+        }
+
+        private void ButtonDeleteNote_Click(object sender, RoutedEventArgs e)
+        {
+            _crudManager.SetSelectedNote(((Button)sender).Tag);
+
+            _crudManager.DeleteNote();
+
+            HideNoteList();
+            PopulateNoteList();
+            ShowNoteList();
         }
 
         private void ProjectDetailsChanged()
