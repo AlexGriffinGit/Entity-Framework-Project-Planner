@@ -145,28 +145,12 @@ namespace ProjectPlannerGUI
             NotesView.Visibility = Visibility.Visible;
         }
 
-        private void HideAddAndDeleteButtons()
+        private void HideCrudButtons()
         {
             AddButton.Visibility = Visibility.Hidden;
             DeleteButton.Visibility = Visibility.Hidden;
-        }
-
-        private void ShowAddAndDeleteButtons()
-        {
-            AddButton.Visibility = Visibility.Visible;
-            DeleteButton.Visibility = Visibility.Visible;
-        }
-
-        private void HideConfirmAndCancelButtons()
-        {
             ConfirmButton.Visibility = Visibility.Hidden;
             Cancelbutton.Visibility = Visibility.Hidden;
-        }
-
-        private void ShowConfirmAndCancelButtons()
-        {
-            ConfirmButton.Visibility = Visibility.Visible;
-            Cancelbutton.Visibility = Visibility.Visible;
         }
 
         private void HideProjectComboBox()

@@ -32,7 +32,7 @@ namespace ProjectPlannerGUI
         private bool _issuesSelected = false;
 
         private bool _isAdding = false;
-        private bool _isUpdatingProject = false;
+        private bool _hasChangedFromComboBox = false;
 
         private string _currentView = "p";
         private string _updateView = "";
@@ -72,6 +72,8 @@ namespace ProjectPlannerGUI
             PopulateComboBox();
             ButtonSelected(ProjectHeaderButton);
             HideProjectSubheadingButtons();
+
+            HideCrudButtons();
             AddButton.Visibility = Visibility.Visible;
 
             ProjectStatusComboBox.ItemsSource = _projectStatus;
@@ -81,33 +83,38 @@ namespace ProjectPlannerGUI
 
         private void ProjectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (_isAdding == false || _updateView == "p")
+            _hasChangedFromComboBox = true;
+
+            //_crudManager.SetSelectedProject(ProjectComboBox.SelectedItem);
+
+            ShowProjectSubheadingButtons();
+
+            HideFeatureFields();
+            HideFeatureLists();
+            HideIssueFields();
+            HideIssueLists();
+            HideNoteFields();
+            HideNoteList();
+
+            HideCrudButtons();
+            AddButton.Visibility = Visibility.Visible;
+
+            if (ProjectComboBox.SelectedItem != null)
             {
-                _isUpdatingProject = false;
                 _crudManager.SetSelectedProject(ProjectComboBox.SelectedItem);
-
-                DeleteButton.Visibility = Visibility.Visible;
-
-                ShowProjectSubheadingButtons();
-
-                HideFeatureFields();
-                HideFeatureLists();
-                HideIssueFields();
-                HideIssueLists();
-                HideNoteFields();
-                HideNoteList();
-
                 PopulateProjectFields();
                 ShowProjectFields();
 
-                ButtonSelected(ProjectOverviewButton);
-                ButtonDeselected(ProjectFeaturesButton);
-                ButtonDeselected(ProjectIssuesButton);
-
-                ProjectOverviewButton.FontSize = 45; ProjectFeaturesButton.FontSize = 37; ProjectIssuesButton.FontSize = 37;
-
-                _isUpdatingProject = true;
+                DeleteButton.Visibility = Visibility.Visible;
             }
+
+            ButtonSelected(ProjectOverviewButton);
+            ButtonDeselected(ProjectFeaturesButton);
+            ButtonDeselected(ProjectIssuesButton);
+
+            ProjectOverviewButton.FontSize = 45; ProjectFeaturesButton.FontSize = 37; ProjectIssuesButton.FontSize = 37;
+
+            _hasChangedFromComboBox = false;
         }
 
         private void ProjectHeaderButton_Click(object sender, RoutedEventArgs e)
@@ -126,6 +133,9 @@ namespace ProjectPlannerGUI
                 HideNoteList();
                 HideNoteFields();
 
+                HideCrudButtons();
+                AddButton.Visibility = Visibility.Visible;
+
                 _currentView = "p";
 
                 if (ProjectComboBox.SelectedItem != null)
@@ -140,6 +150,8 @@ namespace ProjectPlannerGUI
                     ButtonDeselected(ProjectIssuesButton);
 
                     ProjectOverviewButton.FontSize = 45; ProjectFeaturesButton.FontSize = 37; ProjectIssuesButton.FontSize = 37;
+
+                    DeleteButton.Visibility = Visibility.Visible;
                 }
             }
         }
@@ -167,6 +179,9 @@ namespace ProjectPlannerGUI
                 HideIssueFields();
                 HideIssueLists();
 
+                HideCrudButtons();
+                AddButton.Visibility = Visibility.Visible;
+
                 PopulateNoteList();
                 ShowNoteList();
             }
@@ -185,11 +200,20 @@ namespace ProjectPlannerGUI
                 ProjectOverviewButton.FontSize = 45; ProjectFeaturesButton.FontSize = 37; ProjectIssuesButton.FontSize = 37;
 
                 ShowProjectFields();
+                PopulateProjectFields();
                 HideFeatureFields();
                 HideFeatureLists();
                 HideIssueFields();
                 HideIssueLists();
-                
+
+                HideCrudButtons();
+                AddButton.Visibility = Visibility.Visible;
+
+                if (ProjectComboBox.SelectedItem != null)
+                {
+                    DeleteButton.Visibility = Visibility.Visible;
+                }
+
                 _currentView = "p";
             }
         }
@@ -214,6 +238,9 @@ namespace ProjectPlannerGUI
                 HideIssueLists();
 
                 PopulateFeatureLists();
+
+                HideCrudButtons();
+                AddButton.Visibility = Visibility.Visible;
 
                 _currentView = "f";
             }
@@ -240,6 +267,9 @@ namespace ProjectPlannerGUI
 
                 PopulateIssueLists();
 
+                HideCrudButtons();
+                AddButton.Visibility = Visibility.Visible;
+
                 _currentView = "i";
             }
         }
@@ -264,23 +294,33 @@ namespace ProjectPlannerGUI
                 case "p":
                     HideProjectFields();
                     ShowProjectFields();
-                    HideAddAndDeleteButtons();
-                    ShowConfirmAndCancelButtons();
+
+                    HideCrudButtons();
+                    ConfirmButton.Visibility = Visibility.Visible;
+                    Cancelbutton.Visibility = Visibility.Visible;
                     break;
                 case "f":
                     ShowFeatureFields();
-                    HideAddAndDeleteButtons();
-                    ShowConfirmAndCancelButtons();
+                    FeatureProjectIDText.Content = _crudManager.SelectedProject.ProjectId;
+
+                    HideCrudButtons();
+                    ConfirmButton.Visibility = Visibility.Visible;
+                    Cancelbutton.Visibility = Visibility.Visible;
                     break;
                 case "i":
                     ShowIssueFields();
-                    HideAddAndDeleteButtons();
-                    ShowConfirmAndCancelButtons();
+                    IssueProjectIDText.Content = _crudManager.SelectedProject.ProjectId;
+
+                    HideCrudButtons();
+                    ConfirmButton.Visibility = Visibility.Visible;
+                    Cancelbutton.Visibility = Visibility.Visible;
                     break;
                 case "n":
                     ShowNoteFields();
-                    HideAddAndDeleteButtons();
-                    ShowConfirmAndCancelButtons();
+
+                    HideCrudButtons();
+                    ConfirmButton.Visibility = Visibility.Visible;
+                    Cancelbutton.Visibility = Visibility.Visible;
                     break;
                 default:
                     break;
@@ -309,8 +349,23 @@ namespace ProjectPlannerGUI
                             HideProjectFields();
                             PopulateComboBox();
 
-                            ShowAddAndDeleteButtons();
-                            HideConfirmAndCancelButtons();
+                            List<Project> projects = _crudManager.RetrieveAllProjects();
+                            int index = 0;
+
+                            for (int i = 0; i < projects.Count; i++)
+                            {
+                                if (projects[i].ProjectId == _crudManager.SelectedProject.ProjectId)
+                                {
+                                    index = i;
+                                }
+                            }
+
+                            ProjectComboBox.SelectedIndex = index;
+                            ShowProjectFields();
+
+                            HideCrudButtons();
+                            AddButton.Visibility = Visibility.Visible;
+                            DeleteButton.Visibility = Visibility.Visible;
                         }
                         break;
                     case "f":
@@ -328,8 +383,8 @@ namespace ProjectPlannerGUI
                                 PopulateFeatureLists();
                                 ShowFeatureLists();
 
-                                ShowAddAndDeleteButtons();
-                                HideConfirmAndCancelButtons();
+                                HideCrudButtons();
+                                AddButton.Visibility = Visibility.Visible;
                             }
                         }
                         else
@@ -352,8 +407,8 @@ namespace ProjectPlannerGUI
                                 PopulateIssueLists();
                                 ShowIssueLists();
 
-                                ShowAddAndDeleteButtons();
-                                HideConfirmAndCancelButtons();
+                                HideCrudButtons();
+                                AddButton.Visibility = Visibility.Visible;
                             }
                         }
                         else
@@ -368,8 +423,8 @@ namespace ProjectPlannerGUI
                         PopulateNoteList();
                         ShowNoteList();
 
-                        ShowAddAndDeleteButtons();
-                        HideConfirmAndCancelButtons();
+                        HideCrudButtons();
+                        AddButton.Visibility = Visibility.Visible;
                         break;
                     default:
                         break;
@@ -389,17 +444,25 @@ namespace ProjectPlannerGUI
                         {
                             _crudManager.UpdateProject(ProjectTitleTextBox.Text, ProjectDescriptionTextBox.Text, ProjectStatusComboBox.SelectedIndex, ProjectLinkTextBox.Text);
 
-                            _isAdding = true;
-                            _updateView = "";
-                            _isUpdatingProject = false;
-
                             HideProjectFields();
                             PopulateComboBox();
 
-                            ShowAddAndDeleteButtons();
-                            HideConfirmAndCancelButtons();
+                            List<Project> projects = _crudManager.RetrieveAllProjects();
+                            int index = 0;
 
-                            
+                            for (int i = 0; i < projects.Count; i++)
+                            {
+                                if (projects[i].ProjectId == _crudManager.SelectedProject.ProjectId)
+                                {
+                                    index = i;
+                                }
+                            }
+
+                            ProjectComboBox.SelectedIndex = index;
+
+                            HideCrudButtons();
+                            AddButton.Visibility = Visibility.Visible;
+                            DeleteButton.Visibility = Visibility.Visible;
                         }
                         break;
                     case "f":
@@ -417,8 +480,8 @@ namespace ProjectPlannerGUI
                                 ShowFeatureLists();
                                 PopulateFeatureLists();
 
-                                ShowAddAndDeleteButtons();
-                                HideConfirmAndCancelButtons();
+                                HideCrudButtons();
+                                AddButton.Visibility = Visibility.Visible;
                             }
                         }
                         else
@@ -441,8 +504,8 @@ namespace ProjectPlannerGUI
                                 PopulateIssueLists();
                                 ShowIssueLists();
 
-                                ShowAddAndDeleteButtons();
-                                HideConfirmAndCancelButtons();
+                                HideCrudButtons();
+                                AddButton.Visibility = Visibility.Visible;
                             }
                         }
                         else
@@ -456,6 +519,9 @@ namespace ProjectPlannerGUI
                         HideNoteFields();
                         PopulateNoteList();
                         ShowNoteList();
+
+                        HideCrudButtons();
+                        AddButton.Visibility = Visibility.Visible;
                         break;
                     default:
                         break;
@@ -464,7 +530,6 @@ namespace ProjectPlannerGUI
 
             _isAdding = false;
             _updateView = "";
-            _isUpdatingProject = false;
         }
 
         private void Cancelbutton_Click(object sender, RoutedEventArgs e)
@@ -475,29 +540,35 @@ namespace ProjectPlannerGUI
                 {
                     case "p":
                         HideProjectFields();
-                        ShowAddAndDeleteButtons();
-                        HideConfirmAndCancelButtons();
+
+                        ProjectComboBox.SelectedItem = null;
+
+                        HideCrudButtons();
+                        AddButton.Visibility = Visibility.Visible;                      
                         break;
                     case "f":
                         HideFeatureFields();
                         PopulateFeatureLists();
                         ShowFeatureLists();
-                        ShowAddAndDeleteButtons();
-                        HideConfirmAndCancelButtons();
+
+                        HideCrudButtons();
+                        AddButton.Visibility = Visibility.Visible;
                         break;
                     case "i":
                         HideIssueFields();
                         PopulateIssueLists();
                         ShowIssueLists();
-                        ShowAddAndDeleteButtons();
-                        HideConfirmAndCancelButtons();
+
+                        HideCrudButtons();
+                        AddButton.Visibility = Visibility.Visible;
                         break;
                     case "n":
                         HideNoteFields();
                         PopulateNoteList();
                         ShowNoteList();
-                        ShowAddAndDeleteButtons();
-                        HideConfirmAndCancelButtons();
+
+                        HideCrudButtons();
+                        AddButton.Visibility = Visibility.Visible;
                         break;
                     default:
                         break;
@@ -511,29 +582,34 @@ namespace ProjectPlannerGUI
                         HideProjectFields();
                         PopulateProjectFields();
                         ShowProjectFields();
-                        ShowAddAndDeleteButtons();
-                        HideConfirmAndCancelButtons();
+
+                        HideCrudButtons();
+                        AddButton.Visibility = Visibility.Visible;
+                        DeleteButton.Visibility = Visibility.Visible;
                         break;
                     case "f":
                         HideFeatureFields();
                         PopulateFeatureLists();
                         ShowFeatureLists();
-                        ShowAddAndDeleteButtons();
-                        HideConfirmAndCancelButtons();
+
+                        HideCrudButtons();
+                        AddButton.Visibility = Visibility.Visible;
                         break;
                     case "i":
                         HideIssueFields();
                         PopulateIssueLists();
                         ShowIssueLists();
-                        ShowAddAndDeleteButtons();
-                        HideConfirmAndCancelButtons();
+
+                        HideCrudButtons();
+                        AddButton.Visibility = Visibility.Visible;
                         break;
                     case "n":
                         HideNoteFields();
                         PopulateNoteList();
                         ShowNoteList();
-                        ShowAddAndDeleteButtons();
-                        HideConfirmAndCancelButtons();
+
+                        HideCrudButtons();
+                        AddButton.Visibility = Visibility.Visible;
                         break;
                     default:
                         break;
@@ -545,7 +621,16 @@ namespace ProjectPlannerGUI
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+            if (_currentView == "p" && ProjectComboBox.SelectedItem != null)
+            {
+                _crudManager.DeleteProject();
 
+                HideProjectFields();
+                PopulateComboBox();
+
+                HideCrudButtons();
+                AddButton.Visibility = Visibility.Visible;
+            }
         }
 
         private void ButtonModifyFeature_Click(object sender, RoutedEventArgs e)
@@ -560,8 +645,10 @@ namespace ProjectPlannerGUI
 
             ShowFeatureFields();
             PopulateFeatureFields();
-            HideAddAndDeleteButtons();
-            ShowConfirmAndCancelButtons();
+
+            HideCrudButtons();
+            ConfirmButton.Visibility = Visibility.Visible;
+            Cancelbutton.Visibility = Visibility.Visible;
         }
 
         private void ButtonModifyIssue_Click(object sender, RoutedEventArgs e)
@@ -576,8 +663,10 @@ namespace ProjectPlannerGUI
 
             ShowIssueFields();
             PopulateIssueFields();
-            HideAddAndDeleteButtons();
-            ShowConfirmAndCancelButtons();
+
+            HideCrudButtons();
+            ConfirmButton.Visibility = Visibility.Visible;
+            Cancelbutton.Visibility = Visibility.Visible;
         }
 
         private void ButtonModifyNote_Click(object sender, RoutedEventArgs e)
@@ -592,16 +681,20 @@ namespace ProjectPlannerGUI
 
             ShowNoteFields();
             PopulateNoteFields();
-            HideAddAndDeleteButtons();
-            ShowConfirmAndCancelButtons();
+
+            HideCrudButtons();
+            ConfirmButton.Visibility = Visibility.Visible;
+            Cancelbutton.Visibility = Visibility.Visible;
         }
 
         private void ProjectDetailsChanged()
         {
-            if (_isUpdatingProject == true)
+            if (_hasChangedFromComboBox == false)
             {
-                ShowConfirmAndCancelButtons();
-                HideAddAndDeleteButtons();
+                HideCrudButtons();
+                ConfirmButton.Visibility = Visibility.Visible;
+                Cancelbutton.Visibility = Visibility.Visible;
+
                 _updateView = "p";
             }
         }
