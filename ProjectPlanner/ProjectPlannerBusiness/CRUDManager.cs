@@ -133,6 +133,25 @@ namespace ProjectPlannerBusiness
             }
         }
 
+        public int RetrieveIndexOfNewProject()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                List<Project> projects = pc.Projects.ToList();
+                int index = 0;
+
+                for (int i = 0; i < projects.Count; i++)
+                {
+                    if (projects[i].ProjectId == SelectedProject.ProjectId)
+                    {
+                        index = i;
+                    }
+                }
+
+                return index;
+            }
+        }
+
         public void SetSelectedProject(object selected)
         {
             SelectedProject = (Project)selected;
@@ -168,6 +187,8 @@ namespace ProjectPlannerBusiness
                 pc.Projects.Add(_newProject);
 
                 pc.SaveChanges();
+
+                SelectedProject = _newProject;
             }
         }
 
@@ -351,9 +372,9 @@ namespace ProjectPlannerBusiness
                 foreach (var item in _deleteFeature)
                 {
                     pc.Features.Remove(item);
-
-                    pc.SaveChanges();
                 }
+
+                pc.SaveChanges();
             }
         }
 
@@ -369,9 +390,9 @@ namespace ProjectPlannerBusiness
                 foreach (var item in _deleteIssue)
                 {
                     pc.Issues.Remove(item);
-
-                    pc.SaveChanges();
                 }
+
+                pc.SaveChanges();
             }
         }
 
@@ -387,9 +408,9 @@ namespace ProjectPlannerBusiness
                 foreach (var item in _deleteNote)
                 {
                     pc.Notes.Remove(item);
-
-                    pc.SaveChanges();
                 }
+
+                pc.SaveChanges();
             }
         }
     }
