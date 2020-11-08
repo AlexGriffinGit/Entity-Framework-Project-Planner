@@ -20,7 +20,13 @@ namespace ProjectPlannerTESTS
                    where p.Title == "TestProj"
                    select p;
 
+                var _secondProject =
+                   from p in pc.Projects
+                   where p.Title == "TestProj2"
+                   select p;
+
                 pc.Projects.RemoveRange(_selectedProject);
+                pc.Projects.RemoveRange(_secondProject);
 
                 pc.SaveChanges();
             }
@@ -36,7 +42,13 @@ namespace ProjectPlannerTESTS
                    where p.Title == "TestProj"
                    select p;
 
+                var _secondProject =
+                   from p in pc.Projects
+                   where p.Title == "TestProj2"
+                   select p;
+
                 pc.Projects.RemoveRange(_selectedProject);
+                pc.Projects.RemoveRange(_secondProject);
 
                 pc.SaveChanges();
             }
@@ -186,7 +198,7 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                int key = _testProj.ProjectId;
+                int _key = _testProj.ProjectId;
 
                 _crudManager.SelectedProject = _testProj;
 
@@ -198,7 +210,7 @@ namespace ProjectPlannerTESTS
                     Assert.AreEqual("I've updated this test project", _crudManager.SelectedProject.Description);
                     Assert.AreEqual(1, _crudManager.SelectedProject.Status);
                     Assert.AreEqual("No Link", _crudManager.SelectedProject.Link);
-                    Assert.AreEqual(key, _crudManager.SelectedProject.ProjectId);
+                    Assert.AreEqual(_key, _crudManager.SelectedProject.ProjectId);
                 });
             }
         }
@@ -220,7 +232,7 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                int key = _testProj.ProjectId;
+                int _key = _testProj.ProjectId;
 
                 _crudManager.SelectedProject = _testProj;
 
@@ -232,7 +244,7 @@ namespace ProjectPlannerTESTS
                     Assert.AreEqual("I've updated this test project", _crudManager.SelectedProject.Description);
                     Assert.AreEqual(3, _crudManager.SelectedProject.Status);
                     Assert.AreEqual("www.google.com", _crudManager.SelectedProject.Link);
-                    Assert.AreEqual(key, _crudManager.SelectedProject.ProjectId);
+                    Assert.AreEqual(_key, _crudManager.SelectedProject.ProjectId);
                 });
             }
         }
@@ -254,7 +266,7 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                int key = _testProj.ProjectId;
+                int _key = _testProj.ProjectId;
 
                 _crudManager.SelectedProject = _testProj;
 
@@ -266,7 +278,7 @@ namespace ProjectPlannerTESTS
                     Assert.AreEqual("A blank test project", _crudManager.SelectedProject.Description);
                     Assert.AreEqual(1, _crudManager.SelectedProject.Status);
                     Assert.AreEqual("No Link", _crudManager.SelectedProject.Link);
-                    Assert.AreEqual(key, _crudManager.SelectedProject.ProjectId);
+                    Assert.AreEqual(_key, _crudManager.SelectedProject.ProjectId);
                 });
             }
         }
@@ -413,6 +425,62 @@ namespace ProjectPlannerTESTS
                 {
                     Assert.IsEmpty(_containsIssueID);
                     Assert.IsEmpty(_containsIssueProjectID);
+                });
+            }
+        }
+
+        [Test]
+        public void WhenANewProjectIsCreatedMakeSureThatTheIndexOfTheNewProjectIsCorrectlyReturnedByTheRetrieveIndexOfNewProjectMethod()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Project _testProj = new Project()
+                {
+                    Title = "TestProj",
+                    Description = "A blank test project",
+                    Status = 1,
+                    Link = "No Link"
+                };
+
+                pc.Projects.Add(_testProj);
+
+                pc.SaveChanges();
+
+                _crudManager.SelectedProject = _testProj;
+
+                int _firstProjectIndex = _crudManager.RetrieveIndexOfNewProject();
+
+                Project _testProj2 = new Project()
+                {
+                    Title = "TestProj2",
+                    Description = "the second blank test project",
+                    Status = 2,
+                    Link = "No Link here"
+                };
+
+                pc.Projects.Add(_testProj2);
+
+                pc.SaveChanges();
+
+                _crudManager.SelectedProject = _testProj2;
+
+                int _secondProjectIndex = _crudManager.RetrieveIndexOfNewProject();
+
+                List<Project> projects = pc.Projects.ToList();
+                int index = 0;
+
+                for (int i = 0; i < projects.Count; i++)
+                {
+                    if (projects[i].ProjectId == _crudManager.SelectedProject.ProjectId)
+                    {
+                        index = i;
+                    }
+                }
+
+                Assert.Multiple(() =>
+                {
+                    Assert.AreNotEqual(_firstProjectIndex, index);
+                    Assert.AreEqual(_secondProjectIndex, index);
                 });
             }
         }
