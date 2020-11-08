@@ -85,8 +85,6 @@ namespace ProjectPlannerGUI
         {
             _hasChangedFromComboBox = true;
 
-            //_crudManager.SetSelectedProject(ProjectComboBox.SelectedItem);
-
             ShowProjectSubheadingButtons();
 
             HideFeatureFields();
@@ -349,18 +347,7 @@ namespace ProjectPlannerGUI
                             HideProjectFields();
                             PopulateComboBox();
 
-                            List<Project> projects = _crudManager.RetrieveAllProjects();
-                            int index = 0;
-
-                            for (int i = 0; i < projects.Count; i++)
-                            {
-                                if (projects[i].ProjectId == _crudManager.SelectedProject.ProjectId)
-                                {
-                                    index = i;
-                                }
-                            }
-
-                            ProjectComboBox.SelectedIndex = index;
+                            ProjectComboBox.SelectedIndex = _crudManager.RetrieveIndexOfNewProject();
                             ShowProjectFields();
 
                             HideCrudButtons();
@@ -444,21 +431,12 @@ namespace ProjectPlannerGUI
                         {
                             _crudManager.UpdateProject(ProjectTitleTextBox.Text, ProjectDescriptionTextBox.Text, ProjectStatusComboBox.SelectedIndex, ProjectLinkTextBox.Text);
 
+                            int _chosenIndex = ProjectComboBox.SelectedIndex;
+
                             HideProjectFields();
                             PopulateComboBox();
 
-                            List<Project> projects = _crudManager.RetrieveAllProjects();
-                            int index = 0;
-
-                            for (int i = 0; i < projects.Count; i++)
-                            {
-                                if (projects[i].ProjectId == _crudManager.SelectedProject.ProjectId)
-                                {
-                                    index = i;
-                                }
-                            }
-
-                            ProjectComboBox.SelectedIndex = index;
+                            ProjectComboBox.SelectedIndex = _chosenIndex;
 
                             HideCrudButtons();
                             AddButton.Visibility = Visibility.Visible;
