@@ -413,5 +413,72 @@ namespace ProjectPlannerBusiness
                 pc.SaveChanges();
             }
         }
+
+        public int CalculateProjectProgress()
+        {
+            int progress = 0;
+            int numOfFeatures = RetrieveCompleteFeatures().Count + RetrieveToDoFeatures().Count;
+
+            if (numOfFeatures == 0)
+            {
+                return 0;
+            }
+
+            int featureWorth = 100 / numOfFeatures;
+
+            foreach (var item in RetrieveToDoFeatures())
+            {
+                if (item.Status == 0)
+                {
+                    progress += featureWorth / 5;
+                }
+                else if (item.Status == 1)
+                {
+                    progress += featureWorth / 2;
+                }
+                else if (item.Status == 2)
+                {
+                    progress += (featureWorth / 4) * 3;
+                }
+            }
+
+            progress += RetrieveCompleteFeatures().Count * featureWorth;
+
+            foreach (var item in RetrieveProjectIssues())
+            {
+                if (item.Status == 0 || item.Status == 1)
+                {
+                    if (item.Priority <= 5)
+                    {
+                        progress -= 10;
+                    }
+                    else if (item.Priority <= 10)
+                    {
+                        progress -= 5;
+                    }
+                    else
+                    {
+                        progress -= 3;
+                    }
+                }
+                else if (item.Status == 2)
+                {
+                    if (item.Priority <= 5)
+                    {
+                        progress -= 3;
+                    }
+                    else if (item.Priority <= 10)
+                    {
+                        progress -= 2;
+                    }
+                    else
+                    {
+                        progress -= 1;
+                    }
+                }
+            }
+
+            return progress;
+        }
     }
 }

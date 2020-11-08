@@ -29,28 +29,54 @@ namespace ProjectPlannerGUI
             ProjectIDText.Content = _crudManager.SelectedProject.ProjectId;
             ProjectTitleTextBox.Text = _crudManager.SelectedProject.Title;
             ProjectDescriptionTextBox.Text = _crudManager.SelectedProject.Description;
-            ProjectStatusComboBox.SelectedIndex = _crudManager.SelectedProject.Status;
+
+            if (_crudManager.SelectedProject.Status == -1)
+            {
+                ProjectStatusComboBox.SelectedIndex = 0;
+            }
+            else
+            {
+                ProjectStatusComboBox.SelectedIndex = _crudManager.SelectedProject.Status;
+            }
+            
             ProjectLinkTextBox.Text = _crudManager.SelectedProject.Link;
 
             string _completeText = "";
 
-            foreach (var item in _crudManager.RetrieveCompleteFeatures())
+            if (_crudManager.RetrieveCompleteFeatures().Count > 0)
             {
-                _completeText += $", { item.Title }";
+                foreach (var item in _crudManager.RetrieveCompleteFeatures())
+                {
+                    _completeText += $", { item.Title }";
+                }
             }
 
             string _toDoText = "";
 
             foreach (var item in _crudManager.RetrieveToDoFeatures())
             {
-                _toDoText += $", { item.Title } - {_featureStatus[item.Status]}";
+                if (item.Status > -1)
+                {
+                    _toDoText += $", { item.Title } - {_featureStatus[item.Status]}";
+                }
+                else
+                {
+                    _toDoText += $", { item.Title } - {_featureStatus[0]}";
+                }
             }
-
+            
             string _issueText = "";
 
             foreach (var item in _crudManager.RetrieveProjectIssues())
             {
-                _issueText += $", { item.Title } - { _issueStatus[item.Status] }";
+                if (item.Status > -1)
+                {
+                    _issueText += $", { item.Title } - { _issueStatus[item.Status] }";
+                }
+                else
+                {
+                    _issueText += $", { item.Title } - { _issueStatus[0]}";
+                }    
             }
 
             if (_completeText.Length > 0)
@@ -83,8 +109,8 @@ namespace ProjectPlannerGUI
                 ProjectIssuesText.Text = "";
             }
 
-            ProjectProgressBar.Value = CalculateProjectProgress();
-            ProgressBarValue.Text = CalculateProjectProgress().ToString() + "%";
+            ProjectProgressBar.Value = _crudManager.CalculateProjectProgress();
+            ProgressBarValue.Text = ProjectProgressBar.Value.ToString() + "%";
         }
 
         private void PopulateFeatureFields()
@@ -114,39 +140,6 @@ namespace ProjectPlannerGUI
             NoteIDText.Content = _crudManager.SelectedNote.NoteId;
             NoteTitleTextBox.Text = _crudManager.SelectedNote.Title;
             NoteBodyTextBox.Text = _crudManager.SelectedNote.Body;
-        }
-
-        private int CalculateProjectProgress()
-        {
-            int progress = 0;
-            int numOfFeatures = _crudManager.RetrieveCompleteFeatures().Count + _crudManager.RetrieveToDoFeatures().Count;
-
-            if (numOfFeatures == 0)
-            {
-                return 0;
-            }
-
-            int featureWorth = 100 / numOfFeatures;
-
-            foreach (var item in _crudManager.RetrieveToDoFeatures())
-            {
-                if (item.Status == 0)
-                {
-                    progress += featureWorth / 5;
-                }
-                else if (item.Status == 1)
-                {
-                    progress += featureWorth / 2;
-                }
-                else if (item.Status == 2)
-                {
-                    progress += (featureWorth / 4) * 3;
-                }
-            }
-
-            progress += _crudManager.RetrieveCompleteFeatures().Count * featureWorth;
-
-            return progress;
         }
 
         private void PopulateFeatureLists()
