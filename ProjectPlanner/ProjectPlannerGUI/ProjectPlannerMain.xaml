@@ -1116,13 +1116,33 @@
         <ComboBox ItemContainerStyle="{DynamicResource ProjectComboBoxItemContainerStyle}" Style="{DynamicResource ProjectComboBox}" Name="ProjectComboBox" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,265,0"  SelectionChanged="ProjectComboBox_SelectionChanged" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Width="310" Height="50" FontSize="26" IsEditable="False" VerticalContentAlignment="Center"/>
 
         <!--Add, confirm, cancel and delete buttons-->
-        <Button Name="AddButton" Content="Add" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="0" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#59585a" Click="AddButton_Click"/>
-        <Button Name="ConfirmButton" Content="Confirm" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="1" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#59585a" Click="ConfirmButton_Click" Visibility="Hidden"/>
-        <Button Name="Cancelbutton" Content="Cancel" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="2" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#59585a" Click="Cancelbutton_Click" Visibility="Hidden"/>
-        <Button Name="DeleteButton" Content="Delete" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="3" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#59585a" Click="DeleteButton_Click" Visibility="Hidden"/>
+        <Button Name="AddButton" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="0" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="38,0,0,0" Click="AddButton_Click">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Add" Padding="0,0,0,0" VerticalAlignment="Center" Foreground="#59585a"/>
+                <Image Source="Images/AddSymbol.png" Margin="45,0,0,0" Width="37"/>
+            </StackPanel>
+        </Button>
+        <Button Name="ConfirmButton" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="1" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="25,0,0,0" Foreground="#59585a" Click="ConfirmButton_Click" Visibility="Hidden">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Confirm" Padding="0,0,0,0" VerticalAlignment="Center" Foreground="#59585a"/>
+                <Image Source="Images/TickSymbol.png" Margin="25,0,0,0" Width="37"/>
+            </StackPanel>
+        </Button>
+        <Button Name="Cancelbutton" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="2" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="34,0,0,0" Foreground="#59585a" Click="Cancelbutton_Click" Visibility="Hidden">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Cancel" Padding="0,0,0,0" VerticalAlignment="Center" Foreground="#59585a"/>
+                <Image Source="Images/CrossSymbol.png" Margin="25,0,0,0" Width="37"/>
+            </StackPanel>
+        </Button>
+        <Button Name="DeleteButton" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="225" Height="45" Grid.Row="6" Grid.Column="3" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="36,0,0,0" Foreground="#59585a" Click="DeleteButton_Click" Visibility="Hidden">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Delete" Padding="0,0,0,0" VerticalAlignment="Center" Foreground="#59585a"/>
+                <Image Source="Images/DeleteSymbol.png" Margin="25,0,0,0" Width="37"/>
+            </StackPanel>
+        </Button>
         
         <!--Project Fields contained in a scroll view-->
-        <ScrollViewer Name="ProjectScrollView" Grid.ColumnSpan="4" Margin="38,112,38,0" Grid.Row="1" Grid.RowSpan="5" Visibility="Visible" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Name="ProjectScrollView" Grid.ColumnSpan="4" Margin="38,112,38,0" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
                     <Label Name="ProjectIDLabel" Content="Project ID: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#EFEFEF" FontSize="30"/>

@@ -68,7 +68,11 @@ namespace ProjectPlannerGUI
 
         public ProjectPlannerMain()
         {
+            //Useful for finding the Uri String of an image or object
+            //string _uriString = TestImage.Source.ToString();
+
             InitializeComponent();
+
             PopulateComboBox();
             ButtonSelected(ProjectHeaderButton);
             HideProjectSubheadingButtons();

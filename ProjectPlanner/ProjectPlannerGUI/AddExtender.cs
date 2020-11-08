@@ -29,12 +29,12 @@ namespace ProjectPlannerGUI
             _expander.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF"));
             _expander.Background = new SolidColorBrush(Colors.Transparent);
             _expander.IsExpanded = false;
-
             _expander.Tag = relatedFeature;
-            _expander.AddHandler(Expander.ExpandedEvent, new RoutedEventHandler(_expander_Feature_Expanded));
 
             Style style = this.FindResource("ExpanderStyle") as Style;
             _expander.Style = style;
+
+            _expander.AddHandler(Expander.ExpandedEvent, new RoutedEventHandler(_expander_Feature_Expanded));
 
             StackPanel _baseStackPanel = new StackPanel { Name = "BaseStackPanel", Orientation = Orientation.Vertical };
 
@@ -54,10 +54,25 @@ namespace ProjectPlannerGUI
             TextBlock _PriorityText = new TextBlock { Text = relatedFeature.Priority.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _notesText = new TextBlock { Text = relatedFeature.Notes, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
 
-            Button _updateFeatureButton = new Button() { Content = "Update", FontSize = 28, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 235, Margin = new Thickness(0, 8, 0, 0), Height = 35 };
+            StackPanel _updateFeatureStackPanel = new StackPanel() { Orientation = Orientation.Horizontal };
+            StackPanel _deleteFeatureStackPanel = new StackPanel() { Orientation = Orientation.Horizontal };
+
+            TextBlock _updateFeatureTextBlock = new TextBlock() { Text = "Update", FontSize = 27, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(-8, 0, 0, 0) };
+            TextBlock _deleteFeatureTextBlock = new TextBlock() { Text = "Delete", FontSize = 27, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(-8, 0, 0, 0) };
+
+            Image _updateFeatureIcon = new Image() { Source = new BitmapImage(new Uri("pack://application:,,,/ProjectPlannerGUI;component/Images/ModifySymbol.png")), Margin = new Thickness(28, 0, 0, 0), Width = 28 };
+            Image _deleteFeatureIcon = new Image() { Source = new BitmapImage(new Uri("pack://application:,,,/ProjectPlannerGUI;component/Images/DeleteSymbol.png")), Margin = new Thickness(38, 0, 0, 0), Width = 28 };
+
+            _updateFeatureStackPanel.Children.Add(_updateFeatureTextBlock);
+            _updateFeatureStackPanel.Children.Add(_updateFeatureIcon);
+
+            _deleteFeatureStackPanel.Children.Add(_deleteFeatureTextBlock);
+            _deleteFeatureStackPanel.Children.Add(_deleteFeatureIcon);
+
+            Button _updateFeatureButton = new Button() { Content = _updateFeatureStackPanel, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(54, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 235, Margin = new Thickness(0, 8, 0, 0), Height = 35 };
             _updateFeatureButton.Click += ButtonModifyFeature_Click;
 
-            Button _deleteFeatureButton = new Button() { Content = "Delete", FontSize = 28, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 235, Margin = new Thickness(0, 8, 0, 0), Height = 35 };
+            Button _deleteFeatureButton = new Button() { Content = _deleteFeatureStackPanel, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(54, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 235, Margin = new Thickness(0, 8, 0, 0), Height = 35 };
             _deleteFeatureButton.Click += ButtonDeleteFeature_Click;
 
             //These tags pass the feature that they relate to and set that as the selected feature in the CRUDManager
@@ -95,12 +110,12 @@ namespace ProjectPlannerGUI
             _expander.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF"));
             _expander.Background = new SolidColorBrush(Colors.Transparent);
             _expander.IsExpanded = false;
-
             _expander.Tag = relatedIssue;
-            _expander.AddHandler(Expander.ExpandedEvent, new RoutedEventHandler(_expander_Issue_Expanded));
 
             Style style = this.FindResource("ExpanderStyle") as Style;
             _expander.Style = style;
+
+            _expander.AddHandler(Expander.ExpandedEvent, new RoutedEventHandler(_expander_Issue_Expanded));
 
             StackPanel _baseStackPanel = new StackPanel { Name = "BaseStackPanel", Orientation = Orientation.Vertical };
 
@@ -120,10 +135,25 @@ namespace ProjectPlannerGUI
             TextBlock _PriorityText = new TextBlock { Text = relatedIssue.Priority.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _notesText = new TextBlock { Text = relatedIssue.Notes, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
 
-            Button _updateIssueButton = new Button() { Content = "Update", FontSize = 28, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 235, Margin = new Thickness(0, 8, 0, 0), Height = 35 };
+            StackPanel _updateIssueStackPanel = new StackPanel() { Orientation = Orientation.Horizontal };
+            StackPanel _deleteIssueStackPanel = new StackPanel() { Orientation = Orientation.Horizontal };
+
+            TextBlock _updateIssueTextBlock = new TextBlock() { Text = "Update", FontSize = 27, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(-8, 0, 0, 0) };
+            TextBlock _deleteIssueTextBlock = new TextBlock() { Text = "Delete", FontSize = 27, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(-8, 0, 0, 0) };
+
+            Image _updateIssueIcon = new Image() { Source = new BitmapImage(new Uri("pack://application:,,,/ProjectPlannerGUI;component/Images/ModifySymbol.png")), Margin = new Thickness(28, 0, 0, 0), Width = 28 };
+            Image _deleteIssueIcon = new Image() { Source = new BitmapImage(new Uri("pack://application:,,,/ProjectPlannerGUI;component/Images/DeleteSymbol.png")), Margin = new Thickness(38, 0, 0, 0), Width = 28 };
+
+            _updateIssueStackPanel.Children.Add(_updateIssueTextBlock);
+            _updateIssueStackPanel.Children.Add(_updateIssueIcon);
+
+            _deleteIssueStackPanel.Children.Add(_deleteIssueTextBlock);
+            _deleteIssueStackPanel.Children.Add(_deleteIssueIcon);
+
+            Button _updateIssueButton = new Button() { Content = _updateIssueStackPanel, FontSize = 28, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(54, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 235, Margin = new Thickness(0, 8, 0, 0), Height = 35 };
             _updateIssueButton.Click += ButtonModifyIssue_Click;
 
-            Button _deleteIssueButton = new Button() { Content = "Delete", FontSize = 28, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 235, Margin = new Thickness(0, 8, 0, 0), Height = 35 };
+            Button _deleteIssueButton = new Button() { Content = _deleteIssueStackPanel, FontSize = 28, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(54, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 235, Margin = new Thickness(0, 8, 0, 0), Height = 35 };
             _deleteIssueButton.Click += ButtonDeleteIssue_Click;
 
             //These tags pass the issue that they relate to and set that as the selected issue in the CRUDManager
@@ -158,18 +188,18 @@ namespace ProjectPlannerGUI
             Expander _expander = new Expander();
 
             _expander.Header = note.Title;
+
             _expander.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF"));
             _expander.Background = new SolidColorBrush(Colors.Transparent);
             _expander.IsExpanded = false;
-
             _expander.Tag = note;
-            _expander.AddHandler(Expander.ExpandedEvent, new RoutedEventHandler(_expander_Note_Expanded));
-
             _expander.FontSize = 32;
             _expander.Margin = Margin = new Thickness(0, 0, 0, 10);
 
             Style style = this.FindResource("ExpanderStyle") as Style;
             _expander.Style = style;
+
+            _expander.AddHandler(Expander.ExpandedEvent, new RoutedEventHandler(_expander_Note_Expanded));       
 
             StackPanel _baseStackPanel = new StackPanel { Name = "BaseStackPanel", Orientation = Orientation.Vertical };
 
@@ -177,10 +207,10 @@ namespace ProjectPlannerGUI
 
             StackPanel _buttonStackPanel = new StackPanel { Name = "BaseStackPanel", Orientation = Orientation.Horizontal };
 
-            Button _updateNoteButton = new Button() { Content = "Update", FontSize = 30, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 300, Margin = new Thickness(0, 8, 0, 0), Height = 40 };
+            Button _updateNoteButton = new Button() { Content = "Update", FontSize = 30, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Margin = new Thickness(0, 8, 0, 0), Height = 40, Width = 450 };
             _updateNoteButton.Click += ButtonModifyNote_Click;
 
-            Button _deleteNoteButton = new Button() { Content = "Delete", FontSize = 30, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 300, Margin = new Thickness(12, 8, 0, 0), Height = 40 };
+            Button _deleteNoteButton = new Button() { Content = "Delete", FontSize = 30, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Margin = new Thickness(12, 8, 0, 0), Height = 40, Width = 450 };
             _deleteNoteButton.Click += ButtonDeleteNote_Click;
 
             //These tags pass the note that they relate to and set that as the selected note in the CRUDManager
