@@ -629,6 +629,15 @@ namespace ProjectPlannerGUI
             Cancelbutton.Visibility = Visibility.Visible;
         }
 
+        private void ButtonDeleteFeature_Click(object sender, RoutedEventArgs e)
+        {
+            _crudManager.DeleteFeature();
+
+            HideFeatureLists();
+            PopulateFeatureLists();
+            ShowFeatureLists();
+        }
+
         private void ButtonModifyIssue_Click(object sender, RoutedEventArgs e)
         {
             _updateView = "i";

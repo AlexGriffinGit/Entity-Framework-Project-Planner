@@ -57,6 +57,9 @@ namespace ProjectPlannerGUI
             Button _updateFeatureButton = new Button() { Content = "Update", FontSize = 26, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 225 };
             _updateFeatureButton.Click += ButtonModifyFeature_Click;
 
+            Button _deleteFeatureButton = new Button() { Content = "Delete", FontSize = 26, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 225 };
+            _deleteFeatureButton.Click += ButtonDeleteFeature_Click;
+
             _basestackPanel.Children.Add(_idLabel);
             _basestackPanel.Children.Add(_idText);
             _basestackPanel.Children.Add(_titleLabel);
@@ -72,6 +75,7 @@ namespace ProjectPlannerGUI
             _basestackPanel.Children.Add(_notesLabel);
             _basestackPanel.Children.Add(_notesText);
             _basestackPanel.Children.Add(_updateFeatureButton);
+            _basestackPanel.Children.Add(_deleteFeatureButton);
 
             _expander.Content = _basestackPanel;
 
