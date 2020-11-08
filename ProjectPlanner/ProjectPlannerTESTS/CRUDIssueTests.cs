@@ -59,7 +59,7 @@ namespace ProjectPlannerTESTS
                 pc.Projects.RemoveRange(_selectedProject);
                 pc.Projects.RemoveRange(_secondProject);
                 pc.Issues.RemoveRange(_selectedIssue);
-                
+
                 pc.SaveChanges();
             }
         }
@@ -69,13 +69,15 @@ namespace ProjectPlannerTESTS
         {
             using (PlannerContext pc = new PlannerContext())
             {
+                int numOfIssues = pc.Issues.ToList().Count;
+
                 _crudManager.CreateNewIssue("TestIssue", "This is a test issue", 1, 1, "No notes needed");
 
                 var _issueCount =
                     from i in pc.Issues
                     select i;
 
-                Assert.AreEqual(2, _issueCount.Count());
+                Assert.AreEqual(numOfIssues + 1, _issueCount.Count());
             }
         }
 
@@ -301,7 +303,7 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                int key = _testIssue.IssueId;
+                int _key = _testIssue.IssueId;
 
                 _crudManager.SelectedIssue = _testIssue;
 
@@ -314,7 +316,7 @@ namespace ProjectPlannerTESTS
                     Assert.AreEqual(1, _crudManager.SelectedIssue.Status);
                     Assert.AreEqual(1, _crudManager.SelectedIssue.Priority);
                     Assert.AreEqual("No notes needed", _crudManager.SelectedIssue.Notes);
-                    Assert.AreEqual(key, _crudManager.SelectedIssue.IssueId);
+                    Assert.AreEqual(_key, _crudManager.SelectedIssue.IssueId);
                 });
             }
         }
@@ -338,7 +340,7 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                int key = _testIssue.IssueId;
+                int _key = _testIssue.IssueId;
 
                 _crudManager.SelectedIssue = _testIssue;
 
@@ -351,7 +353,7 @@ namespace ProjectPlannerTESTS
                     Assert.AreEqual(2, _crudManager.SelectedIssue.Status);
                     Assert.AreEqual(2, _crudManager.SelectedIssue.Priority);
                     Assert.AreEqual("No notes here", _crudManager.SelectedIssue.Notes);
-                    Assert.AreEqual(key, _crudManager.SelectedIssue.IssueId);
+                    Assert.AreEqual(_key, _crudManager.SelectedIssue.IssueId);
                 });
             }
         }
@@ -375,7 +377,7 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                int key = _testIssue.IssueId;
+                int _key = _testIssue.IssueId;
 
                 _crudManager.SelectedIssue = _testIssue;
 
@@ -388,8 +390,76 @@ namespace ProjectPlannerTESTS
                     Assert.AreEqual(1, _crudManager.SelectedIssue.Status);
                     Assert.AreEqual(1, _crudManager.SelectedIssue.Priority);
                     Assert.AreEqual("No notes needed", _crudManager.SelectedIssue.Notes);
-                    Assert.AreEqual(key, _crudManager.SelectedIssue.IssueId);
+                    Assert.AreEqual(_key, _crudManager.SelectedIssue.IssueId);
                 });
+            }
+        }
+
+        [Test]
+        public void WhenAnIssueIsDeletedMakeSureItIsRemovedFromTheDatabase()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Issue _testIssue = new Issue()
+                {
+                    Title = "TestIssue",
+                    Description = "This is a test issue",
+                    Status = 1,
+                    Priority = 1,
+                    Notes = "No notes needed",
+                    ProjectId = _crudManager.SelectedProject.ProjectId
+                };
+
+                pc.Issues.Add(_testIssue);
+
+                pc.SaveChanges();
+
+                int _key = _testIssue.IssueId;
+
+                _crudManager.SelectedIssue = _testIssue;
+
+                _crudManager.DeleteIssue();
+
+                var _containsDeleted =
+                    from i in pc.Issues
+                    where i.IssueId == _key
+                    select i;
+
+                Assert.IsEmpty(_containsDeleted);
+            }
+        }
+
+        [Test]
+        public void WhenAProjectIsDeletedMakeSureTheIssuesAreRemovedFromTheDatabase()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Issue _testIssue = new Issue()
+                {
+                    Title = "TestIssue",
+                    Description = "This is a test issue",
+                    Status = 1,
+                    Priority = 1,
+                    Notes = "No notes needed",
+                    ProjectId = _crudManager.SelectedProject.ProjectId
+                };
+
+                pc.Issues.Add(_testIssue);
+
+                pc.SaveChanges();
+
+                int _key = _testIssue.IssueId;
+
+                _crudManager.SelectedIssue = _testIssue;
+
+                _crudManager.DeleteProject();
+
+                var _containsDeleted =
+                     from i in pc.Issues
+                     where i.IssueId == _key
+                     select i;
+
+                Assert.IsEmpty(_containsDeleted);
             }
         }
     }
