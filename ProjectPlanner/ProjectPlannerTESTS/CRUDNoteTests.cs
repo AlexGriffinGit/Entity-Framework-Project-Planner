@@ -176,7 +176,7 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                int key = _testNote.NoteId;
+                int _key = _testNote.NoteId;
 
                 _crudManager.SelectedNote = _testNote;
 
@@ -186,7 +186,7 @@ namespace ProjectPlannerTESTS
                 {
                     Assert.AreEqual("TestNote", _crudManager.SelectedNote.Title);
                     Assert.AreEqual("An updated test note", _crudManager.SelectedNote.Body);
-                    Assert.AreEqual(key, _crudManager.SelectedNote.NoteId);
+                    Assert.AreEqual(_key, _crudManager.SelectedNote.NoteId);
                 });
             }
         }
@@ -206,7 +206,7 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                int key = _testNote.NoteId;
+                int _key = _testNote.NoteId;
 
                 _crudManager.SelectedNote = _testNote;
 
@@ -216,7 +216,7 @@ namespace ProjectPlannerTESTS
                 {
                     Assert.AreEqual("UpdatedTestNote", _crudManager.SelectedNote.Title);
                     Assert.AreEqual("An updated test note", _crudManager.SelectedNote.Body);
-                    Assert.AreEqual(key, _crudManager.SelectedNote.NoteId);
+                    Assert.AreEqual(_key, _crudManager.SelectedNote.NoteId);
                 });
             }
         }
@@ -236,7 +236,7 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                int key = _testNote.NoteId;
+                int _key = _testNote.NoteId;
 
                 _crudManager.SelectedNote = _testNote;
 
@@ -246,8 +246,38 @@ namespace ProjectPlannerTESTS
                 {
                     Assert.AreEqual("TestNote", _crudManager.SelectedNote.Title);
                     Assert.AreEqual("A test note", _crudManager.SelectedNote.Body);
-                    Assert.AreEqual(key, _crudManager.SelectedNote.NoteId);
+                    Assert.AreEqual(_key, _crudManager.SelectedNote.NoteId);
                 });
+            }
+        }
+
+        [Test]
+        public void WhenANoteIsDeletedMakeSureItIsRemovedFromTheDatabase()
+        {
+            using (PlannerContext pc = new PlannerContext())
+            {
+                Note _testNote = new Note()
+                {
+                    Title = "TestNote",
+                    Body = "A test note",
+                };
+
+                pc.Notes.Add(_testNote);
+
+                pc.SaveChanges();
+
+                int _key = _testNote.NoteId;
+
+                _crudManager.SelectedNote = _testNote;
+
+                _crudManager.DeleteNote();
+
+                var _containsDeleted =
+                    from n in pc.Notes
+                    where n.NoteId == _key
+                    select n;
+
+                Assert.IsEmpty(_containsDeleted);
             }
         }
     }
