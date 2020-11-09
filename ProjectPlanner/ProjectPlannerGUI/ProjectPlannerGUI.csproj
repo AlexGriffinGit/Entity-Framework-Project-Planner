@@ -10,9 +10,11 @@
     <None Remove="Images\AddSymbol.png" />
     <None Remove="Images\CrossSymbol.png" />
     <None Remove="Images\DeleteSymbol.png" />
+    <None Remove="Images\JSONSymbol.png" />
     <None Remove="Images\ModifySymbol.png" />
     <None Remove="Images\SearchSymbol.png" />
     <None Remove="Images\TickSymbol.png" />
+    <None Remove="Images\XMLSymbol.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +31,9 @@
     <Resource Include="Images\DeleteSymbol.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\JSONSymbol.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\ModifySymbol.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -36,6 +41,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\TickSymbol.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\XMLSymbol.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

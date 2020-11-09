@@ -1107,6 +1107,7 @@
         <Button Name="ProjectHeaderButton" Style="{DynamicResource HeaderButtons}" Content="Projects" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="ProjectHeaderButton_Click" Width="250" Height="80" Grid.Row="0" Grid.Column="0" FontSize="45" Foreground="#D2D1D3"/>
         <Button Name="NotesHeaderButton" Style="{DynamicResource HeaderButtons}" Content="Notes" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="NotesHeaderButton_Click" Width="250" Height="80" Grid.Row="0" Grid.Column="1" FontSize="45" Foreground="#D2D1D3"/>
         <Button Name="SearchHeaderButton" Style="{DynamicResource HeaderButtons}" Content="Search" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="SearchHeaderButton_Click" Width="250" Height="80" Grid.Row="0" Grid.Column="2" FontSize="45" Foreground="#D2D1D3"/>
+        <Button Name="ExportHeaderButton" Style="{DynamicResource HeaderButtons}" Content="Export" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="ExportHeaderButton_Click" Width="250" Height="80" Grid.Row="0" Grid.Column="3" FontSize="45" Foreground="#D2D1D3"/>
 
         <!--Overview, features and issues buttons-->
         <Button Name="ProjectOverviewButton" Style="{DynamicResource HeaderButtons}" Content="Overview" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="ProjectOverviewButton_Click" Width="250" Height="80" Grid.Row="1" Grid.Column="1" FontSize="37" Foreground="#D2D1D3"/>
@@ -1316,7 +1317,6 @@
                     </StackPanel>
                 </Button>
             </StackPanel>
-
             <StackPanel Orientation="Horizontal">
                 <CheckBox Name="SearchProjectsCheckBox" Content="Projects" Foreground="#D2D1D3" Margin="292,15,0,0" VerticalContentAlignment="Center" Padding="12,2,0,0"/>
                 <CheckBox Name="SearchFeaturesCheckBox" Content="Features" Foreground="#D2D1D3" Margin="38,15,0,0" VerticalContentAlignment="Center" Padding="12,2,0,0"/>
@@ -1325,10 +1325,41 @@
             </StackPanel>
         </StackPanel>
 
+        <!--Search Results-->
         <ScrollViewer Name="SearchScrollView" Grid.ColumnSpan="4" Margin="38,140,38,50" Grid.Row="2" Grid.RowSpan="5" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="SearchStackPanel" Orientation="Vertical">
-
             </StackPanel>
         </ScrollViewer>
+        
+        <!--Export fields-->
+        <StackPanel Name="ExportFields" Orientation="Vertical" Grid.Row="1" Grid.RowSpan="6" Grid.Column="0" Grid.ColumnSpan="4" Visibility="Hidden">
+            <TextBlock Text="Welcome to the export screen, here you can choose to export your projects, features, issues and notes to either XML or JSON." Foreground="#D2D1D3" FontSize="32" Margin="65,0,65,0" TextAlignment="Center" TextWrapping="Wrap"/>
+            <TextBlock Text=""  FontSize="18" Margin="65,0,65,0" />
+            <TextBlock Text="Just pick which tables you want to export with the check boxes below and then hit one of the buttons." Foreground="#D2D1D3" FontSize="32" Margin="65,0,65,0" TextAlignment="Center" TextWrapping="Wrap"/>
+            <TextBlock Text=""  FontSize="18" Margin="65,0,65,0" />
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Name="ExportProjectsCheckBox" Content="Projects" Foreground="#D2D1D3" Margin="225,0,0,0" VerticalContentAlignment="Center" Padding="12,2,0,0" FontSize="25"/>
+                <CheckBox Name="ExportFeaturesCheckBox" Content="Features" Foreground="#D2D1D3" Margin="75,0,0,0" VerticalContentAlignment="Center" Padding="12,2,0,0" FontSize="25"/>
+                <CheckBox Name="ExportIssuesCheckBox" Content="Issues" Foreground="#D2D1D3" Margin="75,0,0,0" VerticalContentAlignment="Center" Padding="12,2,0,0" FontSize="25"/>
+                <CheckBox Name="ExportNotesCheckBox" Content="Notes" Foreground="#D2D1D3" Margin="75,0,0,0" VerticalContentAlignment="Center" Padding="12,2,0,0" FontSize="25"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Name="XMLButton" HorizontalAlignment="Center" Margin="250,40,0,0" VerticalAlignment="Center" Width="225" Height="55" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="38,0,0,0" Foreground="#59585a" Click="XMLButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="XML" Padding="0,0,0,0" VerticalAlignment="Center" Foreground="#59585a"/>
+                        <Image Source="Images/XMLSymbol.png" Margin="35,0,0,0" Width="44"/>
+                    </StackPanel>
+                </Button>
+                <Button Name="JSONbutton" HorizontalAlignment="Center" Margin="225,40,0,0" VerticalAlignment="Center" Width="225" Height="55" Style="{DynamicResource CRUDButtons}" FontSize="28" HorizontalContentAlignment="Left" Padding="37,0,0,0" Foreground="#59585a" Click="JSONButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="JSON" Padding="0,0,0,0" VerticalAlignment="Center" Foreground="#59585a"/>
+                        <Image Source="Images/JSONSymbol.png" Margin="35,0,0,0" Width="42"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <ScrollViewer Name="ExportOutputScroll"  Margin="45,25,45,0" VerticalScrollBarVisibility="Auto" Height="300">
+                <StackPanel Name="ExportOutPutStackPanel"/>
+            </ScrollViewer>
+        </StackPanel>
     </Grid>
 </Window>

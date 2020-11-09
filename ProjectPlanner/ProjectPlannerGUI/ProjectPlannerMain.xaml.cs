@@ -24,10 +24,12 @@ namespace ProjectPlannerGUI
     {
         private CRUDManager _crudManager = new CRUDManager();
         private Searcher _searcher = new Searcher();
+        private XMLExporter _xmlExporter = new XMLExporter();
 
         private bool _projectsSelected = true;
         private bool _notesSelected = false;
         private bool _searchSelected = false;
+        private bool _exportSelected = false;
 
         private bool _overviewSelected = false;
         private bool _featuresSelected = false;
@@ -126,13 +128,14 @@ namespace ProjectPlannerGUI
         {
             if (_projectsSelected == false)
             {
-                _projectsSelected = true; _notesSelected = false; _searchSelected = false;
+                _projectsSelected = true; _notesSelected = false; _searchSelected = false; _exportSelected = false;
 
                 ButtonSelected(ProjectHeaderButton); 
                 ButtonDeselected(NotesHeaderButton);
                 ButtonDeselected(SearchHeaderButton);
+                ButtonDeselected(ExportHeaderButton);
 
-                ProjectHeaderButton.FontSize = 55; NotesHeaderButton.FontSize = 45; SearchHeaderButton.FontSize = 45;
+                ProjectHeaderButton.FontSize = 55; NotesHeaderButton.FontSize = 45; SearchHeaderButton.FontSize = 45; ExportHeaderButton.FontSize = 45;
 
                 ShowProjectComboBox();
                 
@@ -140,6 +143,8 @@ namespace ProjectPlannerGUI
                 HideNoteFields();
 
                 HideSearch();
+
+                ExportFields.Visibility = Visibility.Hidden;
 
                 HideCrudButtons();
                 AddButton.Visibility = Visibility.Visible;
@@ -168,13 +173,14 @@ namespace ProjectPlannerGUI
         {
             if (_notesSelected == false)
             {
-                _notesSelected = true; _projectsSelected = false; _searchSelected = false;
+                _notesSelected = true; _projectsSelected = false; _searchSelected = false; _exportSelected = false;
 
                 ButtonSelected(NotesHeaderButton);
                 ButtonDeselected(ProjectHeaderButton);
                 ButtonDeselected(SearchHeaderButton);
+                ButtonDeselected(ExportHeaderButton);
 
-                NotesHeaderButton.FontSize = 55; ProjectHeaderButton.FontSize = 45; SearchHeaderButton.FontSize = 45;
+                NotesHeaderButton.FontSize = 55; ProjectHeaderButton.FontSize = 45; SearchHeaderButton.FontSize = 45; ExportHeaderButton.FontSize = 45;
 
                 _currentView = "n";
 
@@ -182,13 +188,15 @@ namespace ProjectPlannerGUI
                 HideProjectSubheadingButtons();
                 HideProjectFields();
 
-                HideSearch();
-
                 HideFeatureFields();
                 HideFeatureLists();
 
                 HideIssueFields();
                 HideIssueLists();
+
+                HideSearch();
+
+                ExportFields.Visibility = Visibility.Hidden;
 
                 HideCrudButtons();
                 AddButton.Visibility = Visibility.Visible;
@@ -202,13 +210,14 @@ namespace ProjectPlannerGUI
         {
             if (_searchSelected == false)
             {
-                _searchSelected = true; _projectsSelected = false; _notesSelected = false;
+                _searchSelected = true; _projectsSelected = false; _notesSelected = false; _exportSelected = false;
 
                 ButtonSelected(SearchHeaderButton); 
                 ButtonDeselected(ProjectHeaderButton);
                 ButtonDeselected(NotesHeaderButton);
+                ButtonDeselected(ExportHeaderButton);
 
-                SearchHeaderButton.FontSize = 55; ProjectHeaderButton.FontSize = 45; NotesHeaderButton.FontSize = 45;
+                SearchHeaderButton.FontSize = 55; ProjectHeaderButton.FontSize = 45; NotesHeaderButton.FontSize = 45; ExportHeaderButton.FontSize = 45;
 
                 HideProjectComboBox();
                 HideProjectSubheadingButtons();
@@ -225,7 +234,44 @@ namespace ProjectPlannerGUI
 
                 HideCrudButtons();
 
+                ExportFields.Visibility = Visibility.Hidden;
+
                 SearchFields.Visibility = Visibility.Visible;
+            }
+        }
+
+
+        private void ExportHeaderButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_exportSelected == false)
+            {
+                _exportSelected = true; _projectsSelected = false; _notesSelected = false; _searchSelected = false;
+
+                ButtonSelected(ExportHeaderButton);
+                ButtonDeselected(ProjectHeaderButton);
+                ButtonDeselected(NotesHeaderButton);
+                ButtonDeselected(SearchHeaderButton);
+
+                ExportHeaderButton.FontSize = 55; SearchHeaderButton.FontSize = 45; ProjectHeaderButton.FontSize = 45; NotesHeaderButton.FontSize = 45;
+
+                HideProjectComboBox();
+                HideProjectSubheadingButtons();
+                HideProjectFields();
+
+                HideFeatureFields();
+                HideFeatureLists();
+
+                HideIssueFields();
+                HideIssueLists();
+
+                HideNoteFields();
+                HideNoteList();
+
+                HideCrudButtons();
+
+                SearchFields.Visibility = Visibility.Hidden;
+
+                ExportFields.Visibility = Visibility.Visible;
             }
         }
 
@@ -836,6 +882,54 @@ namespace ProjectPlannerGUI
                 {
                     CreateSearchExpander(item);
                 }
+            }
+        }
+
+        private void XMLButton_Click(object sender, RoutedEventArgs e)
+        {
+            ExportOutPutStackPanel.Children.Clear();
+            _xmlExporter.InitSerialisation();
+
+            TextBlock _projectOutput;
+            TextBlock _featuretOutput;
+            TextBlock _issueOutput;
+            TextBlock _noteOutput;
+
+            if (ExportProjectsCheckBox.IsChecked == true)
+            {
+                string _outputMessage = _xmlExporter.SerialiseProjects();
+
+                _projectOutput = new TextBlock() { Text = _outputMessage, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), FontSize = 25, Margin = new Thickness(45, 20, 45, 0), TextAlignment = TextAlignment.Center , TextWrapping = TextWrapping.Wrap };
+
+                ExportOutPutStackPanel.Children.Add(_projectOutput);
+            }
+            
+            if (ExportFeaturesCheckBox.IsChecked == true)
+            {
+                string _outputMessage = _xmlExporter.SerialiseFeatures();
+
+                _featuretOutput = new TextBlock() { Text = _outputMessage, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), FontSize = 25, Margin = new Thickness(45, 20, 45, 0), TextAlignment = TextAlignment.Center, TextWrapping = TextWrapping.Wrap };
+
+                ExportOutPutStackPanel.Children.Add(_featuretOutput);
+            }
+
+            if (ExportIssuesCheckBox.IsChecked == true)
+            {
+
+                string _outputMessage = _xmlExporter.SerialiseIssues();
+
+                _issueOutput = new TextBlock() { Text = _outputMessage, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), FontSize = 25, Margin = new Thickness(45, 20, 45, 0), TextAlignment = TextAlignment.Center, TextWrapping = TextWrapping.Wrap };
+
+                ExportOutPutStackPanel.Children.Add(_issueOutput);
+            }
+
+            if (ExportNotesCheckBox.IsChecked == true)
+            {
+                string _outputMessage = _xmlExporter.SerialiseNotes();
+
+                _noteOutput = new TextBlock() { Text = _outputMessage, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), FontSize = 25, Margin = new Thickness(45, 20, 45, 0), TextAlignment = TextAlignment.Center, TextWrapping = TextWrapping.Wrap };
+
+                ExportOutPutStackPanel.Children.Add(_noteOutput);
             }
         }
     }
