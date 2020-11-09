@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Fonts\Drugs.otf" />
     <None Remove="Images\AddSymbol.png" />
     <None Remove="Images\CrossSymbol.png" />
     <None Remove="Images\DeleteSymbol.png" />
@@ -22,6 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Fonts\Drugs.otf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\AddSymbol.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

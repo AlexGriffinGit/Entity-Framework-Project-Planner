@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         MinHeight="800" MaxHeight="800" MinWidth="1200" MaxWidth="1200"
-        FontFamily="Drugs"
+        FontFamily="Fonts/#Drugs"
         FontSize="20"
         Title="Project Planner"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
