@@ -25,6 +25,7 @@ namespace ProjectPlannerGUI
         private CRUDManager _crudManager = new CRUDManager();
         private Searcher _searcher = new Searcher();
         private XMLExporter _xmlExporter = new XMLExporter();
+        JSONExporter _jsonExporter = new JSONExporter();
 
         private bool _projectsSelected = true;
         private bool _notesSelected = false;
@@ -266,6 +267,8 @@ namespace ProjectPlannerGUI
 
                 HideNoteFields();
                 HideNoteList();
+
+                HideSearch();
 
                 HideCrudButtons();
 
@@ -915,7 +918,6 @@ namespace ProjectPlannerGUI
 
             if (ExportIssuesCheckBox.IsChecked == true)
             {
-
                 string _outputMessage = _xmlExporter.SerialiseIssues();
 
                 _issueOutput = new TextBlock() { Text = _outputMessage, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), FontSize = 25, Margin = new Thickness(45, 20, 45, 0), TextAlignment = TextAlignment.Center, TextWrapping = TextWrapping.Wrap };
@@ -926,6 +928,53 @@ namespace ProjectPlannerGUI
             if (ExportNotesCheckBox.IsChecked == true)
             {
                 string _outputMessage = _xmlExporter.SerialiseNotes();
+
+                _noteOutput = new TextBlock() { Text = _outputMessage, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), FontSize = 25, Margin = new Thickness(45, 20, 45, 0), TextAlignment = TextAlignment.Center, TextWrapping = TextWrapping.Wrap };
+
+                ExportOutPutStackPanel.Children.Add(_noteOutput);
+            }
+        }
+
+        private void JSONButton_Click(object sender, RoutedEventArgs e)
+        {
+            ExportOutPutStackPanel.Children.Clear();
+            _jsonExporter.InitSerialisation();
+
+            TextBlock _projectOutput;
+            TextBlock _featuretOutput;
+            TextBlock _issueOutput;
+            TextBlock _noteOutput;
+
+            if (ExportProjectsCheckBox.IsChecked == true)
+            {
+                string _outputMessage = _jsonExporter.SerialiseProjects();
+
+                _projectOutput = new TextBlock() { Text = _outputMessage, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), FontSize = 25, Margin = new Thickness(45, 20, 45, 0), TextAlignment = TextAlignment.Center, TextWrapping = TextWrapping.Wrap };
+
+                ExportOutPutStackPanel.Children.Add(_projectOutput);
+            }
+
+            if (ExportFeaturesCheckBox.IsChecked == true)
+            {
+                string _outputMessage = _jsonExporter.SerialiseFeatures();
+
+                _featuretOutput = new TextBlock() { Text = _outputMessage, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), FontSize = 25, Margin = new Thickness(45, 20, 45, 0), TextAlignment = TextAlignment.Center, TextWrapping = TextWrapping.Wrap };
+
+                ExportOutPutStackPanel.Children.Add(_featuretOutput);
+            }
+
+            if (ExportIssuesCheckBox.IsChecked == true)
+            {
+                string _outputMessage = _jsonExporter.SerialiseIssues();
+
+                _issueOutput = new TextBlock() { Text = _outputMessage, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), FontSize = 25, Margin = new Thickness(45, 20, 45, 0), TextAlignment = TextAlignment.Center, TextWrapping = TextWrapping.Wrap };
+
+                ExportOutPutStackPanel.Children.Add(_issueOutput);
+            }
+
+            if (ExportNotesCheckBox.IsChecked == true)
+            {
+                string _outputMessage = _jsonExporter.SerialiseNotes();
 
                 _noteOutput = new TextBlock() { Text = _outputMessage, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), FontSize = 25, Margin = new Thickness(45, 20, 45, 0), TextAlignment = TextAlignment.Center, TextWrapping = TextWrapping.Wrap };
 
