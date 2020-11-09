@@ -19,6 +19,8 @@ namespace ProjectPlannerGUI
 {
     public partial class ProjectPlannerMain : Window
     {
+        CalculateProgress _calculateProgress = new CalculateProgress();
+
         private void PopulateComboBox()
         {
             ProjectComboBox.ItemsSource = _crudManager.RetrieveAllProjects();
@@ -109,7 +111,7 @@ namespace ProjectPlannerGUI
                 ProjectIssuesText.Text = "";
             }
 
-            ProjectProgressBar.Value = _crudManager.CalculateProjectProgress();
+            ProjectProgressBar.Value = _calculateProgress.CalculateProjectProgress(_crudManager.SelectedProject);
             ProgressBarValue.Text = ProjectProgressBar.Value.ToString() + "%";
         }
 
