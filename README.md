@@ -100,9 +100,9 @@ A user story is considered done when:
     * [Epic 2 - User Story 4 - The ability to delete a feature present in the database.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689068)
     * [Epic 3 - User Story 4- Delete an existing issue related to a project in the database.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689040)
     * [Epic 4 - User Story 4 - Delete an existing note in the database.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48688983)
-
-    Not completed user stories:
-    All Completed.
+    
+    Not completed user stories:  
+    * All Completed.
     
   * #### Sprint Retrospective ####
     My second sprint went very smoothly and I'm very happy with where the project planner currently is. The improvements I outlined in my first sprint retrospective really helped to focus my efforts where they needed to be.
