@@ -145,7 +145,7 @@ namespace ProjectPlannerGUI
 
                 HideSearch();
 
-                ExportFields.Visibility = Visibility.Hidden;
+                HideExport();
 
                 HideCrudButtons();
                 AddButton.Visibility = Visibility.Visible;
@@ -197,7 +197,7 @@ namespace ProjectPlannerGUI
 
                 HideSearch();
 
-                ExportFields.Visibility = Visibility.Hidden;
+                HideExport();
 
                 HideCrudButtons();
                 AddButton.Visibility = Visibility.Visible;
@@ -235,7 +235,7 @@ namespace ProjectPlannerGUI
 
                 HideCrudButtons();
 
-                ExportFields.Visibility = Visibility.Hidden;
+                HideExport();
 
                 SearchFields.Visibility = Visibility.Visible;
             }

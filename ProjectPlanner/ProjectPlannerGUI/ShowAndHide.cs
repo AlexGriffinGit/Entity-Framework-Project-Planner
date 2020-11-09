@@ -210,5 +210,16 @@ namespace ProjectPlannerGUI
 
             SearchTextBox.Text = String.Empty;
         }
+
+        private void HideExport()
+        {
+            ExportFields.Visibility = Visibility.Hidden;
+            ExportOutPutStackPanel.Children.Clear();
+
+            ExportProjectsCheckBox.IsChecked = false;
+            ExportFeaturesCheckBox.IsChecked = false;
+            ExportIssuesCheckBox.IsChecked = false;
+            ExportNotesCheckBox.IsChecked = false;
+        }
     }
 }
