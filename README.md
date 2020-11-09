@@ -53,18 +53,18 @@ A user story is considered done when:
    
   * #### Sprint Review ####
     Completed user stories:
-    * Epic 1 - User Story 1 - List the projects currently in the database.
-    * Epic 1 - User Story 2 - Select a project from the project list.
-    * Epic 1 - User Story 3 - Adding a new project to the project database.
-    * Epic 2 - User Story 1 - Adding a new feature to the feature table in the database.
-    * Epic 3 - User Story 1 - Add a new issue to the issue table in the database.
-    * Epic 4 - User Story 1 - Add a new note to the note table in the database.
+    * [Epic 1 - User Story 1 - List the projects currently in the database.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689148)
+    * [Epic 1 - User Story 2 - Select a project from the project list.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689139)
+    * [Epic 1 - User Story 3 - Adding a new project to the project database.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689129)
+    * [Epic 2 - User Story 1 - Adding a new feature to the feature table in the database.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689095)
+    * [Epic 3 - User Story 1 - Add a new issue to the issue table in the database.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689061)
+    * [Epic 4 - User Story 1 - Add a new note to the note table in the database.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689025)
 
     Not completed user stories:
-    * Epic 1 - User Story 4 - Viewing a specific project and it's associated information, methods not adequately covered by unit tests.
-    * Epic 2 - User Story 2 - Viewing features and their details for a specific project, methods not adequately covered by unit tests.
-    * Epic 3 - User Story 2- Viewing issues and their details for a specific project, methods not adequately covered by unit tests.
-    * Epic 4 - User Story 2- Viewing notes and their details, methods not adequately covered by unit tests.
+    * [Epic 1 - User Story 4 - Viewing a specific project and it's associated information, methods not adequately covered by unit tests.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689119)
+    * [Epic 2 - User Story 2 - Viewing features and their details for a specific project, methods not adequately covered by unit tests.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689084)
+    * [Epic 3 - User Story 2- Viewing issues and their details for a specific project, methods not adequately covered by unit tests.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689058)
+    * [Epic 4 - User Story 2- Viewing notes and their details, methods not adequately covered by unit tests.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689007)
   
   * #### Sprint Retrospective ####
     Overall I think my first sprint went well and I am happy with the progress I have made on the project.
@@ -83,24 +83,46 @@ A user story is considered done when:
       
 * ### Sprint 2 ###
   * #### Sprint Goal ####
+    The goal for my second sprint was to extend the Minimum Viable Product to include the ability to modify and delete existing items that are in the database for all 4 different tables. In addition to that create unit tests for the implementations of the modification and deletion methods and ensure they all pass.
     
    
   * #### Sprint Review ####
     Completed user stories:
+    * [Epic 1 - User Story 4 - Viewing a specific project and it's associated information.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689119)
+    * [Epic 2 - User Story 2 - Viewing features and their details for a specific project.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689084)
+    * [Epic 3 - User Story 2- Viewing issues and their details for a specific project.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689058)
+    * [Epic 4 - User Story 2- Viewing notes and their details.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689007)
+    * [Epic 1 - User Story 5 - Modify existing projects in the database.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689115)
+    * [Epic 2 - User Story 3 - The ability to modify a feature present in the database.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689075)
+    * [Epic 3 - User Story 3 - Modify an existing issue related to a project in the database.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689052)
+    * [Epic 4 - User Story 3 - Modify an existing note in the database.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48688997)
+    * [Epic 1 - User Story 6 - Deleting existing projects in the database.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689104)
+    * [Epic 2 - User Story 4 - The ability to delete a feature present in the database.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689068)
+    * [Epic 3 - User Story 4- Delete an existing issue related to a project in the database.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48689040)
+    * [Epic 4 - User Story 4 - Delete an existing note in the database.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48688983)
     
-
-    Not completed user stories:
+    Not completed user stories:  
+    * All Completed.
     
-  
   * #### Sprint Retrospective ####
-    
+    My second sprint went very smoothly and I'm very happy with where the project planner currently is. The improvements I outlined in my first sprint retrospective really helped to focus my efforts where they needed to be.
 
     * <b>What went well?</b>
-      
+      * I created tests for all of the functionality before implementing the GUI aspects.
+      * The update and the delete methods behaved as expected after a few alterations and they passed the tests I created after these alterations.
+      * The GUI is updating to changes in the database straight away.
+      * The changes I made to improve the readability of the code have certainly helped me in fixing bugs and finding specific code.
     * <b>Improvements to make?</b>
-      
+      * Although better than last sprint I still find I'm focusing on the details of the GUI too much.
+      * I need to find ways to stop reusing very similar code in multiple different places.
+      * More focus on planning certain aspect so I don’t have make alterations later down the line.
     * <b>What will I be doing in the next sprint?</b>
-    
+      * Adding more test coverage that’ll focus on edge and error cases
+      * Adding the ability to search using a search bar which will search for that word or phrase.
+      * Adding the ability to export all of the data for projects, features, issues and notes as XML and JSON.
+      * Add missing GUI elements, such as the list titles.
+      * Move any non CRUD methods out of the CRUDManager class.
+      
 * ### Sprint 3 ###
   * #### Sprint Goal ####
     
