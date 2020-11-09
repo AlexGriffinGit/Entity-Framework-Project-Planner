@@ -357,6 +357,9 @@ namespace ProjectPlannerGUI
                             HideCrudButtons();
                             AddButton.Visibility = Visibility.Visible;
                             DeleteButton.Visibility = Visibility.Visible;
+
+                            _isAdding = false;
+                            _updateView = "";
                         }
                         break;
                     case "f":
@@ -376,6 +379,9 @@ namespace ProjectPlannerGUI
 
                                 HideCrudButtons();
                                 AddButton.Visibility = Visibility.Visible;
+
+                                _isAdding = false;
+                                _updateView = "";
                             }
                         }
                         else
@@ -400,6 +406,9 @@ namespace ProjectPlannerGUI
 
                                 HideCrudButtons();
                                 AddButton.Visibility = Visibility.Visible;
+
+                                _isAdding = false;
+                                _updateView = "";
                             }
                         }
                         else
@@ -416,6 +425,9 @@ namespace ProjectPlannerGUI
 
                         HideCrudButtons();
                         AddButton.Visibility = Visibility.Visible;
+
+                        _isAdding = false;
+                        _updateView = "";
                         break;
                     default:
                         break;
@@ -445,6 +457,9 @@ namespace ProjectPlannerGUI
                             HideCrudButtons();
                             AddButton.Visibility = Visibility.Visible;
                             DeleteButton.Visibility = Visibility.Visible;
+
+                            _isAdding = false;
+                            _updateView = "";
                         }
                         break;
                     case "f":
@@ -464,6 +479,9 @@ namespace ProjectPlannerGUI
 
                                 HideCrudButtons();
                                 AddButton.Visibility = Visibility.Visible;
+
+                                _isAdding = false;
+                                _updateView = "";
                             }
                         }
                         else
@@ -488,6 +506,9 @@ namespace ProjectPlannerGUI
 
                                 HideCrudButtons();
                                 AddButton.Visibility = Visibility.Visible;
+
+                                _isAdding = false;
+                                _updateView = "";
                             }
                         }
                         else
@@ -504,14 +525,14 @@ namespace ProjectPlannerGUI
 
                         HideCrudButtons();
                         AddButton.Visibility = Visibility.Visible;
+
+                        _isAdding = false;
+                        _updateView = "";
                         break;
                     default:
                         break;
                 }
             }
-
-            _isAdding = false;
-            _updateView = "";
         }
 
         private void Cancelbutton_Click(object sender, RoutedEventArgs e)
