@@ -7,10 +7,10 @@ using System.Collections.Generic;
 
 namespace ProjectPlannerTESTS
 {
-    class XMLExporterTests
+    class JSONExporterTests
     {
         private CRUDManager _crudManager = new CRUDManager();
-        private XMLExporter _xmlExporter = new XMLExporter();
+        private JSONExporter _jsonExporter = new JSONExporter();
 
         [SetUp]
         public void Setup()
@@ -56,10 +56,10 @@ namespace ProjectPlannerTESTS
 
                 _crudManager.SelectedProject = _tempProj;
 
-                File.Delete(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\XML Export\Projects.xml");
-                File.Delete(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\XML Export\Features.xml");
-                File.Delete(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\XML Export\Issues.xml");
-                File.Delete(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\XML Export\Notes.xml");
+                File.Delete(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\JSON Export\Projects.json");
+                File.Delete(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\JSON Export\Features.json");
+                File.Delete(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\JSON Export\Issues.json");
+                File.Delete(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\JSON Export\Notes.json");
             }
         }
 
@@ -113,15 +113,15 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                File.Delete(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\XML Export\Projects.xml");
-                File.Delete(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\XML Export\Features.xml");
-                File.Delete(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\XML Export\Issues.xml");
-                File.Delete(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\XML Export\Notes.xml");
+                File.Delete(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\JSON Export\Projects.json");
+                File.Delete(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\JSON Export\Features.json");
+                File.Delete(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\JSON Export\Issues.json");
+                File.Delete(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\JSON Export\Notes.json");
             }
         }
 
         [Test]
-        public void AddAProjectAndCheckThatTheExportMethodHasExportedAXMLFile()
+        public void AddAProjectAndCheckThatTheExportMethodHasExportedAJSONFile()
         {
             using (PlannerContext pc = new PlannerContext())
             {
@@ -137,16 +137,16 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                _xmlExporter.InitSerialisation();
+                _jsonExporter.InitSerialisation();
 
-                _xmlExporter.SerialiseProjects();
+                _jsonExporter.SerialiseProjects();
 
-                FileAssert.Exists(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\XML Export\Projects.xml");
+                FileAssert.Exists(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\JSON Export\Projects.json");
             }
         }
 
         [Test]
-        public void AddAFeatureAndCheckThatTheExportMethodHasExportedAXMLFile()
+        public void AddAFeatureAndCheckThatTheExportMethodHasExportedAJSONFile()
         {
             using (PlannerContext pc = new PlannerContext())
             {
@@ -164,16 +164,16 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                _xmlExporter.InitSerialisation();
+                _jsonExporter.InitSerialisation();
 
-                _xmlExporter.SerialiseFeatures();
+                _jsonExporter.SerialiseFeatures();
 
-                FileAssert.Exists(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\XML Export\Features.xml");
+                FileAssert.Exists(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\JSON Export\Features.json");
             }
         }
 
         [Test]
-        public void AddAnIssueAndCheckThatTheExportMethodHasExportedAXMLFile()
+        public void AddAnIssueAndCheckThatTheExportMethodHasExportedAJSONFile()
         {
             using (PlannerContext pc = new PlannerContext())
             {
@@ -191,16 +191,16 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                _xmlExporter.InitSerialisation();
+                _jsonExporter.InitSerialisation();
 
-                _xmlExporter.SerialiseIssues();
+                _jsonExporter.SerialiseIssues();
 
-                FileAssert.Exists(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\XML Export\Issues.xml");
+                FileAssert.Exists(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\JSON Export\Issues.json");
             }
         }
 
         [Test]
-        public void AddANoteAndCheckThatTheExportMethodHasExportedAXMLFile()
+        public void AddANoteAndCheckThatTheExportMethodHasExportedAJSONFile()
         {
             using (PlannerContext pc = new PlannerContext())
             {
@@ -214,11 +214,11 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                _xmlExporter.InitSerialisation();
+                _jsonExporter.InitSerialisation();
 
-                _xmlExporter.SerialiseNotes();
+                _jsonExporter.SerialiseNotes();
 
-                FileAssert.Exists(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\XML Export\Notes.xml");
+                FileAssert.Exists(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\JSON Export\Notes.json");
             }
         }
     }
