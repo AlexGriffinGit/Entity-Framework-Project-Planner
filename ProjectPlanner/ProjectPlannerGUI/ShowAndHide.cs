@@ -60,6 +60,11 @@ namespace ProjectPlannerGUI
 
         private void HideFeatureLists()
         {
+            FeaturePlannedListTitle.Visibility = Visibility.Hidden;
+            FeatureInProgressListTitle.Visibility = Visibility.Hidden;
+            FeatureTestingListTitle.Visibility = Visibility.Hidden;
+            FeatureCompleteListTitle.Visibility = Visibility.Hidden;
+
             FeaturePlannedView.Visibility = Visibility.Hidden;
             FeatureInProgressView.Visibility = Visibility.Hidden;
             FeatureTestingView.Visibility = Visibility.Hidden;
@@ -73,6 +78,11 @@ namespace ProjectPlannerGUI
 
         private void ShowFeatureLists()
         {
+            FeaturePlannedListTitle.Visibility = Visibility.Visible;
+            FeatureInProgressListTitle.Visibility = Visibility.Visible;
+            FeatureTestingListTitle.Visibility = Visibility.Visible;
+            FeatureCompleteListTitle.Visibility = Visibility.Visible;
+
             FeaturePlannedView.Visibility = Visibility.Visible;
             FeatureInProgressView.Visibility = Visibility.Visible;
             FeatureTestingView.Visibility = Visibility.Visible;
@@ -100,6 +110,11 @@ namespace ProjectPlannerGUI
 
         private void HideIssueLists()
         {
+            IssueKnownListTitle.Visibility = Visibility.Hidden;
+            IssueInProgressTitle.Visibility = Visibility.Hidden;
+            IssueTestingTitle.Visibility = Visibility.Hidden;
+            IssueResolvedTitle.Visibility = Visibility.Hidden;
+
             IssueKnownView.Visibility = Visibility.Hidden;
             IssueInProgressView.Visibility = Visibility.Hidden;
             IssueTestingView.Visibility = Visibility.Hidden;
@@ -113,6 +128,11 @@ namespace ProjectPlannerGUI
 
         private void ShowIssueLists()
         {
+            IssueKnownListTitle.Visibility = Visibility.Visible;
+            IssueInProgressTitle.Visibility = Visibility.Visible;
+            IssueTestingTitle.Visibility = Visibility.Visible;
+            IssueResolvedTitle.Visibility = Visibility.Visible;
+
             IssueKnownView.Visibility = Visibility.Visible;
             IssueInProgressView.Visibility = Visibility.Visible;
             IssueTestingView.Visibility = Visibility.Visible;

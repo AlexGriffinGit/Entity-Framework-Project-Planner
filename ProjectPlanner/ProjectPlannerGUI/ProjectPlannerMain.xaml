@@ -1221,15 +1221,19 @@
         </ScrollViewer>
 
         <!--Feature lists populated by different stages of completion-->
+        <TextBlock Name="FeaturePlannedListTitle" Text="Planned" HorizontalAlignment="Center" Height="50" Margin="0,30,0,0" VerticalAlignment="Center" Width="275" Foreground="#EFEFEF" FontSize="28" Grid.Column="0" TextAlignment="Center" Grid.Row="1" Grid.RowSpan="2" Visibility="Hidden"/>
         <ScrollViewer Name="FeaturePlannedView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="0" Grid.RowSpan="4" Width="275" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="PlannedFeatures"/>
         </ScrollViewer>
+        <TextBlock Name="FeatureInProgressListTitle" Text="In Progress" HorizontalAlignment="Center" Height="50" Margin="0,30,0,0" VerticalAlignment="Center" Width="275" Foreground="#EFEFEF" FontSize="28" Grid.Column="1" TextAlignment="Center" Grid.Row="1" Grid.RowSpan="2" Visibility="Hidden"/>
         <ScrollViewer Name="FeatureInProgressView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" Width="275" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="InProgressFeatures"/>
         </ScrollViewer>
+        <TextBlock Name="FeatureTestingListTitle" Text="In Testing" HorizontalAlignment="Center" Height="50" Margin="0,30,0,0" VerticalAlignment="Center" Width="275" Foreground="#EFEFEF" FontSize="28" Grid.Column="2" TextAlignment="Center" Grid.Row="1" Grid.RowSpan="2" Visibility="Hidden"/>
         <ScrollViewer Name="FeatureTestingView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="2" Grid.RowSpan="4" Width="275" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="TestingFeatures"/>
         </ScrollViewer>
+        <TextBlock Name="FeatureCompleteListTitle" Text="Complete" HorizontalAlignment="Center" Height="50" Margin="0,30,0,0" VerticalAlignment="Center" Width="275" Foreground="#EFEFEF" FontSize="28" Grid.Column="3" TextAlignment="Center" Grid.Row="1" Grid.RowSpan="2" Visibility="Hidden"/>
         <ScrollViewer Name="FeatureCompleteView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="3" Grid.RowSpan="4" Width="275" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="CompleteFeatures"/>
         </ScrollViewer>
@@ -1268,16 +1272,20 @@
             </StackPanel>
         </ScrollViewer>
 
-        <!--Feature lists populated by different stages of completion-->
+        <!--Issue lists populated by different stages of completion-->
+        <TextBlock Name="IssueKnownListTitle" Text="Known Issues" HorizontalAlignment="Center" Height="50" Margin="0,30,0,0" VerticalAlignment="Center" Width="275" Foreground="#EFEFEF" FontSize="28" Grid.Column="0" TextAlignment="Center" Grid.Row="1" Grid.RowSpan="2" Visibility="Hidden"/>
         <ScrollViewer Name="IssueKnownView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="0" Grid.RowSpan="4" Width="275" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="KnownIssues"/>
         </ScrollViewer>
+        <TextBlock Name="IssueInProgressTitle" Text="In Progress" HorizontalAlignment="Center" Height="50" Margin="0,30,0,0" VerticalAlignment="Center" Width="275" Foreground="#EFEFEF" FontSize="28" Grid.Column="1" TextAlignment="Center" Grid.Row="1" Grid.RowSpan="2" Visibility="Hidden"/>
         <ScrollViewer Name="IssueInProgressView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" Width="275" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="InProgressIssues"/>
         </ScrollViewer>
+        <TextBlock Name="IssueTestingTitle" Text="Testing" HorizontalAlignment="Center" Height="50" Margin="0,30,0,0" VerticalAlignment="Center" Width="275" Foreground="#EFEFEF" FontSize="28" Grid.Column="2" TextAlignment="Center" Grid.Row="1" Grid.RowSpan="2" Visibility="Hidden"/>
         <ScrollViewer Name="IssueTestingView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="2" Grid.RowSpan="4" Width="275" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="TestingIssues"/>
         </ScrollViewer>
+        <TextBlock Name="IssueResolvedTitle" Text="Resolved" HorizontalAlignment="Center" Height="50" Margin="0,30,0,0" VerticalAlignment="Center" Width="275" Foreground="#EFEFEF" FontSize="28" Grid.Column="3" TextAlignment="Center" Grid.Row="1" Grid.RowSpan="2" Visibility="Hidden"/>
         <ScrollViewer Name="IssueResolvedView" Margin="0,35,0,0" Grid.Row="2" Grid.Column="3" Grid.RowSpan="4" Width="275" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="ResolvedIssues"/>
         </ScrollViewer>
