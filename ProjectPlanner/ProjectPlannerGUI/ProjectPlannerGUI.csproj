@@ -11,6 +11,7 @@
     <None Remove="Images\CrossSymbol.png" />
     <None Remove="Images\DeleteSymbol.png" />
     <None Remove="Images\ModifySymbol.png" />
+    <None Remove="Images\SearchSymbol.png" />
     <None Remove="Images\TickSymbol.png" />
   </ItemGroup>
 
@@ -29,6 +30,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\ModifySymbol.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\SearchSymbol.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\TickSymbol.png">

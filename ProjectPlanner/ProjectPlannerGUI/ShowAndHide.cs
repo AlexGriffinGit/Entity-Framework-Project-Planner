@@ -176,5 +176,19 @@ namespace ProjectPlannerGUI
             ProjectFeaturesButton.Visibility = Visibility.Visible;
             ProjectIssuesButton.Visibility = Visibility.Visible;
         }
+
+        private void HideSearch()
+        {
+            SearchFields.Visibility = Visibility.Hidden;
+            SearchScrollView.Visibility = Visibility.Hidden;
+            SearchStackPanel.Children.Clear();
+
+            SearchProjectsCheckBox.IsChecked = false;
+            SearchFeaturesCheckBox.IsChecked = false;
+            SearchIssuesCheckBox.IsChecked = false;
+            SearchNotesCheckBox.IsChecked = false;
+
+            SearchTextBox.Text = String.Empty;
+        }
     }
 }

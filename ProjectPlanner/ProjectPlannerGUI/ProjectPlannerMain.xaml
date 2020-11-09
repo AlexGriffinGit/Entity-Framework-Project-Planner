@@ -1106,6 +1106,7 @@
         <!--Project and Notes button-->
         <Button Name="ProjectHeaderButton" Style="{DynamicResource HeaderButtons}" Content="Projects" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="ProjectHeaderButton_Click" Width="250" Height="80" Grid.Row="0" Grid.Column="0" FontSize="45" Foreground="#D2D1D3"/>
         <Button Name="NotesHeaderButton" Style="{DynamicResource HeaderButtons}" Content="Notes" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="NotesHeaderButton_Click" Width="250" Height="80" Grid.Row="0" Grid.Column="1" FontSize="45" Foreground="#D2D1D3"/>
+        <Button Name="SearchHeaderButton" Style="{DynamicResource HeaderButtons}" Content="Search" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="SearchHeaderButton_Click" Width="250" Height="80" Grid.Row="0" Grid.Column="2" FontSize="45" Foreground="#D2D1D3"/>
 
         <!--Overview, features and issues buttons-->
         <Button Name="ProjectOverviewButton" Style="{DynamicResource HeaderButtons}" Content="Overview" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="ProjectOverviewButton_Click" Width="250" Height="80" Grid.Row="1" Grid.Column="1" FontSize="37" Foreground="#D2D1D3"/>
@@ -1301,6 +1302,33 @@
         <!--Note list-->
         <ScrollViewer Name="NotesView" Margin="0,0,0,0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="5" Width="1100" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="NoteStackPanel"/>
+        </ScrollViewer>
+
+        <!--Search fields-->
+        <StackPanel Name="SearchFields" Orientation="Vertical" Grid.Row="2" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="4" Visibility="Hidden">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Name="SearchLabel" Text="Search: " HorizontalAlignment="Left" Height="50" Margin="20,0,0,0" VerticalAlignment="Top" Width="450" Foreground="#EFEFEF" FontSize="30"/>
+                <TextBox Name="SearchTextBox" Width="775" HorizontalAlignment="Left" Margin="-300,-12,0,0" Height="50" Style="{DynamicResource MainTextBoxStyle}" Foreground="#D2D1D3" TextWrapping="Wrap" FontSize="30" VerticalContentAlignment="Center"/>
+                <Button Name="SearchButton" HorizontalAlignment="Center" Margin="20,-15,0,0" VerticalAlignment="Center" Width="200" Height="35" Style="{DynamicResource CRUDButtons}" FontSize="26" HorizontalContentAlignment="Left" Padding="30,0,0,0" Foreground="#59585a" Click="SearchButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Search" Padding="0,0,0,0" VerticalAlignment="Center" Foreground="#59585a"/>
+                        <Image Source="Images/SearchSymbol.png" Margin="25,0,0,0" Width="30"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Name="SearchProjectsCheckBox" Content="Projects" Foreground="#D2D1D3" Margin="292,15,0,0" VerticalContentAlignment="Center" Padding="12,2,0,0"/>
+                <CheckBox Name="SearchFeaturesCheckBox" Content="Features" Foreground="#D2D1D3" Margin="38,15,0,0" VerticalContentAlignment="Center" Padding="12,2,0,0"/>
+                <CheckBox Name="SearchIssuesCheckBox" Content="Issues" Foreground="#D2D1D3" Margin="38,15,0,0" VerticalContentAlignment="Center" Padding="12,2,0,0"/>
+                <CheckBox Name="SearchNotesCheckBox" Content="Notes" Foreground="#D2D1D3" Margin="38,15,0,0" VerticalContentAlignment="Center" Padding="12,2,0,0"/>
+            </StackPanel>
+        </StackPanel>
+
+        <ScrollViewer Name="SearchScrollView" Grid.ColumnSpan="4" Margin="38,140,38,50" Grid.Row="2" Grid.RowSpan="5" Visibility="Hidden" VerticalScrollBarVisibility="Auto">
+            <StackPanel Name="SearchStackPanel" Orientation="Vertical">
+
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 </Window>
