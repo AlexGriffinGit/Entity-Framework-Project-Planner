@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ProjectPlannerBusiness.CRUDManager">
+    <Position X="1" Y="1" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AQQAEQAAAAKAAZBAIAEAAgEFAAAAwABIcAQIRAAAgAA=</HashCode>
+      <FileName>CRUDManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectPlannerBusiness.CalculateProgress">
+    <Position X="4.75" Y="1" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>CalculateProgress.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectPlannerBusiness.JSONExporter">
+    <Position X="8.5" Y="1" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AEBAQEAABAAAAAAAAAQCIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>JSONExporter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectPlannerBusiness.Searcher">
+    <Position X="4.75" Y="4.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AABAAAIAAAAAAABEEAAIAAIAAAAAIAAAAAAAAAQVAAA=</HashCode>
+      <FileName>Searcher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectPlannerBusiness.XMLExporter">
+    <Position X="8.5" Y="4.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AABAQEAABAAAAAAAAAQCIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>XMLExporter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

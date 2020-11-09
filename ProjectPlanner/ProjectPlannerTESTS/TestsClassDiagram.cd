@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ProjectPlannerTESTS.CalculateProgressTests">
+    <Position X="1" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAhAAAAACEAAQAAAAAAABAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CalculateProgressTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectPlannerTESTS.CRUDFeatureTests">
+    <Position X="3" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AANEAAACCCIAAAAAAAAABgAEAAACAQAAAAAAgAECAAA=</HashCode>
+      <FileName>CRUDFeatureTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectPlannerTESTS.CRUDIssueTests">
+    <Position X="5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AARAAAAQCAYgIAAAEAAABAAAAAAAAAAAAAABAAASABA=</HashCode>
+      <FileName>CRUDIssueTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectPlannerTESTS.CRUDNoteTests">
+    <Position X="9" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgBAAAAACAIAAAAAAAABRAAAAAABAAAAAAAAABEAECA=</HashCode>
+      <FileName>CRUDNoteTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectPlannerTESTS.CRUDProjectTests">
+    <Position X="7" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAgiAIAAAAEBAAARAAEAIACAAAAAAABAAAAIAA=</HashCode>
+      <FileName>CRUDProjectTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectPlannerTESTS.JSONExporterTests">
+    <Position X="3" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAACAAAAAAgAAAABAAAAAAQAAAIAAEAAAAAAAQ=</HashCode>
+      <FileName>JSONExporterTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectPlannerTESTS.XMLExporterTests">
+    <Position X="5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAACAAAAgAAAAAIBACAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>XMLExporterTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectPlannerTESTS.SearcherTests">
+    <Position X="1" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QABAACAECAEAAAAAAGIABAAAAAAAAAAAAAAAAgABBAA=</HashCode>
+      <FileName>SearcherTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

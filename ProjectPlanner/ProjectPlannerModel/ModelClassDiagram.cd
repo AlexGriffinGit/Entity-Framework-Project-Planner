@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ProjectPlannerModel.PlannerContext">
+    <Position X="1.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEgAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>PlannerModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectPlannerModel.Project">
+    <Position X="3.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAEAAAgAEAEAAABAAAABAAAAAAAAAAAQAAQAAA=</HashCode>
+      <FileName>PlannerModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectPlannerModel.Feature">
+    <Position X="1.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAEAAAgAEAEAAAAAAQABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PlannerModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectPlannerModel.Issue">
+    <Position X="3.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAEAAAgAEAEAAAAAAAABAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>PlannerModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectPlannerModel.Note">
+    <Position X="5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAABAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PlannerModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
