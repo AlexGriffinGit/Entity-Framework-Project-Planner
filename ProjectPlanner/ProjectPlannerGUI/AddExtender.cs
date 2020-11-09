@@ -207,10 +207,25 @@ namespace ProjectPlannerGUI
 
             StackPanel _buttonStackPanel = new StackPanel { Name = "BaseStackPanel", Orientation = Orientation.Horizontal };
 
-            Button _updateNoteButton = new Button() { Content = "Update", FontSize = 30, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Margin = new Thickness(0, 8, 0, 0), Height = 40, Width = 450 };
+            StackPanel _updateNoteStackPanel = new StackPanel() { Orientation = Orientation.Horizontal };
+            StackPanel _deleteNoteStackPanel = new StackPanel() { Orientation = Orientation.Horizontal };
+
+            TextBlock _updateNoteTextBlock = new TextBlock() { Text = "Update", FontSize = 29, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(35, 0, 0, 0) };
+            TextBlock _deleteNoteTextBlock = new TextBlock() { Text = "Delete", FontSize = 29, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(35, 0, 0, 0) };
+
+            Image _updateNoteIcon = new Image() { Source = new BitmapImage(new Uri("pack://application:,,,/ProjectPlannerGUI;component/Images/ModifySymbol.png")), Margin = new Thickness(175, 0, 0, 0), Width = 32 };
+            Image _deleteNoteIcon = new Image() { Source = new BitmapImage(new Uri("pack://application:,,,/ProjectPlannerGUI;component/Images/DeleteSymbol.png")), Margin = new Thickness(185, 0, 0, 0), Width = 32 };
+
+            _updateNoteStackPanel.Children.Add(_updateNoteTextBlock);
+            _updateNoteStackPanel.Children.Add(_updateNoteIcon);
+
+            _deleteNoteStackPanel.Children.Add(_deleteNoteTextBlock);
+            _deleteNoteStackPanel.Children.Add(_deleteNoteIcon);
+
+            Button _updateNoteButton = new Button() { Content = _updateNoteStackPanel, FontSize = 30, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(60, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Margin = new Thickness(0, 8, 15, 0), Height = 40, Width = 525, HorizontalAlignment = HorizontalAlignment.Left };
             _updateNoteButton.Click += ButtonModifyNote_Click;
 
-            Button _deleteNoteButton = new Button() { Content = "Delete", FontSize = 30, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(30, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Margin = new Thickness(12, 8, 0, 0), Height = 40, Width = 450 };
+            Button _deleteNoteButton = new Button() { Content = _deleteNoteStackPanel, FontSize = 30, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(60, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Margin = new Thickness(15, 8, 0, 0), Height = 40, Width = 525, HorizontalAlignment = HorizontalAlignment.Right };
             _deleteNoteButton.Click += ButtonDeleteNote_Click;
 
             //These tags pass the note that they relate to and set that as the selected note in the CRUDManager
