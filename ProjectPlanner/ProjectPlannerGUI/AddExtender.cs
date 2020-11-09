@@ -257,5 +257,174 @@ namespace ProjectPlannerGUI
         {
             _crudManager.SetSelectedNote(((Expander)sender).Tag);
         }
+
+        private void CreateSearchExpander(Project project)
+        {
+            Expander _expander = new Expander();
+
+            _expander.Header = "Project: " + project.Title;
+            _expander.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF"));
+            _expander.Background = new SolidColorBrush(Colors.Transparent);
+            _expander.IsExpanded = false;
+            _expander.FontSize = 32;
+
+            Style style = this.FindResource("ExpanderStyle") as Style;
+            _expander.Style = style;
+
+            StackPanel _baseStackPanel = new StackPanel { Name = "BaseStackPanel", Orientation = Orientation.Vertical };
+
+            TextBlock _idLabel = new TextBlock() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")), Text = "Project ID" };
+            TextBlock _titleLabel = new TextBlock() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")), Text = "Project Title" };
+            TextBlock _descriptionLabel = new TextBlock() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")), Text = "Project Description" };
+            TextBlock _statusLabel = new TextBlock { Text = "Project Status", TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")) };
+            TextBlock _linkLabel = new TextBlock() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")), Text = "Project Link" };
+
+            TextBlock _idText = new TextBlock { Text = project.ProjectId.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
+            TextBlock _titleText = new TextBlock { Text = project.Title, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
+            TextBlock _descriptionText = new TextBlock { Text = project.Description, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
+            TextBlock _statusText = new TextBlock { Text = _projectStatus[project.Status], TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
+            TextBlock _linkText = new TextBlock() { TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), Text = project.Link };
+
+            _baseStackPanel.Children.Add(_idLabel);
+            _baseStackPanel.Children.Add(_idText);
+            _baseStackPanel.Children.Add(_titleLabel);
+            _baseStackPanel.Children.Add(_titleText);
+            _baseStackPanel.Children.Add(_descriptionLabel);
+            _baseStackPanel.Children.Add(_descriptionText);
+            _baseStackPanel.Children.Add(_statusLabel);
+            _baseStackPanel.Children.Add(_statusText);
+            _baseStackPanel.Children.Add(_linkLabel);
+            _baseStackPanel.Children.Add(_linkText);
+
+            _expander.Content = _baseStackPanel;
+
+            SearchStackPanel.Children.Add(_expander);
+        }
+
+        private void CreateSearchExpander(Feature feature)
+        {
+            Expander _expander = new Expander();
+
+            _expander.Header = "Feature: " + feature.Title;
+            _expander.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF"));
+            _expander.Background = new SolidColorBrush(Colors.Transparent);
+            _expander.IsExpanded = false;
+            _expander.FontSize = 32;
+
+            Style style = this.FindResource("ExpanderStyle") as Style;
+            _expander.Style = style;
+
+            StackPanel _baseStackPanel = new StackPanel { Name = "BaseStackPanel", Orientation = Orientation.Vertical };
+
+            TextBlock _idLabel = new TextBlock() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")), Text = "Feature ID" };
+            TextBlock _titleLabel = new TextBlock() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")), Text = "Feature Title" };
+            TextBlock _descriptionLabel = new TextBlock() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")), Text = "Feature Description" };
+            TextBlock _projectIDLabel = new TextBlock { Text = "Project ID", TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")) };
+            TextBlock _statusLabel = new TextBlock() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")), Text = "Feature Status" };
+            TextBlock _priorityLabel = new TextBlock() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")), Text = "Feature Priority" };
+            TextBlock _notesLabel = new TextBlock { Text = "Notes", TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")) };
+
+            TextBlock _idText = new TextBlock { Text = feature.FeatureId.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
+            TextBlock _titleText = new TextBlock { Text = feature.Title, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
+            TextBlock _descriptionText = new TextBlock { Text = feature.Description, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
+            TextBlock _projectIDText = new TextBlock { Text = feature.ProjectId.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
+            TextBlock _statusText = new TextBlock() { TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), Text = _featureStatus[feature.Status] };
+            TextBlock _PriorityText = new TextBlock { Text = feature.Priority.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
+            TextBlock _notesText = new TextBlock { Text = feature.Notes, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
+
+            _baseStackPanel.Children.Add(_idLabel);
+            _baseStackPanel.Children.Add(_idText);
+            _baseStackPanel.Children.Add(_titleLabel);
+            _baseStackPanel.Children.Add(_titleText);
+            _baseStackPanel.Children.Add(_descriptionLabel);
+            _baseStackPanel.Children.Add(_descriptionText);
+            _baseStackPanel.Children.Add(_projectIDLabel);
+            _baseStackPanel.Children.Add(_projectIDText);
+            _baseStackPanel.Children.Add(_statusLabel);
+            _baseStackPanel.Children.Add(_statusText);
+            _baseStackPanel.Children.Add(_priorityLabel);
+            _baseStackPanel.Children.Add(_PriorityText);
+            _baseStackPanel.Children.Add(_notesLabel);
+            _baseStackPanel.Children.Add(_notesText);
+
+            _expander.Content = _baseStackPanel;
+
+            SearchStackPanel.Children.Add(_expander);
+        }
+
+        private void CreateSearchExpander(Issue issue)
+        {
+            Expander _expander = new Expander();
+
+            _expander.Header = "Issue: " + issue.Title;
+            _expander.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF"));
+            _expander.Background = new SolidColorBrush(Colors.Transparent);
+            _expander.IsExpanded = false;
+            _expander.FontSize = 32;
+
+            Style style = this.FindResource("ExpanderStyle") as Style;
+            _expander.Style = style;
+
+            StackPanel _baseStackPanel = new StackPanel { Name = "BaseStackPanel", Orientation = Orientation.Vertical };
+
+            TextBlock _idLabel = new TextBlock() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")), Text = "Issue ID" };
+            TextBlock _titleLabel = new TextBlock() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")), Text = "Issue Title" };
+            TextBlock _descriptionLabel = new TextBlock() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")), Text = "Issue Description" };
+            TextBlock _projectIDLabel = new TextBlock { Text = "Project ID", TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")) };
+            TextBlock _statusLabel = new TextBlock() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")), Text = "Issue Status" };
+            TextBlock _priorityLabel = new TextBlock() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")), Text = "Issue Priority" };
+            TextBlock _notesLabel = new TextBlock { Text = "Notes", TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF")) };
+
+            TextBlock _idText = new TextBlock { Text = issue.IssueId.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
+            TextBlock _titleText = new TextBlock { Text = issue.Title, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
+            TextBlock _descriptionText = new TextBlock { Text = issue.Description, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
+            TextBlock _projectIDText = new TextBlock { Text = issue.ProjectId.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
+            TextBlock _statusText = new TextBlock() { TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), Text = _issueStatus[issue.Status] };
+            TextBlock _PriorityText = new TextBlock { Text = issue.Priority.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
+            TextBlock _notesText = new TextBlock { Text = issue.Notes, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
+
+            _baseStackPanel.Children.Add(_idLabel);
+            _baseStackPanel.Children.Add(_idText);
+            _baseStackPanel.Children.Add(_titleLabel);
+            _baseStackPanel.Children.Add(_titleText);
+            _baseStackPanel.Children.Add(_descriptionLabel);
+            _baseStackPanel.Children.Add(_descriptionText);
+            _baseStackPanel.Children.Add(_projectIDLabel);
+            _baseStackPanel.Children.Add(_projectIDText);
+            _baseStackPanel.Children.Add(_statusLabel);
+            _baseStackPanel.Children.Add(_statusText);
+            _baseStackPanel.Children.Add(_priorityLabel);
+            _baseStackPanel.Children.Add(_PriorityText);
+            _baseStackPanel.Children.Add(_notesLabel);
+            _baseStackPanel.Children.Add(_notesText);
+
+            _expander.Content = _baseStackPanel;
+
+            SearchStackPanel.Children.Add(_expander);
+        }
+
+        private void CreateSearchExpander(Note note)
+        {
+            Expander _expander = new Expander();
+
+            _expander.Header = "Note: " + note.Title;
+            _expander.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF"));
+            _expander.Background = new SolidColorBrush(Colors.Transparent);
+            _expander.IsExpanded = false;
+            _expander.FontSize = 32;
+
+            Style style = this.FindResource("ExpanderStyle") as Style;
+            _expander.Style = style;
+
+            StackPanel _baseStackPanel = new StackPanel { Name = "BaseStackPanel", Orientation = Orientation.Vertical };
+
+            TextBlock _noteBody = new TextBlock { Text = note.Body, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), Margin = new Thickness(0, 10, 0, 0), FontSize = 29 };
+
+            _baseStackPanel.Children.Add(_noteBody);
+
+            _expander.Content = _baseStackPanel;
+
+            SearchStackPanel.Children.Add(_expander);
+        }
     }
 }

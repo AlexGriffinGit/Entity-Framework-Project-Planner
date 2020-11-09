@@ -23,9 +23,11 @@ namespace ProjectPlannerGUI
     public partial class ProjectPlannerMain : Window
     {
         private CRUDManager _crudManager = new CRUDManager();
+        private Searcher _searcher = new Searcher();
 
         private bool _projectsSelected = true;
         private bool _notesSelected = false;
+        private bool _searchSelected = false;
 
         private bool _overviewSelected = false;
         private bool _featuresSelected = false;
@@ -75,6 +77,7 @@ namespace ProjectPlannerGUI
 
             PopulateComboBox();
             ButtonSelected(ProjectHeaderButton);
+            ProjectHeaderButton.FontSize = 55;
             HideProjectSubheadingButtons();
 
             HideCrudButtons();
@@ -123,17 +126,20 @@ namespace ProjectPlannerGUI
         {
             if (_projectsSelected == false)
             {
-                _projectsSelected = true; _notesSelected = false;
+                _projectsSelected = true; _notesSelected = false; _searchSelected = false;
 
                 ButtonSelected(ProjectHeaderButton); 
                 ButtonDeselected(NotesHeaderButton);
+                ButtonDeselected(SearchHeaderButton);
 
-                ProjectHeaderButton.FontSize = 55; NotesHeaderButton.FontSize = 45;
+                ProjectHeaderButton.FontSize = 55; NotesHeaderButton.FontSize = 45; SearchHeaderButton.FontSize = 45;
 
                 ShowProjectComboBox();
                 
                 HideNoteList();
                 HideNoteFields();
+
+                HideSearch();
 
                 HideCrudButtons();
                 AddButton.Visibility = Visibility.Visible;
@@ -162,18 +168,21 @@ namespace ProjectPlannerGUI
         {
             if (_notesSelected == false)
             {
-                _notesSelected = true; _projectsSelected = false;
+                _notesSelected = true; _projectsSelected = false; _searchSelected = false;
 
                 ButtonSelected(NotesHeaderButton);
                 ButtonDeselected(ProjectHeaderButton);
+                ButtonDeselected(SearchHeaderButton);
 
-                NotesHeaderButton.FontSize = 55; ProjectHeaderButton.FontSize = 45;
+                NotesHeaderButton.FontSize = 55; ProjectHeaderButton.FontSize = 45; SearchHeaderButton.FontSize = 45;
 
                 _currentView = "n";
 
                 HideProjectComboBox();
                 HideProjectSubheadingButtons();
                 HideProjectFields();
+
+                HideSearch();
 
                 HideFeatureFields();
                 HideFeatureLists();
@@ -186,6 +195,37 @@ namespace ProjectPlannerGUI
 
                 PopulateNoteList();
                 ShowNoteList();
+            }
+        }
+
+        private void SearchHeaderButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_searchSelected == false)
+            {
+                _searchSelected = true; _projectsSelected = false; _notesSelected = false;
+
+                ButtonSelected(SearchHeaderButton); 
+                ButtonDeselected(ProjectHeaderButton);
+                ButtonDeselected(NotesHeaderButton);
+
+                SearchHeaderButton.FontSize = 55; ProjectHeaderButton.FontSize = 45; NotesHeaderButton.FontSize = 45;
+
+                HideProjectComboBox();
+                HideProjectSubheadingButtons();
+                HideProjectFields();
+
+                HideFeatureFields();
+                HideFeatureLists();
+
+                HideIssueFields();
+                HideIssueLists();
+
+                HideNoteFields();
+                HideNoteList();
+
+                HideCrudButtons();
+
+                SearchFields.Visibility = Visibility.Visible;
             }
         }
 
@@ -759,6 +799,44 @@ namespace ProjectPlannerGUI
         private void ProjectLinkTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             ProjectDetailsChanged();
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            SearchStackPanel.Children.Clear();
+            SearchScrollView.Visibility = Visibility.Visible;
+
+            if (SearchProjectsCheckBox.IsChecked == true)
+            {
+                foreach (var item in _searcher.SearchProjects(SearchTextBox.Text))
+                {
+                    CreateSearchExpander(item);
+                }
+            }
+
+            if (SearchFeaturesCheckBox.IsChecked == true)
+            {
+                foreach (var item in _searcher.SearchFeatures(SearchTextBox.Text))
+                {
+                    CreateSearchExpander(item);
+                }
+            }
+
+            if (SearchIssuesCheckBox.IsChecked == true)
+            {
+                foreach (var item in _searcher.SearchIssues(SearchTextBox.Text))
+                {
+                    CreateSearchExpander(item);
+                }
+            }
+
+            if (SearchNotesCheckBox.IsChecked == true)
+            {
+                foreach (var item in _searcher.SearchNotes(SearchTextBox.Text))
+                {
+                    CreateSearchExpander(item);
+                }
+            }
         }
     }
 }
