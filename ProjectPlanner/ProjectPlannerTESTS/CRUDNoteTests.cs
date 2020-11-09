@@ -53,13 +53,15 @@ namespace ProjectPlannerTESTS
         {
             using (PlannerContext pc = new PlannerContext())
             {
+                int numOfNotes = pc.Notes.ToList().Count;
+
                 _crudManager.CreateNewNote("TestNote", "A test note");
 
                 var _noteCount =
                     from n in pc.Notes
                     select n;
 
-                Assert.AreEqual(6, _noteCount.Count());
+                Assert.AreEqual(numOfNotes + 1, _noteCount.Count());
             }
         }
 
