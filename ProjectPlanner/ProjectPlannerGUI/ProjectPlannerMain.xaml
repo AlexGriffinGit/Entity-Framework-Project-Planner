@@ -1269,7 +1269,7 @@
                     <TextBlock Name="ProjectToDoText" Text="" HorizontalAlignment="Left" Height="150" Margin="-140,10,0,0" VerticalAlignment="Top" Width="775" Foreground="#D2D1D3" FontSize="30" TextWrapping="Wrap"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Name="ProjectIssuesLabel" Content="Unresolved Issues: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#EFEFEF" FontSize="30"/>
+                    <Label Name="ProjectIssuesLabel" Content="Issues: " HorizontalAlignment="Left" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="450" Foreground="#EFEFEF" FontSize="30"/>
                     <TextBlock Name="ProjectIssuesText" Text="" HorizontalAlignment="Left" Height="150" Margin="-140,10,0,0" VerticalAlignment="Top" Width="775" Foreground="#D2D1D3" FontSize="30" TextWrapping="Wrap"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">

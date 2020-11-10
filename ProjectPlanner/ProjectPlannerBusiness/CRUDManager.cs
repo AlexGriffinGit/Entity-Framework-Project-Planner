@@ -125,7 +125,7 @@ namespace ProjectPlannerBusiness
 
                 var _issueIDs =
                     from i in pc.Issues
-                    where i.ProjectId == SelectedProject.ProjectId && i.Status != 3
+                    where i.ProjectId == SelectedProject.ProjectId
                     orderby i.Priority
                     select i;
 
