@@ -11,7 +11,11 @@ namespace ProjectPlannerBusiness
 {
     public class JSONExporter
     {
-        private CRUDManager _crudManager = new CRUDManager();
+        private CRUDProjectManager _crudProjectManager = new CRUDProjectManager();
+        private CRUDFeatureManager _crudFeatureManager = new CRUDFeatureManager();
+        private CRUDIssueManager _crudIssueManager = new CRUDIssueManager();
+        private CRUDNoteManager _crudNoteManager = new CRUDNoteManager();
+
         string path = "";
 
         JsonSerializerOptions options = new JsonSerializerOptions()
@@ -22,7 +26,7 @@ namespace ProjectPlannerBusiness
         public string SerialiseProjects()
         {
             string filePath = Path.Combine(path, "Projects.json");
-            string jsonString = JsonSerializer.Serialize(_crudManager.RetrieveAllProjects(), options);
+            string jsonString = JsonSerializer.Serialize(_crudProjectManager.RetrieveAllProjects(), options);
 
             File.WriteAllText(filePath, jsonString);
 
@@ -32,7 +36,7 @@ namespace ProjectPlannerBusiness
         public string SerialiseFeatures()
         {
             string filePath = Path.Combine(path, "Features.json");
-            string jsonString = JsonSerializer.Serialize(_crudManager.RetrieveAllFeatures(), options);
+            string jsonString = JsonSerializer.Serialize(_crudFeatureManager.RetrieveAllFeatures(), options);
 
             File.WriteAllText(filePath, jsonString);
 
@@ -42,7 +46,7 @@ namespace ProjectPlannerBusiness
         public string SerialiseIssues()
         {
             string filePath = Path.Combine(path, "Issues.json");
-            string jsonString = JsonSerializer.Serialize(_crudManager.RetrieveAllIssues(), options);
+            string jsonString = JsonSerializer.Serialize(_crudIssueManager.RetrieveAllIssues(), options);
 
             File.WriteAllText(filePath, jsonString);
 
@@ -52,7 +56,7 @@ namespace ProjectPlannerBusiness
         public string SerialiseNotes()
         {
             string filePath = Path.Combine(path, "Notes.json");
-            string jsonString = JsonSerializer.Serialize(_crudManager.RetrieveAllNotes(), options);
+            string jsonString = JsonSerializer.Serialize(_crudNoteManager.RetrieveAllNotes(), options);
 
             File.WriteAllText(filePath, jsonString);
 

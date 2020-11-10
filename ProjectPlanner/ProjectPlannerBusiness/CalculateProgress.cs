@@ -8,8 +8,6 @@ namespace ProjectPlannerBusiness
 {
     public class CalculateProgress
     {
-        private CRUDManager _crudManager = new CRUDManager();
-
         public int CalculateProjectProgress(Project current)
         {
             List<Feature> _completeFeatures = new List<Feature>();

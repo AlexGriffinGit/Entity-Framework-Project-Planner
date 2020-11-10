@@ -317,17 +317,17 @@ namespace ProjectPlannerGUI
 
         public void Expander_Feature_Expanded(object sender, RoutedEventArgs e)
         {
-            ProjectPlannerMain.window.CrudManager.SetSelectedFeature(((Expander)sender).Tag);
+            ProjectPlannerMain.window._crudFeatureManager.SetSelectedFeature(((Expander)sender).Tag);
         }
 
         public void Expander_Issue_Expanded(object sender, RoutedEventArgs e)
         {
-            ProjectPlannerMain.window.CrudManager.SetSelectedIssue(((Expander)sender).Tag);
+            ProjectPlannerMain.window._crudIssueManager.SetSelectedIssue(((Expander)sender).Tag);
         }
 
         public void Expander_Note_Expanded(object sender, RoutedEventArgs e)
         {
-            ProjectPlannerMain.window.CrudManager.SetSelectedNote(((Expander)sender).Tag);
+            ProjectPlannerMain.window._crudNoteManager.SetSelectedNote(((Expander)sender).Tag);
         }
     }
 }

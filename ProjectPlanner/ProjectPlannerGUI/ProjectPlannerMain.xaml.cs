@@ -22,7 +22,11 @@ namespace ProjectPlannerGUI
     /// </summary>
     public partial class ProjectPlannerMain : Window
     {
-        public CRUDManager CrudManager = new CRUDManager();
+        public CRUDProjectManager _crudProjectManager = new CRUDProjectManager();
+        public CRUDFeatureManager _crudFeatureManager = new CRUDFeatureManager();
+        public CRUDIssueManager _crudIssueManager = new CRUDIssueManager();
+        public CRUDNoteManager _crudNoteManager = new CRUDNoteManager();
+
         private Searcher _searcher = new Searcher();
         private XMLExporter _xmlExporter = new XMLExporter();
         private JSONExporter _jsonExporter = new JSONExporter();
@@ -117,7 +121,7 @@ namespace ProjectPlannerGUI
 
             if (ProjectComboBox.SelectedItem != null)
             {
-                CrudManager.SetSelectedProject(ProjectComboBox.SelectedItem);
+                _crudProjectManager.SetSelectedProject(ProjectComboBox.SelectedItem);
                 _populator.PopulateProjectFields();
                 _showAndHide.ShowProjectFields();
 
@@ -400,7 +404,7 @@ namespace ProjectPlannerGUI
                     break;
                 case "f":
                     _showAndHide.ShowFeatureFields();
-                    FeatureProjectIDText.Content = CrudManager.SelectedProject.ProjectId;
+                    FeatureProjectIDText.Content = _crudProjectManager.SelectedProject.ProjectId;
 
                     _showAndHide.HideCrudButtons();
                     ConfirmButton.Visibility = Visibility.Visible;
@@ -408,7 +412,7 @@ namespace ProjectPlannerGUI
                     break;
                 case "i":
                     _showAndHide.ShowIssueFields();
-                    IssueProjectIDText.Content = CrudManager.SelectedProject.ProjectId;
+                    IssueProjectIDText.Content = _crudProjectManager.SelectedProject.ProjectId;
 
                     _showAndHide.HideCrudButtons();
                     ConfirmButton.Visibility = Visibility.Visible;
@@ -443,12 +447,12 @@ namespace ProjectPlannerGUI
                         }
                         else
                         {
-                            CrudManager.CreateNewProject(ProjectTitleTextBox.Text, ProjectDescriptionTextBox.Text, ProjectStatusComboBox.SelectedIndex, ProjectLinkTextBox.Text);
+                            _crudProjectManager.CreateNewProject(ProjectTitleTextBox.Text, ProjectDescriptionTextBox.Text, ProjectStatusComboBox.SelectedIndex, ProjectLinkTextBox.Text);
 
                             _showAndHide.HideProjectFields();
                             _populator.PopulateComboBox();
 
-                            ProjectComboBox.SelectedIndex = CrudManager.RetrieveIndexOfNewProject();
+                            ProjectComboBox.SelectedIndex = _crudProjectManager.RetrieveIndexOfNewProject();
                             _showAndHide.ShowProjectFields();
 
                             _showAndHide.HideCrudButtons();
@@ -468,7 +472,7 @@ namespace ProjectPlannerGUI
                             }
                             else
                             {
-                                CrudManager.CreateNewFeature(FeatureTitleTextBox.Text, FeatureDescriptionTextBox.Text, FeatureStatusComboBox.SelectedIndex, _featurePriority, FeatureNotesTextBox.Text);
+                                _crudFeatureManager.CreateNewFeature(FeatureTitleTextBox.Text, FeatureDescriptionTextBox.Text, FeatureStatusComboBox.SelectedIndex, _featurePriority, FeatureNotesTextBox.Text, ProjectPlannerMain.window._crudProjectManager);
 
                                 _showAndHide.HideFeatureFields();
                                 _populator.PopulateFeatureLists();
@@ -495,7 +499,7 @@ namespace ProjectPlannerGUI
                             }
                             else
                             {
-                                CrudManager.CreateNewIssue(IssueTitleTextBox.Text, IssueDescriptionTextBox.Text, IssueStatusComboBox.SelectedIndex, _issuePriority, IssueNotesTextBox.Text);
+                                _crudIssueManager.CreateNewIssue(IssueTitleTextBox.Text, IssueDescriptionTextBox.Text, IssueStatusComboBox.SelectedIndex, _issuePriority, IssueNotesTextBox.Text, ProjectPlannerMain.window._crudProjectManager);
 
                                 _showAndHide.HideIssueFields();
                                 _populator.PopulateIssueLists();
@@ -514,7 +518,7 @@ namespace ProjectPlannerGUI
                         }
                         break;
                     case "n":
-                        CrudManager.CreateNewNote(NoteTitleTextBox.Text, NoteBodyTextBox.Text);
+                        _crudNoteManager.CreateNewNote(NoteTitleTextBox.Text, NoteBodyTextBox.Text);
 
                         _showAndHide.HideNoteFields();
                         _populator.PopulateNoteList();
@@ -542,7 +546,7 @@ namespace ProjectPlannerGUI
                         }
                         else
                         {
-                            CrudManager.UpdateProject(ProjectTitleTextBox.Text, ProjectDescriptionTextBox.Text, ProjectStatusComboBox.SelectedIndex, ProjectLinkTextBox.Text);
+                            _crudProjectManager.UpdateProject(ProjectTitleTextBox.Text, ProjectDescriptionTextBox.Text, ProjectStatusComboBox.SelectedIndex, ProjectLinkTextBox.Text);
 
                             int _chosenIndex = ProjectComboBox.SelectedIndex;
 
@@ -568,7 +572,7 @@ namespace ProjectPlannerGUI
                             }
                             else
                             {
-                                CrudManager.UpdateFeature(FeatureTitleTextBox.Text, FeatureDescriptionTextBox.Text, FeatureStatusComboBox.SelectedIndex, _featurePriority, FeatureNotesTextBox.Text);
+                                _crudFeatureManager.UpdateFeature(FeatureTitleTextBox.Text, FeatureDescriptionTextBox.Text, FeatureStatusComboBox.SelectedIndex, _featurePriority, FeatureNotesTextBox.Text);
 
                                 _showAndHide.HideFeatureFields();
                                 _showAndHide.ShowFeatureLists();
@@ -595,7 +599,7 @@ namespace ProjectPlannerGUI
                             }
                             else
                             {
-                                CrudManager.UpdateIssue(IssueTitleTextBox.Text, IssueDescriptionTextBox.Text, IssueStatusComboBox.SelectedIndex, _issuePriority, IssueNotesTextBox.Text);
+                                _crudIssueManager.UpdateIssue(IssueTitleTextBox.Text, IssueDescriptionTextBox.Text, IssueStatusComboBox.SelectedIndex, _issuePriority, IssueNotesTextBox.Text);
 
                                 _showAndHide.HideIssueFields();
                                 _populator.PopulateIssueLists();
@@ -614,7 +618,7 @@ namespace ProjectPlannerGUI
                         }
                         break;
                     case "n":
-                        CrudManager.UpdateNote(NoteTitleTextBox.Text, NoteBodyTextBox.Text);
+                        _crudNoteManager.UpdateNote(NoteTitleTextBox.Text, NoteBodyTextBox.Text);
 
                         _showAndHide.HideNoteFields();
                         _populator.PopulateNoteList();
@@ -723,7 +727,7 @@ namespace ProjectPlannerGUI
         {
             if (_currentView == "p" && ProjectComboBox.SelectedItem != null)
             {
-                CrudManager.DeleteProject();
+                _crudProjectManager.DeleteProject();
 
                 _showAndHide.HideProjectFields();
                 _populator.PopulateComboBox();
@@ -735,7 +739,7 @@ namespace ProjectPlannerGUI
 
         public void ButtonModifyFeature_Click(object sender, RoutedEventArgs e)
         {
-            CrudManager.SetSelectedFeature(((Button)sender).Tag);
+            _crudFeatureManager.SetSelectedFeature(((Button)sender).Tag);
 
             _updateView = "f";
 
@@ -755,9 +759,9 @@ namespace ProjectPlannerGUI
 
         public void ButtonDeleteFeature_Click(object sender, RoutedEventArgs e)
         {
-            CrudManager.SetSelectedFeature(((Button)sender).Tag);
+            _crudFeatureManager.SetSelectedFeature(((Button)sender).Tag);
 
-            CrudManager.DeleteFeature();
+            _crudFeatureManager.DeleteFeature();
 
             _showAndHide.HideFeatureLists();
             _populator.PopulateFeatureLists();
@@ -766,7 +770,7 @@ namespace ProjectPlannerGUI
 
         public void ButtonModifyIssue_Click(object sender, RoutedEventArgs e)
         {
-            CrudManager.SetSelectedIssue(((Button)sender).Tag);
+            _crudIssueManager.SetSelectedIssue(((Button)sender).Tag);
 
             _updateView = "i";
 
@@ -786,9 +790,9 @@ namespace ProjectPlannerGUI
 
         public void ButtonDeleteIssue_Click(object sender, RoutedEventArgs e)
         {
-            CrudManager.SetSelectedIssue(((Button)sender).Tag);
+            _crudIssueManager.SetSelectedIssue(((Button)sender).Tag);
 
-            CrudManager.DeleteIssue();
+            _crudIssueManager.DeleteIssue();
 
             _showAndHide.HideIssueLists();
             _populator.PopulateIssueLists();
@@ -797,7 +801,7 @@ namespace ProjectPlannerGUI
 
         public void ButtonModifyNote_Click(object sender, RoutedEventArgs e)
         {
-            CrudManager.SetSelectedNote(((Button)sender).Tag);
+            _crudNoteManager.SetSelectedNote(((Button)sender).Tag);
 
             _updateView = "n";
 
@@ -817,9 +821,9 @@ namespace ProjectPlannerGUI
 
         public void ButtonDeleteNote_Click(object sender, RoutedEventArgs e)
         {
-            CrudManager.SetSelectedNote(((Button)sender).Tag);
+            _crudNoteManager.SetSelectedNote(((Button)sender).Tag);
 
-            CrudManager.DeleteNote();
+            _crudNoteManager.DeleteNote();
 
             _showAndHide.HideNoteList();
             _populator.PopulateNoteList();

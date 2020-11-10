@@ -13,7 +13,10 @@ namespace ProjectPlannerBusiness
         private List<Issue> _issuesFound = new List<Issue>();
         private List<Note> _notesFound = new List<Note>();
 
-        private CRUDManager _crudManager = new CRUDManager();
+        private CRUDProjectManager _crudProjectManager = new CRUDProjectManager();
+        private CRUDFeatureManager _crudFeatureManager = new CRUDFeatureManager();
+        private CRUDIssueManager _crudIssueManager = new CRUDIssueManager();
+        private CRUDNoteManager _crudNoteManager = new CRUDNoteManager();
 
         private List<string> _projectStatus = new List<string>()
         {
@@ -46,7 +49,7 @@ namespace ProjectPlannerBusiness
 
             _projectsFound.Clear();
 
-            foreach (Project _project in _crudManager.RetrieveAllProjects())
+            foreach (Project _project in _crudProjectManager.RetrieveAllProjects())
             {
                 bool _isAdded = false;
 
@@ -106,7 +109,7 @@ namespace ProjectPlannerBusiness
 
             _featuresFound.Clear();
 
-            foreach (Feature _feature in _crudManager.RetrieveAllFeatures())
+            foreach (Feature _feature in _crudFeatureManager.RetrieveAllFeatures())
             {
                 bool _isAdded = false;
 
@@ -142,7 +145,7 @@ namespace ProjectPlannerBusiness
 
             _issuesFound.Clear();
 
-            foreach (Issue _issue in _crudManager.RetrieveAllIssues())
+            foreach (Issue _issue in _crudIssueManager.RetrieveAllIssues())
             {
                 bool _isAdded = false;
 
@@ -178,7 +181,7 @@ namespace ProjectPlannerBusiness
 
             _notesFound.Clear();
 
-            foreach (Note _note in _crudManager.RetrieveAllNotes())
+            foreach (Note _note in _crudNoteManager.RetrieveAllNotes())
             {
                 bool _isAdded = false;
 

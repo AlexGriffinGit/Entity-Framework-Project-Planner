@@ -9,7 +9,11 @@ namespace ProjectPlannerBusiness
 {
     public class XMLExporter
     {
-        private CRUDManager _crudManager = new CRUDManager();
+        private CRUDProjectManager _crudProjectManager = new CRUDProjectManager();
+        private CRUDFeatureManager _crudFeatureManager = new CRUDFeatureManager();
+        private CRUDIssueManager _crudIssueManager = new CRUDIssueManager();
+        private CRUDNoteManager _crudNoteManager = new CRUDNoteManager();
+
         string path = "";
 
         public string SerialiseProjects()
@@ -18,7 +22,7 @@ namespace ProjectPlannerBusiness
             string filePath = Path.Combine(path, "Projects.xml");
             FileStream file = File.Create(filePath);
 
-            foreach (var item in _crudManager.RetrieveAllProjects())
+            foreach (var item in _crudProjectManager.RetrieveAllProjects())
             {
                 _projectSerialiser.Serialize(file, item);
             }
@@ -34,7 +38,7 @@ namespace ProjectPlannerBusiness
             string filePath = Path.Combine(path, "Features.xml");
             FileStream file = File.Create(filePath);
 
-            foreach (var item in _crudManager.RetrieveAllFeatures())
+            foreach (var item in _crudFeatureManager.RetrieveAllFeatures())
             {
                 _featureSerialiser.Serialize(file, item);
             }
@@ -50,7 +54,7 @@ namespace ProjectPlannerBusiness
             string filePath = Path.Combine(path, "Issues.xml");
             FileStream file = File.Create(filePath);
 
-            foreach (var item in _crudManager.RetrieveAllIssues())
+            foreach (var item in _crudIssueManager.RetrieveAllIssues())
             {
                 _issueSerialiser.Serialize(file, item);
             }
@@ -66,7 +70,7 @@ namespace ProjectPlannerBusiness
             string filePath = Path.Combine(path, "Notes.xml");
             FileStream file = File.Create(filePath);
 
-            foreach (var item in _crudManager.RetrieveAllNotes())
+            foreach (var item in _crudNoteManager.RetrieveAllNotes())
             {
                 _noteSerialiser.Serialize(file, item);
             }
