@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using ProjectPlannerModel;
+﻿using ProjectPlannerModel;
 using System.IO;
 
 namespace ProjectPlannerBusiness
