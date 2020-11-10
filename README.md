@@ -18,9 +18,12 @@
     * [Sprint Goal](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#sprint-goal-2)
     * [Sprint Review](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#sprint-review-2)
     * [Sprint Retrospective](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#sprint-retrospective-2)
-* [Project Retrospective](link)
-* [Class Diagrams](link)
-* [Kanban Board](link)
+* [Project Retrospective](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#project-retrospective)
+* [Class Diagrams](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#class-diagrams)
+* [Kanban Board](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#project-board)
+* [Wireframes](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#wireframes)
+* [Screenshots](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#screenshots)
+* [Download](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#download)
 
 ## Summary ##
 
