@@ -125,21 +125,29 @@ A user story is considered done when:
       
 * ### Sprint 3 ###
   * #### Sprint Goal ####
-    
+    The goal for my final sprint was to add a number of additional features to the application that make it more user friendly. These features are the ability to export data from the database into XML and JSON format, the ability to search the database for keywords and phrases and the ability to drag and drop elements into different status columns and have this change occur in the database.
    
   * #### Sprint Review ####
     Completed user stories:
-    
+    * [User Story 1 - Be able to search for specific words or phrases and have a list of items where that word or phrase occurs](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48688974)
 
     Not completed user stories:
-    
+    * [User Story 2 - Be able to export all of or some of the data that is in the database to an XML file, unit tests do not check for a valid XML file or if the right information had been exported.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48978910)
+    * [User Story 3 - Be able to export all of or some of the data that is in the database to a JSON file, unit tests do not check for a valid JSON file or if the right information had been exported.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48978936)
+    * [User Story 4 - Be able to drag and drop issues and features from one status column to another to change their status, Implementation not started.](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/projects/1#card-48979115)
   
   * #### Sprint Retrospective ####
-    
+    My final sprint has been fairly productive although I couldn't quite get all the extras I was planning to include implemented into the application. These extra modifications will be moved back onto the product backlog and can be developed in a version 2.0.
 
     * <b>What went well?</b>
-      
+      * Unit tests for checking that the search functionality was exhibiting the expected behaviour were easier to create than i had first envisioned.
+      * Implementing the XML and JSON exporting was also easier to implement than I expected.
+      * GUI behaved as I expected it to.
+      * refactoring was time consuming but went fairly smoothly.
     * <b>Improvements to make?</b>
-      
+      * Better planning of the application would mean I wouldn't have had to spend as much time refactoring and reorganising than I did in this sprint.
+      * I was unsure of how to unit test the exported XML and JSON were valid and held the correct information.
+      * There are probably more efficient ways to implement a search function than my implementation.
     * <b>What will I be doing in the next sprint?</b>
-      
+      * Research and create more unit tests for the XML and JSON exporting.
+      * Research on how to search through a database more efficiently.
