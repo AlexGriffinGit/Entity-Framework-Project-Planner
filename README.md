@@ -156,6 +156,22 @@ A user story is considered done when:
       * Research on how to search through a database more efficiently.
       
 ## Project Retrospective ##
+### What I have learned ###
+Overall I am very happy with the end project planner that I have created over these 3 sprints, I’ve learnt a lot through undertaking this project, but in particular I’ve learned a lot about testing and agile methodology and it’s techniques.
+
+I started off with the code first approach and created four classes which represented the 4 different tables for my database, these are projects, features, issues and notes. At the start of this project I preferred the database first approach where you create a database and then scaffold it with code, however throughout this process I have come to appreciate the code first approach and it’s ability to create a database from C# classes.
+
+A self-imposed hurdle that I ran into in the beginning of this project was not having adequate tests before implementing methods. I identified this as an improvement to make in the subsequent sprints and focused on making sure I had tests for the rest of the project. I think doing this helped me a great deal and made the following sprints run a lot smoother as I was focusing on making sure everything I was implementing was thoroughly tested. I also learnt a lot about the different types of unit tests that can be carried out by NUnit, there are still lots of different types of tests that I haven’t used or that I’m not aware of yet. 
+
+Spending time creating and thinking about user stories helped me a great deal in the early stages of the application as it forced me to think about how a user would use the application in the real world. Through this I found that I was able to identify things I needed to include and what I needed to think about in regards to designing the application. I also discovered how many tasks I can complete in a specified time, i.e. a sprint. This information will help me when scheduling tasks in the future and what is reasonable within a given time. 
+
+### What would I do differently next time? ###
+Next time I would spend a longer time planning out the different portions of the program, especially with how CRUD operations (Create, Read, Update, Delete) are implemented as in my case I had a large file which contained all of my CRUD operations contained in it. Late on into sprint 3 I refactored this file and split it up into separate files for the separate tables. This took development time away from other parts of the program and could have been prevented with planning.
+
+In addition to this I would not create the GUI project until later on in the project as I found that I was spending too much time changing details and fixing small parts of the GUI. This was happening mainly through sprint 2 and 3, I identified this in my second sprint retrospective and had started working on it in my third sprint. By not creating the GUI application till later I would have to focus on the business layer and the testing first.
+
+### What would I do next? ###
+The next step for the project planner is to be able to drag and drop items from the feature and issue lists to different columns which would change their status, I would then probably extend this and have the projects listed in a similar way. Further than that I would extend the customisability of the program and allow changes for fonts and colours. This is a major step and would require rewriting a lot of the XAML code.
 
 ## Class Diagrams ##
 
