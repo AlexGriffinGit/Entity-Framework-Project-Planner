@@ -1,58 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="ProjectPlannerTESTS.CalculateProgressTests">
-    <Position X="1" Y="1" Width="1.5" />
+    <Position X="9" Y="9" Width="5.75" />
     <TypeIdentifier>
       <HashCode>AAhAAAAACEAAQAAAAAAABAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CalculateProgressTests.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ProjectPlannerTESTS.CRUDFeatureTests">
-    <Position X="3" Y="1" Width="1.5" />
+    <Position X="15" Y="5" Width="5.75" />
     <TypeIdentifier>
-      <HashCode>AANEAAACCCIAAAAAAAAABgAEAAACAQAAAAAAgAECAAA=</HashCode>
+      <HashCode>AAMEAAASCCIAAAAAAAAABgAEAAACAQAAAAAAgAECAAA=</HashCode>
       <FileName>CRUDFeatureTests.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ProjectPlannerTESTS.CRUDIssueTests">
-    <Position X="5" Y="1" Width="1.5" />
+    <Position X="3" Y="1" Width="5.75" />
     <TypeIdentifier>
-      <HashCode>AARAAAAQCAYgIAAAEAAABAAAAAAAAAAAAAABAAASABA=</HashCode>
+      <HashCode>AAQEAAAQCAYgIAAAEAAABAAAAAAAAAAAAAABIAASABA=</HashCode>
       <FileName>CRUDIssueTests.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ProjectPlannerTESTS.CRUDNoteTests">
-    <Position X="9" Y="1" Width="1.5" />
+    <Position X="9" Y="1" Width="5.75" />
     <TypeIdentifier>
-      <HashCode>AgBAAAAACAIAAAAAAAABRAAAAAABAAAAAAAAABEAECA=</HashCode>
+      <HashCode>AgAAAAAACAIAAAAAAAABRAAAAAABAAAAAAAEABEAECA=</HashCode>
       <FileName>CRUDNoteTests.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ProjectPlannerTESTS.CRUDProjectTests">
-    <Position X="7" Y="1" Width="1.5" />
+    <Position X="9" Y="4.75" Width="5.75" />
     <TypeIdentifier>
-      <HashCode>AABAAAAgiAIAAAAEBAAARAAEAIACAAAAAAABAAAAIAA=</HashCode>
+      <HashCode>AAAEAAAgiAIAAAAEBAAARAAEAIACAAAAAAABAAAAIAA=</HashCode>
       <FileName>CRUDProjectTests.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ProjectPlannerTESTS.JSONExporterTests">
-    <Position X="3" Y="5.75" Width="1.5" />
+    <Position X="3" Y="5.25" Width="5.75" />
     <TypeIdentifier>
-      <HashCode>AABAAAAACAAAAAAgAAAABAAAAAAQAAAIAAEAAAAAAAQ=</HashCode>
+      <HashCode>AAAEAAAACAAAAAAgAAAABAAAAAAQAAAIAAEAAAAAAAQ=</HashCode>
       <FileName>JSONExporterTests.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ProjectPlannerTESTS.XMLExporterTests">
-    <Position X="5" Y="5.75" Width="1.5" />
+    <Position X="3" Y="8.25" Width="5.75" />
     <TypeIdentifier>
-      <HashCode>AABAAAAACAAAAgAAAAAIBACAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAEAAAACAAAAgAAAAAIBACAAAAAEAAAAAAAAAAAAAA=</HashCode>
       <FileName>XMLExporterTests.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ProjectPlannerTESTS.SearcherTests">
-    <Position X="1" Y="4" Width="1.5" />
+    <Position X="15" Y="1" Width="5.75" />
     <TypeIdentifier>
-      <HashCode>QABAACAECAEAAAAAAGIABAAAAAAAAAAAAAAAAgABBAA=</HashCode>
+      <HashCode>QAAEACAECAEAAAAAAGIABAAAAAAAAAAAAAAAAgABBAA=</HashCode>
       <FileName>SearcherTests.cs</FileName>
     </TypeIdentifier>
   </Class>
