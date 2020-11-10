@@ -174,11 +174,43 @@ In addition to this I would not create the GUI project until later on in the pro
 The next step for the project planner is to be able to drag and drop items from the feature and issue lists to different columns which would change their status, I would then probably extend this and have the projects listed in a similar way. Further than that I would extend the customisability of the program and allow changes for fonts and colours. This is a major step and would require rewriting a lot of the XAML code.
 
 ## Class Diagrams ##
+  ### Entity Relationship Diagram ###
+  ![Entity Relationship Diagram](/Images/Project%20Database%20ERD.png)
+  ### Model Class Diagram ###
+  ![Model Class Diagram](/Images/Model%20Class%20Diagram.png)
+  ### Business Class Diagram ###
+  ![Business Class Diagram](/Images/Business%20Class%20Diagram.png)
+  ### GUI Class Diagram ###
+  ![GUI Class Diagram](/Images/GUI%20Class%20Diagram.png)
+  ### Test Class Diagram ###
+  ![Tests Class Diagram](/Images/Tests%20Class%20Diagram.png)
 
 ## Project Board ## 
-
-## Wireframes ## 
-
+  ### Start of Sprint 1 ###
+  ![Start of Sprint 1 Project Board](/Images/Start%20of%20Sprint%201.png)
+  ### End of Sprint 1 ###
+  ![End of Sprint 1 Project Board](/Images/End%20of%20Sprint%201.png)
+  ### Start of Sprint 2 ###
+  ![Start of Sprint 2 Project Board](/Images/Start%20of%20Sprint%202.png)
+  ### End of Sprint 2 ###
+  ![End of Sprint 2 Project Board](/Images/End%20of%20Sprint%202.png)
+  ### Start of Sprint 3 ###
+  ![Start of Sprint 3 Project Board](/Images/Start%20of%20Sprint%203.png)
+  ### End of Sprint 3 ###
+  ![End of Sprint 3 Project Board](/Images/End%20of%20Sprint%203.png)
+  
+## Mockups ## 
+ ### Default View ###
+ ![Default Mockup View](/Images/ProjectWireframeBase.png)
+ ### Project Overview ###
+ ![Project Overview Mockup](/Images/ProjectWireframeProjectView.png)
+ ### Features View ###
+ ![Features Mockup View](/Images/ProjectWireframeFeaturesView.png)
+ ### Issues View ###
+ ![Issues Mockup View](/Images/ProjectWireframeIssuesView.png)
+ ### Note View ###
+ ![Note Mockup View](/Images/ProjectWireframeNotesView.png)
+ 
 ## Screenshots ## 
 
 ## Download ##
