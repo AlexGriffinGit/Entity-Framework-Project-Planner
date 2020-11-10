@@ -16,210 +16,210 @@ using ProjectPlannerBusiness;
 
 namespace ProjectPlannerGUI
 {
-    public partial class ProjectPlannerMain : Window
+    public class ShowAndHide
     {
-        private void HideProjectFields()
+        public void HideProjectFields()
         {
-            ProjectScrollView.Visibility = Visibility.Hidden;
-            ProjectScrollView.ScrollToTop();
+            ProjectPlannerMain.window.ProjectScrollView.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.ProjectScrollView.ScrollToTop();
 
-            ProjectIDText.Content = String.Empty;
-            ProjectTitleTextBox.Text = String.Empty;
-            ProjectDescriptionTextBox.Text = String.Empty;
-            ProjectStatusComboBox.SelectedIndex = -1;
-            ProjectLinkTextBox.Text = String.Empty;
-            ProjectCompletedText.Text = String.Empty;
-            ProjectToDoText.Text = String.Empty;
-            ProjectIssuesText.Text = String.Empty;
-            ProjectProgressBar.Value = 0;
+            ProjectPlannerMain.window.ProjectIDText.Content = String.Empty;
+            ProjectPlannerMain.window.ProjectTitleTextBox.Text = String.Empty;
+            ProjectPlannerMain.window.ProjectDescriptionTextBox.Text = String.Empty;
+            ProjectPlannerMain.window.ProjectStatusComboBox.SelectedIndex = -1;
+            ProjectPlannerMain.window.ProjectLinkTextBox.Text = String.Empty;
+            ProjectPlannerMain.window.ProjectCompletedText.Text = String.Empty;
+            ProjectPlannerMain.window.ProjectToDoText.Text = String.Empty;
+            ProjectPlannerMain.window.ProjectIssuesText.Text = String.Empty;
+            ProjectPlannerMain.window.ProjectProgressBar.Value = 0;
         }
 
-        private void ShowProjectFields()
+        public void ShowProjectFields()
         {
-            ProjectScrollView.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.ProjectScrollView.Visibility = Visibility.Visible;
         }
 
-        private void HideFeatureFields()
+        public void HideFeatureFields()
         {
-            FeatureScrollView.Visibility = Visibility.Hidden;
-            FeatureScrollView.ScrollToTop();
+            ProjectPlannerMain.window.FeatureScrollView.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.FeatureScrollView.ScrollToTop();
 
-            FeatureIDText.Content = String.Empty;
-            FeatureTitleTextBox.Text = String.Empty;
-            FeatureDescriptionTextBox.Text = String.Empty;
-            FeatureProjectIDText.Content = String.Empty;
-            FeatureStatusComboBox.SelectedIndex = -1;
-            FeaturePriorityTextBox.Text = String.Empty;
-            FeatureNotesTextBox.Text = String.Empty;
+            ProjectPlannerMain.window.FeatureIDText.Content = String.Empty;
+            ProjectPlannerMain.window.FeatureTitleTextBox.Text = String.Empty;
+            ProjectPlannerMain.window.FeatureDescriptionTextBox.Text = String.Empty;
+            ProjectPlannerMain.window.FeatureProjectIDText.Content = String.Empty;
+            ProjectPlannerMain.window.FeatureStatusComboBox.SelectedIndex = -1;
+            ProjectPlannerMain.window.FeaturePriorityTextBox.Text = String.Empty;
+            ProjectPlannerMain.window.FeatureNotesTextBox.Text = String.Empty;
         }
 
-        private void ShowFeatureFields()
+        public void ShowFeatureFields()
         {
-            FeatureScrollView.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.FeatureScrollView.Visibility = Visibility.Visible;
         }
 
-        private void HideFeatureLists()
+        public void HideFeatureLists()
         {
-            FeaturePlannedListTitle.Visibility = Visibility.Hidden;
-            FeatureInProgressListTitle.Visibility = Visibility.Hidden;
-            FeatureTestingListTitle.Visibility = Visibility.Hidden;
-            FeatureCompleteListTitle.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.FeaturePlannedListTitle.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.FeatureInProgressListTitle.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.FeatureTestingListTitle.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.FeatureCompleteListTitle.Visibility = Visibility.Hidden;
 
-            FeaturePlannedView.Visibility = Visibility.Hidden;
-            FeatureInProgressView.Visibility = Visibility.Hidden;
-            FeatureTestingView.Visibility = Visibility.Hidden;
-            FeatureCompleteView.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.FeaturePlannedView.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.FeatureInProgressView.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.FeatureTestingView.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.FeatureCompleteView.Visibility = Visibility.Hidden;
 
-            PlannedFeatures.Children.Clear();
-            InProgressFeatures.Children.Clear();
-            TestingFeatures.Children.Clear();
-            CompleteFeatures.Children.Clear();
+            ProjectPlannerMain.window.PlannedFeatures.Children.Clear();
+            ProjectPlannerMain.window.InProgressFeatures.Children.Clear();
+            ProjectPlannerMain.window.TestingFeatures.Children.Clear();
+            ProjectPlannerMain.window.CompleteFeatures.Children.Clear();
         }
 
-        private void ShowFeatureLists()
+        public void ShowFeatureLists()
         {
-            FeaturePlannedListTitle.Visibility = Visibility.Visible;
-            FeatureInProgressListTitle.Visibility = Visibility.Visible;
-            FeatureTestingListTitle.Visibility = Visibility.Visible;
-            FeatureCompleteListTitle.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.FeaturePlannedListTitle.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.FeatureInProgressListTitle.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.FeatureTestingListTitle.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.FeatureCompleteListTitle.Visibility = Visibility.Visible;
 
-            FeaturePlannedView.Visibility = Visibility.Visible;
-            FeatureInProgressView.Visibility = Visibility.Visible;
-            FeatureTestingView.Visibility = Visibility.Visible;
-            FeatureCompleteView.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.FeaturePlannedView.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.FeatureInProgressView.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.FeatureTestingView.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.FeatureCompleteView.Visibility = Visibility.Visible;
         }
 
-        private void HideIssueFields()
+        public void HideIssueFields()
         {
-            IssueScrollView.Visibility = Visibility.Hidden;
-            IssueScrollView.ScrollToTop();
+            ProjectPlannerMain.window.IssueScrollView.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.IssueScrollView.ScrollToTop();
 
-            IssueIDText.Content = String.Empty;
-            IssueTitleTextBox.Text = String.Empty;
-            IssueDescriptionTextBox.Text = String.Empty;
-            IssueProjectIDText.Content = String.Empty;
-            IssueStatusComboBox.SelectedIndex = -1;
-            IssuePriorityTextBox.Text = String.Empty;
-            IssueNotesTextBox.Text = String.Empty;
+            ProjectPlannerMain.window.IssueIDText.Content = String.Empty;
+            ProjectPlannerMain.window.IssueTitleTextBox.Text = String.Empty;
+            ProjectPlannerMain.window.IssueDescriptionTextBox.Text = String.Empty;
+            ProjectPlannerMain.window.IssueProjectIDText.Content = String.Empty;
+            ProjectPlannerMain.window.IssueStatusComboBox.SelectedIndex = -1;
+            ProjectPlannerMain.window.IssuePriorityTextBox.Text = String.Empty;
+            ProjectPlannerMain.window.IssueNotesTextBox.Text = String.Empty;
         }
 
-        private void ShowIssueFields()
+        public void ShowIssueFields()
         {
-            IssueScrollView.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.IssueScrollView.Visibility = Visibility.Visible;
         }
 
-        private void HideIssueLists()
+        public void HideIssueLists()
         {
-            IssueKnownListTitle.Visibility = Visibility.Hidden;
-            IssueInProgressTitle.Visibility = Visibility.Hidden;
-            IssueTestingTitle.Visibility = Visibility.Hidden;
-            IssueResolvedTitle.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.IssueKnownListTitle.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.IssueInProgressTitle.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.IssueTestingTitle.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.IssueResolvedTitle.Visibility = Visibility.Hidden;
 
-            IssueKnownView.Visibility = Visibility.Hidden;
-            IssueInProgressView.Visibility = Visibility.Hidden;
-            IssueTestingView.Visibility = Visibility.Hidden;
-            IssueResolvedView.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.IssueKnownView.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.IssueInProgressView.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.IssueTestingView.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.IssueResolvedView.Visibility = Visibility.Hidden;
 
-            KnownIssues.Children.Clear();
-            InProgressIssues.Children.Clear();
-            TestingIssues.Children.Clear();
-            ResolvedIssues.Children.Clear();
+            ProjectPlannerMain.window.KnownIssues.Children.Clear();
+            ProjectPlannerMain.window.InProgressIssues.Children.Clear();
+            ProjectPlannerMain.window.TestingIssues.Children.Clear();
+            ProjectPlannerMain.window.ResolvedIssues.Children.Clear();
         }
 
-        private void ShowIssueLists()
+        public void ShowIssueLists()
         {
-            IssueKnownListTitle.Visibility = Visibility.Visible;
-            IssueInProgressTitle.Visibility = Visibility.Visible;
-            IssueTestingTitle.Visibility = Visibility.Visible;
-            IssueResolvedTitle.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.IssueKnownListTitle.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.IssueInProgressTitle.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.IssueTestingTitle.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.IssueResolvedTitle.Visibility = Visibility.Visible;
 
-            IssueKnownView.Visibility = Visibility.Visible;
-            IssueInProgressView.Visibility = Visibility.Visible;
-            IssueTestingView.Visibility = Visibility.Visible;
-            IssueResolvedView.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.IssueKnownView.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.IssueInProgressView.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.IssueTestingView.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.IssueResolvedView.Visibility = Visibility.Visible;
         }
 
-        private void HideNoteFields()
+        public void HideNoteFields()
         {
-            NoteScrollView.Visibility = Visibility.Hidden;
-            NoteScrollView.ScrollToTop();
+            ProjectPlannerMain.window.NoteScrollView.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.NoteScrollView.ScrollToTop();
 
-            NoteIDText.Content = String.Empty;
-            NoteTitleTextBox.Text = String.Empty;
-            NoteBodyTextBox.Text = String.Empty;
+            ProjectPlannerMain.window.NoteIDText.Content = String.Empty;
+            ProjectPlannerMain.window.NoteTitleTextBox.Text = String.Empty;
+            ProjectPlannerMain.window.NoteBodyTextBox.Text = String.Empty;
         }
 
-        private void ShowNoteFields()
+        public void ShowNoteFields()
         {
-            NoteScrollView.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.NoteScrollView.Visibility = Visibility.Visible;
         }
 
-        private void HideNoteList()
+        public void HideNoteList()
         {
-            NotesView.Visibility = Visibility.Hidden;
-            NoteStackPanel.Children.Clear();
+            ProjectPlannerMain.window.NotesView.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.NoteStackPanel.Children.Clear();
         }
 
-        private void ShowNoteList()
+        public void ShowNoteList()
         {
-            NotesView.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.NotesView.Visibility = Visibility.Visible;
         }
 
-        private void HideCrudButtons()
+        public void HideCrudButtons()
         {
-            AddButton.Visibility = Visibility.Hidden;
-            DeleteButton.Visibility = Visibility.Hidden;
-            ConfirmButton.Visibility = Visibility.Hidden;
-            Cancelbutton.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.AddButton.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.DeleteButton.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.ConfirmButton.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.Cancelbutton.Visibility = Visibility.Hidden;
         }
 
-        private void HideProjectComboBox()
+        public void HideProjectComboBox()
         {
-            ProjectComboBox.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.ProjectComboBox.Visibility = Visibility.Hidden;
         }
 
-        private void ShowProjectComboBox()
+        public void ShowProjectComboBox()
         {
-            ProjectComboBox.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.ProjectComboBox.Visibility = Visibility.Visible;
         }
 
-        private void HideProjectSubheadingButtons()
+        public void HideProjectSubheadingButtons()
         {
-            ProjectOverviewButton.Visibility = Visibility.Hidden;
-            ProjectFeaturesButton.Visibility = Visibility.Hidden;
-            ProjectIssuesButton.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.ProjectOverviewButton.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.ProjectFeaturesButton.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.ProjectIssuesButton.Visibility = Visibility.Hidden;
         }
 
-        private void ShowProjectSubheadingButtons()
+        public void ShowProjectSubheadingButtons()
         {
-            ProjectOverviewButton.Visibility = Visibility.Visible;
-            ProjectFeaturesButton.Visibility = Visibility.Visible;
-            ProjectIssuesButton.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.ProjectOverviewButton.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.ProjectFeaturesButton.Visibility = Visibility.Visible;
+            ProjectPlannerMain.window.ProjectIssuesButton.Visibility = Visibility.Visible;
         }
 
-        private void HideSearch()
+        public void HideSearch()
         {
-            SearchFields.Visibility = Visibility.Hidden;
-            SearchScrollView.Visibility = Visibility.Hidden;
-            SearchStackPanel.Children.Clear();
+            ProjectPlannerMain.window.SearchFields.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.SearchScrollView.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.SearchStackPanel.Children.Clear();
 
-            SearchProjectsCheckBox.IsChecked = false;
-            SearchFeaturesCheckBox.IsChecked = false;
-            SearchIssuesCheckBox.IsChecked = false;
-            SearchNotesCheckBox.IsChecked = false;
+            ProjectPlannerMain.window.SearchProjectsCheckBox.IsChecked = false;
+            ProjectPlannerMain.window.SearchFeaturesCheckBox.IsChecked = false;
+            ProjectPlannerMain.window.SearchIssuesCheckBox.IsChecked = false;
+            ProjectPlannerMain.window.SearchNotesCheckBox.IsChecked = false;
 
-            SearchTextBox.Text = String.Empty;
+            ProjectPlannerMain.window.SearchTextBox.Text = String.Empty;
         }
 
-        private void HideExport()
+        public void HideExport()
         {
-            ExportFields.Visibility = Visibility.Hidden;
-            ExportOutPutStackPanel.Children.Clear();
+            ProjectPlannerMain.window.ExportFields.Visibility = Visibility.Hidden;
+            ProjectPlannerMain.window.ExportOutPutStackPanel.Children.Clear();
 
-            ExportProjectsCheckBox.IsChecked = false;
-            ExportFeaturesCheckBox.IsChecked = false;
-            ExportIssuesCheckBox.IsChecked = false;
-            ExportNotesCheckBox.IsChecked = false;
+            ProjectPlannerMain.window.ExportProjectsCheckBox.IsChecked = false;
+            ProjectPlannerMain.window.ExportFeaturesCheckBox.IsChecked = false;
+            ProjectPlannerMain.window.ExportIssuesCheckBox.IsChecked = false;
+            ProjectPlannerMain.window.ExportNotesCheckBox.IsChecked = false;
         }
     }
 }

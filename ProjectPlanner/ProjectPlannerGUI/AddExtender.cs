@@ -18,10 +18,10 @@ using ProjectPlannerModel;
 
 namespace ProjectPlannerGUI
 {
-    public partial class ProjectPlannerMain : Window
+    public class AddExtender : Window
     {
         //Create expander for feature lists
-        private void CreateExpander(StackPanel panelToAddTo, Feature relatedFeature)
+        public void CreateExpander(StackPanel panelToAddTo, Feature relatedFeature)
         {
             Expander _expander = new Expander();
 
@@ -31,7 +31,7 @@ namespace ProjectPlannerGUI
             _expander.IsExpanded = false;
             _expander.Tag = relatedFeature;
 
-            Style style = this.FindResource("ExpanderStyle") as Style;
+            Style style = ProjectPlannerMain.window.FindResource("ExpanderStyle") as Style;
             _expander.Style = style;
 
             _expander.AddHandler(Expander.ExpandedEvent, new RoutedEventHandler(_expander_Feature_Expanded));
@@ -50,7 +50,7 @@ namespace ProjectPlannerGUI
             TextBlock _titleText = new TextBlock { Text = relatedFeature.Title , TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _descriptionText = new TextBlock { Text = relatedFeature.Description, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _projectIDText = new TextBlock { Text = relatedFeature.ProjectId.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
-            TextBlock _statusText = new TextBlock() { TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), Text = _featureStatus[relatedFeature.Status] };
+            TextBlock _statusText = new TextBlock() { TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), Text = ProjectPlannerMain.window.FeatureStatus[relatedFeature.Status] };
             TextBlock _PriorityText = new TextBlock { Text = relatedFeature.Priority.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _notesText = new TextBlock { Text = relatedFeature.Notes, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
 
@@ -69,11 +69,11 @@ namespace ProjectPlannerGUI
             _deleteFeatureStackPanel.Children.Add(_deleteFeatureTextBlock);
             _deleteFeatureStackPanel.Children.Add(_deleteFeatureIcon);
 
-            Button _updateFeatureButton = new Button() { Content = _updateFeatureStackPanel, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(54, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 235, Margin = new Thickness(0, 8, 0, 0), Height = 35 };
-            _updateFeatureButton.Click += ButtonModifyFeature_Click;
+            Button _updateFeatureButton = new Button() { Content = _updateFeatureStackPanel, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(54, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = ProjectPlannerMain.window.FindResource("CRUDButtons") as Style, Width = 235, Margin = new Thickness(0, 8, 0, 0), Height = 35 };
+            _updateFeatureButton.Click += ProjectPlannerMain.window.ButtonModifyFeature_Click;
 
-            Button _deleteFeatureButton = new Button() { Content = _deleteFeatureStackPanel, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(54, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 235, Margin = new Thickness(0, 8, 0, 0), Height = 35 };
-            _deleteFeatureButton.Click += ButtonDeleteFeature_Click;
+            Button _deleteFeatureButton = new Button() { Content = _deleteFeatureStackPanel, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(54, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = ProjectPlannerMain.window.FindResource("CRUDButtons") as Style, Width = 235, Margin = new Thickness(0, 8, 0, 0), Height = 35 };
+            _deleteFeatureButton.Click += ProjectPlannerMain.window.ButtonDeleteFeature_Click;
 
             //These tags pass the feature that they relate to and set that as the selected feature in the CRUDManager
             _updateFeatureButton.Tag = relatedFeature;
@@ -102,7 +102,7 @@ namespace ProjectPlannerGUI
         }
 
         //Overloaded to create expander for issue lists
-        private void CreateExpander(StackPanel panelToAddTo, Issue relatedIssue)
+        public void CreateExpander(StackPanel panelToAddTo, Issue relatedIssue)
         {
             Expander _expander = new Expander();
 
@@ -112,7 +112,7 @@ namespace ProjectPlannerGUI
             _expander.IsExpanded = false;
             _expander.Tag = relatedIssue;
 
-            Style style = this.FindResource("ExpanderStyle") as Style;
+            Style style = ProjectPlannerMain.window.FindResource("ExpanderStyle") as Style;
             _expander.Style = style;
 
             _expander.AddHandler(Expander.ExpandedEvent, new RoutedEventHandler(_expander_Issue_Expanded));
@@ -131,7 +131,7 @@ namespace ProjectPlannerGUI
             TextBlock _titleText = new TextBlock { Text = relatedIssue.Title, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _descriptionText = new TextBlock { Text = relatedIssue.Description, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _projectIDText = new TextBlock { Text = relatedIssue.ProjectId.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
-            TextBlock _statusText = new TextBlock() { TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), Text = _issueStatus[relatedIssue.Status] };
+            TextBlock _statusText = new TextBlock() { TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), Text = ProjectPlannerMain.window.IssueStatus[relatedIssue.Status] };
             TextBlock _PriorityText = new TextBlock { Text = relatedIssue.Priority.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _notesText = new TextBlock { Text = relatedIssue.Notes, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
 
@@ -150,11 +150,11 @@ namespace ProjectPlannerGUI
             _deleteIssueStackPanel.Children.Add(_deleteIssueTextBlock);
             _deleteIssueStackPanel.Children.Add(_deleteIssueIcon);
 
-            Button _updateIssueButton = new Button() { Content = _updateIssueStackPanel, FontSize = 28, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(54, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 235, Margin = new Thickness(0, 8, 0, 0), Height = 35 };
-            _updateIssueButton.Click += ButtonModifyIssue_Click;
+            Button _updateIssueButton = new Button() { Content = _updateIssueStackPanel, FontSize = 28, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(54, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = ProjectPlannerMain.window.FindResource("CRUDButtons") as Style, Width = 235, Margin = new Thickness(0, 8, 0, 0), Height = 35 };
+            _updateIssueButton.Click += ProjectPlannerMain.window.ButtonModifyIssue_Click;
 
-            Button _deleteIssueButton = new Button() { Content = _deleteIssueStackPanel, FontSize = 28, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(54, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Width = 235, Margin = new Thickness(0, 8, 0, 0), Height = 35 };
-            _deleteIssueButton.Click += ButtonDeleteIssue_Click;
+            Button _deleteIssueButton = new Button() { Content = _deleteIssueStackPanel, FontSize = 28, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(54, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = ProjectPlannerMain.window.FindResource("CRUDButtons") as Style, Width = 235, Margin = new Thickness(0, 8, 0, 0), Height = 35 };
+            _deleteIssueButton.Click += ProjectPlannerMain.window.ButtonDeleteIssue_Click;
 
             //These tags pass the issue that they relate to and set that as the selected issue in the CRUDManager
             _updateIssueButton.Tag = relatedIssue;
@@ -183,7 +183,7 @@ namespace ProjectPlannerGUI
         }
 
         //Overloaded to create expander for note lists
-        private void CreateExpander(Note note)
+        public void CreateExpander(Note note)
         {
             Expander _expander = new Expander();
 
@@ -193,10 +193,10 @@ namespace ProjectPlannerGUI
             _expander.Background = new SolidColorBrush(Colors.Transparent);
             _expander.IsExpanded = false;
             _expander.Tag = note;
-            _expander.FontSize = 32;
+            _expander.FontSize = 30;
             _expander.Margin = Margin = new Thickness(0, 0, 0, 10);
 
-            Style style = this.FindResource("ExpanderStyle") as Style;
+            Style style = ProjectPlannerMain.window.FindResource("ExpanderStyle") as Style;
             _expander.Style = style;
 
             _expander.AddHandler(Expander.ExpandedEvent, new RoutedEventHandler(_expander_Note_Expanded));       
@@ -222,11 +222,11 @@ namespace ProjectPlannerGUI
             _deleteNoteStackPanel.Children.Add(_deleteNoteTextBlock);
             _deleteNoteStackPanel.Children.Add(_deleteNoteIcon);
 
-            Button _updateNoteButton = new Button() { Content = _updateNoteStackPanel, FontSize = 30, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(60, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Margin = new Thickness(0, 8, 15, 0), Height = 40, Width = 525, HorizontalAlignment = HorizontalAlignment.Left };
-            _updateNoteButton.Click += ButtonModifyNote_Click;
+            Button _updateNoteButton = new Button() { Content = _updateNoteStackPanel, FontSize = 30, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(60, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = ProjectPlannerMain.window.FindResource("CRUDButtons") as Style, Margin = new Thickness(0, 8, 15, 0), Height = 40, Width = 525, HorizontalAlignment = HorizontalAlignment.Left };
+            _updateNoteButton.Click += ProjectPlannerMain.window.ButtonModifyNote_Click;
 
-            Button _deleteNoteButton = new Button() { Content = _deleteNoteStackPanel, FontSize = 30, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(60, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = this.FindResource("CRUDButtons") as Style, Margin = new Thickness(15, 8, 0, 0), Height = 40, Width = 525, HorizontalAlignment = HorizontalAlignment.Right };
-            _deleteNoteButton.Click += ButtonDeleteNote_Click;
+            Button _deleteNoteButton = new Button() { Content = _deleteNoteStackPanel, FontSize = 30, HorizontalContentAlignment = (HorizontalAlignment)TextAlignment.Left, Padding = new Thickness(60, 0, 0, 0), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#908F91")), Style = ProjectPlannerMain.window.FindResource("CRUDButtons") as Style, Margin = new Thickness(15, 8, 0, 0), Height = 40, Width = 525, HorizontalAlignment = HorizontalAlignment.Right };
+            _deleteNoteButton.Click += ProjectPlannerMain.window.ButtonDeleteNote_Click;
 
             //These tags pass the note that they relate to and set that as the selected note in the CRUDManager
             _updateNoteButton.Tag = note;
@@ -240,25 +240,25 @@ namespace ProjectPlannerGUI
 
             _expander.Content = _baseStackPanel;
 
-            NoteStackPanel.Children.Add(_expander);
+            ProjectPlannerMain.window.NoteStackPanel.Children.Add(_expander);
         }
 
-        private void _expander_Feature_Expanded(object sender, RoutedEventArgs e)
+        public void _expander_Feature_Expanded(object sender, RoutedEventArgs e)
         {
-            _crudManager.SetSelectedFeature(((Expander)sender).Tag);
+            ProjectPlannerMain.window.CrudManager.SetSelectedFeature(((Expander)sender).Tag);
         }
 
-        private void _expander_Issue_Expanded(object sender, RoutedEventArgs e)
+        public void _expander_Issue_Expanded(object sender, RoutedEventArgs e)
         {
-            _crudManager.SetSelectedIssue(((Expander)sender).Tag);
+            ProjectPlannerMain.window.CrudManager.SetSelectedIssue(((Expander)sender).Tag);
         }
 
-        private void _expander_Note_Expanded(object sender, RoutedEventArgs e)
+        public void _expander_Note_Expanded(object sender, RoutedEventArgs e)
         {
-            _crudManager.SetSelectedNote(((Expander)sender).Tag);
+            ProjectPlannerMain.window.CrudManager.SetSelectedNote(((Expander)sender).Tag);
         }
 
-        private void CreateSearchExpander(Project project)
+        public void CreateSearchExpander(Project project)
         {
             Expander _expander = new Expander();
 
@@ -268,7 +268,7 @@ namespace ProjectPlannerGUI
             _expander.IsExpanded = false;
             _expander.FontSize = 30;
 
-            Style style = this.FindResource("ExpanderStyle") as Style;
+            Style style = ProjectPlannerMain.window.FindResource("ExpanderStyle") as Style;
             _expander.Style = style;
 
             StackPanel _baseStackPanel = new StackPanel { Name = "BaseStackPanel", Orientation = Orientation.Vertical };
@@ -282,7 +282,7 @@ namespace ProjectPlannerGUI
             TextBlock _idText = new TextBlock { Text = project.ProjectId.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _titleText = new TextBlock { Text = project.Title, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _descriptionText = new TextBlock { Text = project.Description, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
-            TextBlock _statusText = new TextBlock { Text = _projectStatus[project.Status], TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
+            TextBlock _statusText = new TextBlock { Text = ProjectPlannerMain.window.ProjectStatus[project.Status], TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _linkText = new TextBlock() { TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), Text = project.Link };
 
             _baseStackPanel.Children.Add(_idLabel);
@@ -298,10 +298,10 @@ namespace ProjectPlannerGUI
 
             _expander.Content = _baseStackPanel;
 
-            SearchStackPanel.Children.Add(_expander);
+            ProjectPlannerMain.window.SearchStackPanel.Children.Add(_expander);
         }
 
-        private void CreateSearchExpander(Feature feature)
+        public void CreateSearchExpander(Feature feature)
         {
             Expander _expander = new Expander();
 
@@ -311,7 +311,7 @@ namespace ProjectPlannerGUI
             _expander.IsExpanded = false;
             _expander.FontSize = 30;
 
-            Style style = this.FindResource("ExpanderStyle") as Style;
+            Style style = ProjectPlannerMain.window.FindResource("ExpanderStyle") as Style;
             _expander.Style = style;
 
             StackPanel _baseStackPanel = new StackPanel { Name = "BaseStackPanel", Orientation = Orientation.Vertical };
@@ -328,7 +328,7 @@ namespace ProjectPlannerGUI
             TextBlock _titleText = new TextBlock { Text = feature.Title, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _descriptionText = new TextBlock { Text = feature.Description, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _projectIDText = new TextBlock { Text = feature.ProjectId.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
-            TextBlock _statusText = new TextBlock() { TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), Text = _featureStatus[feature.Status] };
+            TextBlock _statusText = new TextBlock() { TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), Text = ProjectPlannerMain.window.FeatureStatus[feature.Status] };
             TextBlock _PriorityText = new TextBlock { Text = feature.Priority.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _notesText = new TextBlock { Text = feature.Notes, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
 
@@ -349,10 +349,10 @@ namespace ProjectPlannerGUI
 
             _expander.Content = _baseStackPanel;
 
-            SearchStackPanel.Children.Add(_expander);
+            ProjectPlannerMain.window.SearchStackPanel.Children.Add(_expander);
         }
 
-        private void CreateSearchExpander(Issue issue)
+        public void CreateSearchExpander(Issue issue)
         {
             Expander _expander = new Expander();
 
@@ -362,7 +362,7 @@ namespace ProjectPlannerGUI
             _expander.IsExpanded = false;
             _expander.FontSize = 30;
 
-            Style style = this.FindResource("ExpanderStyle") as Style;
+            Style style = ProjectPlannerMain.window.FindResource("ExpanderStyle") as Style;
             _expander.Style = style;
 
             StackPanel _baseStackPanel = new StackPanel { Name = "BaseStackPanel", Orientation = Orientation.Vertical };
@@ -379,7 +379,7 @@ namespace ProjectPlannerGUI
             TextBlock _titleText = new TextBlock { Text = issue.Title, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _descriptionText = new TextBlock { Text = issue.Description, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _projectIDText = new TextBlock { Text = issue.ProjectId.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
-            TextBlock _statusText = new TextBlock() { TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), Text = _issueStatus[issue.Status] };
+            TextBlock _statusText = new TextBlock() { TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")), Text = ProjectPlannerMain.window.IssueStatus[issue.Status] };
             TextBlock _PriorityText = new TextBlock { Text = issue.Priority.ToString(), TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
             TextBlock _notesText = new TextBlock { Text = issue.Notes, TextWrapping = TextWrapping.Wrap, Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2D1D3")) };
 
@@ -400,10 +400,10 @@ namespace ProjectPlannerGUI
 
             _expander.Content = _baseStackPanel;
 
-            SearchStackPanel.Children.Add(_expander);
+            ProjectPlannerMain.window.SearchStackPanel.Children.Add(_expander);
         }
 
-        private void CreateSearchExpander(Note note)
+        public void CreateSearchExpander(Note note)
         {
             Expander _expander = new Expander();
 
@@ -413,7 +413,7 @@ namespace ProjectPlannerGUI
             _expander.IsExpanded = false;
             _expander.FontSize = 30;
 
-            Style style = this.FindResource("ExpanderStyle") as Style;
+            Style style = ProjectPlannerMain.window.FindResource("ExpanderStyle") as Style;
             _expander.Style = style;
 
             StackPanel _baseStackPanel = new StackPanel { Name = "BaseStackPanel", Orientation = Orientation.Vertical };
@@ -424,7 +424,7 @@ namespace ProjectPlannerGUI
 
             _expander.Content = _baseStackPanel;
 
-            SearchStackPanel.Children.Add(_expander);
+            ProjectPlannerMain.window.SearchStackPanel.Children.Add(_expander);
         }
     }
 }

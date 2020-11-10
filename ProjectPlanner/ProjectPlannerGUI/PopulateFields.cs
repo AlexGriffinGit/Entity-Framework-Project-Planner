@@ -17,37 +17,38 @@ using ProjectPlannerBusiness;
 
 namespace ProjectPlannerGUI
 {
-    public partial class ProjectPlannerMain : Window
+    public class PopulateFields
     {
-        CalculateProgress _calculateProgress = new CalculateProgress();
+        private CalculateProgress _calculateProgress = new CalculateProgress();
+        private AddExtender _addExtender = new AddExtender();
 
-        private void PopulateComboBox()
+        public void PopulateComboBox()
         {
-            ProjectComboBox.ItemsSource = _crudManager.RetrieveAllProjects();
+            ProjectPlannerMain.window.ProjectComboBox.ItemsSource = ProjectPlannerMain.window.CrudManager.RetrieveAllProjects();
         }
 
-        private void PopulateProjectFields()
+        public void PopulateProjectFields()
         {
-            ProjectIDText.Content = _crudManager.SelectedProject.ProjectId;
-            ProjectTitleTextBox.Text = _crudManager.SelectedProject.Title;
-            ProjectDescriptionTextBox.Text = _crudManager.SelectedProject.Description;
+            ProjectPlannerMain.window.ProjectIDText.Content = ProjectPlannerMain.window.CrudManager.SelectedProject.ProjectId;
+            ProjectPlannerMain.window.ProjectTitleTextBox.Text = ProjectPlannerMain.window.CrudManager.SelectedProject.Title;
+            ProjectPlannerMain.window.ProjectDescriptionTextBox.Text = ProjectPlannerMain.window.CrudManager.SelectedProject.Description;
 
-            if (_crudManager.SelectedProject.Status == -1)
+            if (ProjectPlannerMain.window.CrudManager.SelectedProject.Status == -1)
             {
-                ProjectStatusComboBox.SelectedIndex = 0;
+                ProjectPlannerMain.window.ProjectStatusComboBox.SelectedIndex = 0;
             }
             else
             {
-                ProjectStatusComboBox.SelectedIndex = _crudManager.SelectedProject.Status;
+                ProjectPlannerMain.window.ProjectStatusComboBox.SelectedIndex = ProjectPlannerMain.window.CrudManager.SelectedProject.Status;
             }
-            
-            ProjectLinkTextBox.Text = _crudManager.SelectedProject.Link;
+
+            ProjectPlannerMain.window.ProjectLinkTextBox.Text = ProjectPlannerMain.window.CrudManager.SelectedProject.Link;
 
             string _completeText = "";
 
-            if (_crudManager.RetrieveCompleteFeatures().Count > 0)
+            if (ProjectPlannerMain.window.CrudManager.RetrieveCompleteFeatures().Count > 0)
             {
-                foreach (var item in _crudManager.RetrieveCompleteFeatures())
+                foreach (var item in ProjectPlannerMain.window.CrudManager.RetrieveCompleteFeatures())
                 {
                     _completeText += $", { item.Title }";
                 }
@@ -55,146 +56,146 @@ namespace ProjectPlannerGUI
 
             string _toDoText = "";
 
-            foreach (var item in _crudManager.RetrieveToDoFeatures())
+            foreach (var item in ProjectPlannerMain.window.CrudManager.RetrieveToDoFeatures())
             {
                 if (item.Status > -1)
                 {
-                    _toDoText += $", { item.Title } - {_featureStatus[item.Status]}";
+                    _toDoText += $", { item.Title } - {ProjectPlannerMain.window.FeatureStatus[item.Status]}";
                 }
                 else
                 {
-                    _toDoText += $", { item.Title } - {_featureStatus[0]}";
+                    _toDoText += $", { item.Title } - {ProjectPlannerMain.window.FeatureStatus[0]}";
                 }
             }
             
             string _issueText = "";
 
-            foreach (var item in _crudManager.RetrieveProjectIssues())
+            foreach (var item in ProjectPlannerMain.window.CrudManager.RetrieveProjectIssues())
             {
                 if (item.Status > -1)
                 {
-                    _issueText += $", { item.Title } - { _issueStatus[item.Status] }";
+                    _issueText += $", { item.Title } - { ProjectPlannerMain.window.IssueStatus[item.Status] }";
                 }
                 else
                 {
-                    _issueText += $", { item.Title } - { _issueStatus[0]}";
+                    _issueText += $", { item.Title } - { ProjectPlannerMain.window.IssueStatus[0]}";
                 }    
             }
 
             if (_completeText.Length > 0)
             {
                 _completeText = _completeText.Remove(0, 2);
-                ProjectCompletedText.Text = _completeText;
+                ProjectPlannerMain.window.ProjectCompletedText.Text = _completeText;
             }
             else
             {
-                ProjectCompletedText.Text = "";
+                ProjectPlannerMain.window.ProjectCompletedText.Text = "";
             }
 
             if (_toDoText.Length > 0)
             {
                 _toDoText = _toDoText.Remove(0, 2);
-                ProjectToDoText.Text = _toDoText;
+                ProjectPlannerMain.window.ProjectToDoText.Text = _toDoText;
             }
             else
             {
-                ProjectToDoText.Text = "";
+                ProjectPlannerMain.window.ProjectToDoText.Text = "";
             }
 
             if (_issueText.Length > 0)
             {
                 _issueText = _issueText.Remove(0, 2);
-                ProjectIssuesText.Text = _issueText;
+                ProjectPlannerMain.window.ProjectIssuesText.Text = _issueText;
             }
             else
             {
-                ProjectIssuesText.Text = "";
+                ProjectPlannerMain.window.ProjectIssuesText.Text = "";
             }
 
-            ProjectProgressBar.Value = _calculateProgress.CalculateProjectProgress(_crudManager.SelectedProject);
-            ProgressBarValue.Text = ProjectProgressBar.Value.ToString() + "%";
+            ProjectPlannerMain.window.ProjectProgressBar.Value = _calculateProgress.CalculateProjectProgress(ProjectPlannerMain.window.CrudManager.SelectedProject);
+            ProjectPlannerMain.window.ProgressBarValue.Text = ProjectPlannerMain.window.ProjectProgressBar.Value.ToString() + "%";
         }
 
-        private void PopulateFeatureFields()
+        public void PopulateFeatureFields()
         {
-            FeatureIDText.Content = _crudManager.SelectedFeature.FeatureId;
-            FeatureTitleTextBox.Text = _crudManager.SelectedFeature.Title;
-            FeatureDescriptionTextBox.Text = _crudManager.SelectedFeature.Description;
-            FeatureProjectIDText.Content = _crudManager.SelectedFeature.ProjectId;
-            FeatureStatusComboBox.SelectedIndex = _crudManager.SelectedFeature.Status;
-            FeaturePriorityTextBox.Text = _crudManager.SelectedFeature.Priority.ToString();
-            FeatureNotesTextBox.Text = _crudManager.SelectedFeature.Notes;
+            ProjectPlannerMain.window.FeatureIDText.Content = ProjectPlannerMain.window.CrudManager.SelectedFeature.FeatureId;
+            ProjectPlannerMain.window.FeatureTitleTextBox.Text = ProjectPlannerMain.window.CrudManager.SelectedFeature.Title;
+            ProjectPlannerMain.window.FeatureDescriptionTextBox.Text = ProjectPlannerMain.window.CrudManager.SelectedFeature.Description;
+            ProjectPlannerMain.window.FeatureProjectIDText.Content = ProjectPlannerMain.window.CrudManager.SelectedFeature.ProjectId;
+            ProjectPlannerMain.window.FeatureStatusComboBox.SelectedIndex = ProjectPlannerMain.window.CrudManager.SelectedFeature.Status;
+            ProjectPlannerMain.window.FeaturePriorityTextBox.Text = ProjectPlannerMain.window.CrudManager.SelectedFeature.Priority.ToString();
+            ProjectPlannerMain.window.FeatureNotesTextBox.Text = ProjectPlannerMain.window.CrudManager.SelectedFeature.Notes;
         }
 
-        private void PopulateIssueFields()
+        public void PopulateIssueFields()
         {
-            IssueIDText.Content = _crudManager.SelectedIssue.IssueId;
-            IssueTitleTextBox.Text = _crudManager.SelectedIssue.Title;
-            IssueDescriptionTextBox.Text = _crudManager.SelectedIssue.Description;
-            IssueProjectIDText.Content = _crudManager.SelectedIssue.ProjectId;
-            IssueStatusComboBox.SelectedIndex = _crudManager.SelectedIssue.Status;
-            IssuePriorityTextBox.Text = _crudManager.SelectedIssue.Priority.ToString();
-            IssueNotesTextBox.Text = _crudManager.SelectedIssue.Notes;
+            ProjectPlannerMain.window.IssueIDText.Content = ProjectPlannerMain.window.CrudManager.SelectedIssue.IssueId;
+            ProjectPlannerMain.window.IssueTitleTextBox.Text = ProjectPlannerMain.window.CrudManager.SelectedIssue.Title;
+            ProjectPlannerMain.window.IssueDescriptionTextBox.Text = ProjectPlannerMain.window.CrudManager.SelectedIssue.Description;
+            ProjectPlannerMain.window.IssueProjectIDText.Content = ProjectPlannerMain.window.CrudManager.SelectedIssue.ProjectId;
+            ProjectPlannerMain.window.IssueStatusComboBox.SelectedIndex = ProjectPlannerMain.window.CrudManager.SelectedIssue.Status;
+            ProjectPlannerMain.window.IssuePriorityTextBox.Text = ProjectPlannerMain.window.CrudManager.SelectedIssue.Priority.ToString();
+            ProjectPlannerMain.window.IssueNotesTextBox.Text = ProjectPlannerMain.window.CrudManager.SelectedIssue.Notes;
         }
 
-        private void PopulateNoteFields()
+        public void PopulateNoteFields()
         {
-            NoteIDText.Content = _crudManager.SelectedNote.NoteId;
-            NoteTitleTextBox.Text = _crudManager.SelectedNote.Title;
-            NoteBodyTextBox.Text = _crudManager.SelectedNote.Body;
+            ProjectPlannerMain.window.NoteIDText.Content = ProjectPlannerMain.window.CrudManager.SelectedNote.NoteId;
+            ProjectPlannerMain.window.NoteTitleTextBox.Text = ProjectPlannerMain.window.CrudManager.SelectedNote.Title;
+            ProjectPlannerMain.window.NoteBodyTextBox.Text = ProjectPlannerMain.window.CrudManager.SelectedNote.Body;
         }
 
-        private void PopulateFeatureLists()
+        public void PopulateFeatureLists()
         {
-            foreach (var item in _crudManager.RetrieveProjectFeatures())
+            foreach (var item in ProjectPlannerMain.window.CrudManager.RetrieveProjectFeatures())
             {
                 if (item.Status == 0)
                 {
-                    CreateExpander(PlannedFeatures, item);
+                    _addExtender.CreateExpander(ProjectPlannerMain.window.PlannedFeatures, item);
                 }
                 else if (item.Status == 1)
                 {
-                    CreateExpander(InProgressFeatures, item);
+                    _addExtender.CreateExpander(ProjectPlannerMain.window.InProgressFeatures, item);
                 }
                 else if (item.Status == 2)
                 {
-                    CreateExpander(TestingFeatures, item);
+                    _addExtender.CreateExpander(ProjectPlannerMain.window.TestingFeatures, item);
                 }
                 else
                 {
-                    CreateExpander(CompleteFeatures, item);
+                    _addExtender.CreateExpander(ProjectPlannerMain.window.CompleteFeatures, item);
                 }
             }
         }
 
-        private void PopulateIssueLists()
+        public void PopulateIssueLists()
         {
-            foreach (var item in _crudManager.RetrieveProjectIssues())
+            foreach (var item in ProjectPlannerMain.window.CrudManager.RetrieveProjectIssues())
             {
                 if (item.Status == 0)
                 {
-                    CreateExpander(KnownIssues, item);
+                    _addExtender.CreateExpander(ProjectPlannerMain.window.KnownIssues, item);
                 }
                 else if (item.Status == 1)
                 {
-                    CreateExpander(InProgressIssues, item);
+                    _addExtender.CreateExpander(ProjectPlannerMain.window.InProgressIssues, item);
                 }
                 else if (item.Status == 2)
                 {
-                    CreateExpander(TestingIssues, item);
+                    _addExtender.CreateExpander(ProjectPlannerMain.window.TestingIssues, item);
                 }
-                else
+                else if (item.Status == 3)
                 {
-                    CreateExpander(ResolvedIssues, item);
+                    _addExtender.CreateExpander(ProjectPlannerMain.window.ResolvedIssues, item);
                 }
             }
         }
 
-        private void PopulateNoteList()
+        public void PopulateNoteList()
         {
-            foreach (var item in _crudManager.RetrieveAllNotes())
+            foreach (var item in ProjectPlannerMain.window.CrudManager.RetrieveAllNotes())
             {
-                CreateExpander(item);
+                _addExtender.CreateExpander(item);
             }
         }
     }
