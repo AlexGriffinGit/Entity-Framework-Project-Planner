@@ -283,5 +283,10 @@ The next step for the project planner is to be able to drag and drop items from 
    ![JSON Notepad After Export](/Images/JSONFeaturesExport.png)
    
 ## Download ##
+[Download Project Planner.exe](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/raw/main/ProjectPlanner.exe)
+
+
+
+[Download Whole Repository](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/archive/main.zip)
 
 [Back To Top](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#entity-framework-project-planner)
