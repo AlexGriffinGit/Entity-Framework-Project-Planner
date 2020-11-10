@@ -9,7 +9,7 @@ namespace ProjectPlannerTESTS
 {
     class JSONExporterTests
     {
-        private CRUDManager _crudManager = new CRUDManager();
+        private CRUDProjectManager _crudProjectManager = new CRUDProjectManager();
         private JSONExporter _jsonExporter = new JSONExporter();
 
         [SetUp]
@@ -54,7 +54,7 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                _crudManager.SelectedProject = _tempProj;
+                _crudProjectManager.SelectedProject = _tempProj;
 
                 File.Delete(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\JSON Export\Projects.json");
                 File.Delete(@"C:\Users\Alex\Documents\Engineering 73\Entity Framework Project\Entity-Framework-Project-Planner\ProjectPlanner\ProjectPlannerTESTS\bin\Debug\netcoreapp3.1\JSON Export\Features.json");
@@ -157,7 +157,7 @@ namespace ProjectPlannerTESTS
                     Status = 2,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Features.Add(_testFeat);
@@ -184,7 +184,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Issues.Add(_testIssue);

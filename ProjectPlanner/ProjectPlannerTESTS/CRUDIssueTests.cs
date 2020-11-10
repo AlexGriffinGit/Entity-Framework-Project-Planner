@@ -8,7 +8,8 @@ namespace ProjectPlannerTESTS
 {
     class CRUDIssueTests
     {
-        CRUDManager _crudManager = new CRUDManager();
+        CRUDIssueManager _crudIssueManager = new CRUDIssueManager();
+        CRUDProjectManager _crudProjectManager = new CRUDProjectManager();
 
         [SetUp]
         public void Setup()
@@ -32,7 +33,7 @@ namespace ProjectPlannerTESTS
                 pc.Projects.Add(_tempProj);
 
                 pc.SaveChanges();
-                _crudManager.SelectedProject = _tempProj;
+                _crudProjectManager.SelectedProject = _tempProj;
             }
         }
 
@@ -71,7 +72,7 @@ namespace ProjectPlannerTESTS
             {
                 int numOfIssues = pc.Issues.ToList().Count;
 
-                _crudManager.CreateNewIssue("TestIssue", "This is a test issue", 1, 1, "No notes needed");
+                _crudIssueManager.CreateNewIssue("TestIssue", "This is a test issue", 1, 1, "No notes needed", _crudProjectManager);
 
                 var _issueCount =
                     from i in pc.Issues
@@ -86,7 +87,7 @@ namespace ProjectPlannerTESTS
         {
             using (PlannerContext pc = new PlannerContext())
             {
-                _crudManager.CreateNewIssue("TestIssue", "This is a test issue", 1, 1, "No notes needed");
+                _crudIssueManager.CreateNewIssue("TestIssue", "This is a test issue", 1, 1, "No notes needed", _crudProjectManager);
 
                 var _selectedIssue =
                    from i in pc.Issues
@@ -128,7 +129,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Issues.Add(_testIssue);
@@ -137,7 +138,7 @@ namespace ProjectPlannerTESTS
 
                 List<Issue> _issueList = new List<Issue>();
 
-                _issueList = _crudManager.RetrieveAllIssues();
+                _issueList = _crudIssueManager.RetrieveAllIssues();
 
                 Assert.IsNotEmpty(_issueList);
             }
@@ -155,16 +156,16 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Issues.Add(_testIssue);
 
                 pc.SaveChanges();
 
-                _crudManager.SetSelectedIssue(_testIssue);
+                _crudIssueManager.SetSelectedIssue(_testIssue);
 
-                Assert.AreEqual(_testIssue, _crudManager.SelectedIssue);
+                Assert.AreEqual(_testIssue, _crudIssueManager.SelectedIssue);
             }
         }
 
@@ -180,22 +181,22 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Issues.Add(_testIssue);
 
                 pc.SaveChanges();
 
-                _crudManager.SetSelectedIssue(_testIssue);
+                _crudIssueManager.SetSelectedIssue(_testIssue);
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual("TestIssue", _crudManager.SelectedIssue.Title);
-                    Assert.AreEqual("This is a test issue", _crudManager.SelectedIssue.Description);
-                    Assert.AreEqual(1, _crudManager.SelectedIssue.Status);
-                    Assert.AreEqual(1, _crudManager.SelectedIssue.Priority);
-                    Assert.AreEqual("No notes needed", _crudManager.SelectedIssue.Notes);
+                    Assert.AreEqual("TestIssue", _crudIssueManager.SelectedIssue.Title);
+                    Assert.AreEqual("This is a test issue", _crudIssueManager.SelectedIssue.Description);
+                    Assert.AreEqual(1, _crudIssueManager.SelectedIssue.Status);
+                    Assert.AreEqual(1, _crudIssueManager.SelectedIssue.Priority);
+                    Assert.AreEqual("No notes needed", _crudIssueManager.SelectedIssue.Notes);
                 });
             }
         }
@@ -215,7 +216,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Issues.Add(_testIssue);
@@ -223,7 +224,7 @@ namespace ProjectPlannerTESTS
                 pc.SaveChanges();
 
                 _firstIssueID = _testIssue.IssueId;
-                _firstProjectID = _crudManager.SelectedProject.ProjectId;
+                _firstProjectID = _crudProjectManager.SelectedProject.ProjectId;
             }
 
             using (PlannerContext pc = new PlannerContext())
@@ -239,7 +240,7 @@ namespace ProjectPlannerTESTS
                 pc.Projects.Add(_secondProj);
                 pc.SaveChanges();
 
-                _crudManager.SelectedProject = _secondProj;
+                _crudProjectManager.SelectedProject = _secondProj;
             }
 
             using (PlannerContext pc = new PlannerContext())
@@ -251,7 +252,7 @@ namespace ProjectPlannerTESTS
                     Status = 2,
                     Priority = 2,
                     Notes = "No notes",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Issues.Add(_secondIssue);
@@ -260,7 +261,7 @@ namespace ProjectPlannerTESTS
 
                 string _title = ""; string _desc = ""; int _status = 0; int _priority = 0; string _notes = "";
 
-                foreach (var item in _crudManager.RetrieveProjectIssues())
+                foreach (var item in _crudIssueManager.RetrieveProjectIssues(_crudProjectManager))
                 {
                     _title = item.Title;
                     _desc = item.Description;
@@ -271,13 +272,13 @@ namespace ProjectPlannerTESTS
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual(1, _crudManager.RetrieveProjectIssues().Count);
+                    Assert.AreEqual(1, _crudIssueManager.RetrieveProjectIssues(_crudProjectManager).Count);
                     Assert.AreEqual("TestIssue2", _title);
                     Assert.AreEqual("This is the 2nd test issue", _desc);
                     Assert.AreEqual(2, _status);
                     Assert.AreEqual(2, _priority);
                     Assert.AreEqual("No notes", _notes);
-                    Assert.AreEqual(_crudManager.SelectedProject.ProjectId, _secondIssue.ProjectId);
+                    Assert.AreEqual(_crudProjectManager.SelectedProject.ProjectId, _secondIssue.ProjectId);
                     Assert.AreNotEqual(_firstIssueID, _secondIssue.IssueId);
                     Assert.AreNotEqual(_firstProjectID, _secondIssue.ProjectId);
                 });
@@ -296,7 +297,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Issues.Add(_testIssue);
@@ -305,18 +306,18 @@ namespace ProjectPlannerTESTS
 
                 int _key = _testIssue.IssueId;
 
-                _crudManager.SelectedIssue = _testIssue;
+                _crudIssueManager.SelectedIssue = _testIssue;
 
-                _crudManager.UpdateIssue("TestIssue", "This is an updated test issue", 1, 1, "No notes needed");
+                _crudIssueManager.UpdateIssue("TestIssue", "This is an updated test issue", 1, 1, "No notes needed");
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual("TestIssue", _crudManager.SelectedIssue.Title);
-                    Assert.AreEqual("This is an updated test issue", _crudManager.SelectedIssue.Description);
-                    Assert.AreEqual(1, _crudManager.SelectedIssue.Status);
-                    Assert.AreEqual(1, _crudManager.SelectedIssue.Priority);
-                    Assert.AreEqual("No notes needed", _crudManager.SelectedIssue.Notes);
-                    Assert.AreEqual(_key, _crudManager.SelectedIssue.IssueId);
+                    Assert.AreEqual("TestIssue", _crudIssueManager.SelectedIssue.Title);
+                    Assert.AreEqual("This is an updated test issue", _crudIssueManager.SelectedIssue.Description);
+                    Assert.AreEqual(1, _crudIssueManager.SelectedIssue.Status);
+                    Assert.AreEqual(1, _crudIssueManager.SelectedIssue.Priority);
+                    Assert.AreEqual("No notes needed", _crudIssueManager.SelectedIssue.Notes);
+                    Assert.AreEqual(_key, _crudIssueManager.SelectedIssue.IssueId);
                 });
             }
         }
@@ -333,7 +334,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Issues.Add(_testIssue);
@@ -342,18 +343,18 @@ namespace ProjectPlannerTESTS
 
                 int _key = _testIssue.IssueId;
 
-                _crudManager.SelectedIssue = _testIssue;
+                _crudIssueManager.SelectedIssue = _testIssue;
 
-                _crudManager.UpdateIssue("TestIssue", "This is an updated test issue", 2, 2, "No notes here");
+                _crudIssueManager.UpdateIssue("TestIssue", "This is an updated test issue", 2, 2, "No notes here");
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual("TestIssue", _crudManager.SelectedIssue.Title);
-                    Assert.AreEqual("This is an updated test issue", _crudManager.SelectedIssue.Description);
-                    Assert.AreEqual(2, _crudManager.SelectedIssue.Status);
-                    Assert.AreEqual(2, _crudManager.SelectedIssue.Priority);
-                    Assert.AreEqual("No notes here", _crudManager.SelectedIssue.Notes);
-                    Assert.AreEqual(_key, _crudManager.SelectedIssue.IssueId);
+                    Assert.AreEqual("TestIssue", _crudIssueManager.SelectedIssue.Title);
+                    Assert.AreEqual("This is an updated test issue", _crudIssueManager.SelectedIssue.Description);
+                    Assert.AreEqual(2, _crudIssueManager.SelectedIssue.Status);
+                    Assert.AreEqual(2, _crudIssueManager.SelectedIssue.Priority);
+                    Assert.AreEqual("No notes here", _crudIssueManager.SelectedIssue.Notes);
+                    Assert.AreEqual(_key, _crudIssueManager.SelectedIssue.IssueId);
                 });
             }
         }
@@ -370,7 +371,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Issues.Add(_testIssue);
@@ -379,18 +380,18 @@ namespace ProjectPlannerTESTS
 
                 int _key = _testIssue.IssueId;
 
-                _crudManager.SelectedIssue = _testIssue;
+                _crudIssueManager.SelectedIssue = _testIssue;
 
-                _crudManager.UpdateIssue("TestIssue", "This is a test issue", 1, 1, "No notes needed");
+                _crudIssueManager.UpdateIssue("TestIssue", "This is a test issue", 1, 1, "No notes needed");
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual("TestIssue", _crudManager.SelectedIssue.Title);
-                    Assert.AreEqual("This is a test issue", _crudManager.SelectedIssue.Description);
-                    Assert.AreEqual(1, _crudManager.SelectedIssue.Status);
-                    Assert.AreEqual(1, _crudManager.SelectedIssue.Priority);
-                    Assert.AreEqual("No notes needed", _crudManager.SelectedIssue.Notes);
-                    Assert.AreEqual(_key, _crudManager.SelectedIssue.IssueId);
+                    Assert.AreEqual("TestIssue", _crudIssueManager.SelectedIssue.Title);
+                    Assert.AreEqual("This is a test issue", _crudIssueManager.SelectedIssue.Description);
+                    Assert.AreEqual(1, _crudIssueManager.SelectedIssue.Status);
+                    Assert.AreEqual(1, _crudIssueManager.SelectedIssue.Priority);
+                    Assert.AreEqual("No notes needed", _crudIssueManager.SelectedIssue.Notes);
+                    Assert.AreEqual(_key, _crudIssueManager.SelectedIssue.IssueId);
                 });
             }
         }
@@ -407,7 +408,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Issues.Add(_testIssue);
@@ -416,9 +417,9 @@ namespace ProjectPlannerTESTS
 
                 int _key = _testIssue.IssueId;
 
-                _crudManager.SelectedIssue = _testIssue;
+                _crudIssueManager.SelectedIssue = _testIssue;
 
-                _crudManager.DeleteIssue();
+                _crudIssueManager.DeleteIssue();
 
                 var _containsDeleted =
                     from i in pc.Issues
@@ -441,7 +442,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Issues.Add(_testIssue);
@@ -450,9 +451,9 @@ namespace ProjectPlannerTESTS
 
                 int _key = _testIssue.IssueId;
 
-                _crudManager.SelectedIssue = _testIssue;
+                _crudIssueManager.SelectedIssue = _testIssue;
 
-                _crudManager.DeleteProject();
+                _crudProjectManager.DeleteProject();
 
                 var _containsDeleted =
                      from i in pc.Issues

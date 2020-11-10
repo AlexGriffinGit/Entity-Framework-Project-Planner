@@ -8,7 +8,7 @@ namespace ProjectPlannerTESTS
 {
     class CRUDNoteTests
     {
-        CRUDManager _crudManager = new CRUDManager();
+        CRUDNoteManager _crudNoteManager = new CRUDNoteManager();
 
         [SetUp]
         public void Setup()
@@ -55,7 +55,7 @@ namespace ProjectPlannerTESTS
             {
                 int numOfNotes = pc.Notes.ToList().Count;
 
-                _crudManager.CreateNewNote("TestNote", "A test note");
+                _crudNoteManager.CreateNewNote("TestNote", "A test note");
 
                 var _noteCount =
                     from n in pc.Notes
@@ -70,7 +70,7 @@ namespace ProjectPlannerTESTS
         {
             using (PlannerContext pc = new PlannerContext())
             {
-                _crudManager.CreateNewNote("TestNote", "A test note");
+                _crudNoteManager.CreateNewNote("TestNote", "A test note");
 
                 var _noteDetails =
                    from n in pc.Notes
@@ -111,7 +111,7 @@ namespace ProjectPlannerTESTS
 
                 List<Note> _noteList = new List<Note>();
 
-                _noteList = _crudManager.RetrieveAllNotes();
+                _noteList = _crudNoteManager.RetrieveAllNotes();
 
                 Assert.IsNotEmpty(_noteList);
             }
@@ -132,9 +132,9 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                _crudManager.SetSelectedNote(_testNote);
+                _crudNoteManager.SetSelectedNote(_testNote);
 
-                Assert.AreEqual(_testNote, _crudManager.SelectedNote);
+                Assert.AreEqual(_testNote, _crudNoteManager.SelectedNote);
             }
         }
 
@@ -153,12 +153,12 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                _crudManager.SetSelectedNote(_testNote);
+                _crudNoteManager.SetSelectedNote(_testNote);
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual("TestNote", _crudManager.SelectedNote.Title);
-                    Assert.AreEqual("A test note", _crudManager.SelectedNote.Body);
+                    Assert.AreEqual("TestNote", _crudNoteManager.SelectedNote.Title);
+                    Assert.AreEqual("A test note", _crudNoteManager.SelectedNote.Body);
                 });
             }
         }
@@ -180,15 +180,15 @@ namespace ProjectPlannerTESTS
 
                 int _key = _testNote.NoteId;
 
-                _crudManager.SelectedNote = _testNote;
+                _crudNoteManager.SelectedNote = _testNote;
 
-                _crudManager.UpdateNote("TestNote", "An updated test note");
+                _crudNoteManager.UpdateNote("TestNote", "An updated test note");
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual("TestNote", _crudManager.SelectedNote.Title);
-                    Assert.AreEqual("An updated test note", _crudManager.SelectedNote.Body);
-                    Assert.AreEqual(_key, _crudManager.SelectedNote.NoteId);
+                    Assert.AreEqual("TestNote", _crudNoteManager.SelectedNote.Title);
+                    Assert.AreEqual("An updated test note", _crudNoteManager.SelectedNote.Body);
+                    Assert.AreEqual(_key, _crudNoteManager.SelectedNote.NoteId);
                 });
             }
         }
@@ -210,15 +210,15 @@ namespace ProjectPlannerTESTS
 
                 int _key = _testNote.NoteId;
 
-                _crudManager.SelectedNote = _testNote;
+                _crudNoteManager.SelectedNote = _testNote;
 
-                _crudManager.UpdateNote("UpdatedTestNote", "An updated test note");
+                _crudNoteManager.UpdateNote("UpdatedTestNote", "An updated test note");
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual("UpdatedTestNote", _crudManager.SelectedNote.Title);
-                    Assert.AreEqual("An updated test note", _crudManager.SelectedNote.Body);
-                    Assert.AreEqual(_key, _crudManager.SelectedNote.NoteId);
+                    Assert.AreEqual("UpdatedTestNote", _crudNoteManager.SelectedNote.Title);
+                    Assert.AreEqual("An updated test note", _crudNoteManager.SelectedNote.Body);
+                    Assert.AreEqual(_key, _crudNoteManager.SelectedNote.NoteId);
                 });
             }
         }
@@ -240,15 +240,15 @@ namespace ProjectPlannerTESTS
 
                 int _key = _testNote.NoteId;
 
-                _crudManager.SelectedNote = _testNote;
+                _crudNoteManager.SelectedNote = _testNote;
 
-                _crudManager.UpdateNote("TestNote", "A test note");
+                _crudNoteManager.UpdateNote("TestNote", "A test note");
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual("TestNote", _crudManager.SelectedNote.Title);
-                    Assert.AreEqual("A test note", _crudManager.SelectedNote.Body);
-                    Assert.AreEqual(_key, _crudManager.SelectedNote.NoteId);
+                    Assert.AreEqual("TestNote", _crudNoteManager.SelectedNote.Title);
+                    Assert.AreEqual("A test note", _crudNoteManager.SelectedNote.Body);
+                    Assert.AreEqual(_key, _crudNoteManager.SelectedNote.NoteId);
                 });
             }
         }
@@ -270,9 +270,9 @@ namespace ProjectPlannerTESTS
 
                 int _key = _testNote.NoteId;
 
-                _crudManager.SelectedNote = _testNote;
+                _crudNoteManager.SelectedNote = _testNote;
 
-                _crudManager.DeleteNote();
+                _crudNoteManager.DeleteNote();
 
                 var _containsDeleted =
                     from n in pc.Notes

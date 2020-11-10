@@ -8,7 +8,7 @@ namespace ProjectPlannerTESTS
 {
     class CalculateProgressTests
     {
-        private CRUDManager _crudManager = new CRUDManager();
+        private CRUDProjectManager _crudManager = new CRUDProjectManager();
         private CalculateProgress _calculateProgress = new CalculateProgress();
 
         [SetUp]

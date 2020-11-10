@@ -10,7 +10,7 @@ namespace ProjectPlannerTESTS
     class SearcherTests
     {
         private Searcher _searcher = new Searcher();
-        private CRUDManager _crudManager = new CRUDManager();
+        private CRUDProjectManager _crudProjectManager = new CRUDProjectManager();
 
         [SetUp]
         public void Setup()
@@ -54,7 +54,7 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                _crudManager.SelectedProject = _tempProj;
+                _crudProjectManager.SelectedProject = _tempProj;
             }
         }
 
@@ -210,7 +210,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Features.Add(_testFeat);
@@ -259,7 +259,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Features.Add(_testFeat);
@@ -308,7 +308,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Issues.Add(_testIssue);
@@ -357,7 +357,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Issues.Add(_testIssue);

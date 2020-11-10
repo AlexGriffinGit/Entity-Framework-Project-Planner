@@ -8,7 +8,8 @@ namespace ProjectPlannerTESTS
 {
     class CRUDFeatureTests
     {
-        CRUDManager _crudManager = new CRUDManager();
+        CRUDFeatureManager _crudFeatureManager = new CRUDFeatureManager();
+        CRUDProjectManager _crudProjectManager = new CRUDProjectManager();
 
         [SetUp]
         public void Setup()
@@ -33,7 +34,7 @@ namespace ProjectPlannerTESTS
 
                 pc.SaveChanges();
 
-                _crudManager.SelectedProject = _tempProj;
+                _crudProjectManager.SelectedProject = _tempProj;
             }
         }
 
@@ -72,7 +73,7 @@ namespace ProjectPlannerTESTS
             {
                 int numOfFeatures = pc.Features.ToList().Count;
 
-                _crudManager.CreateNewFeature("TestFeat", "This is a test feature", 1, 1, "No notes needed");
+                _crudFeatureManager.CreateNewFeature("TestFeat", "This is a test feature", 1, 1, "No notes needed", _crudProjectManager);
 
                 var _featureCount =
                     from f in pc.Features
@@ -87,7 +88,7 @@ namespace ProjectPlannerTESTS
         {
             using (PlannerContext pc = new PlannerContext())
             {
-                _crudManager.CreateNewFeature("TestFeat", "This is a test feature", 1, 1, "No notes needed");
+                _crudFeatureManager.CreateNewFeature("TestFeat", "This is a test feature", 1, 1, "No notes needed", _crudProjectManager);
 
                 var _featureDetails =
                    from f in pc.Features
@@ -129,7 +130,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Features.Add(_testFeat);
@@ -138,7 +139,7 @@ namespace ProjectPlannerTESTS
 
                 List<Feature> _featureList = new List<Feature>();
 
-                _featureList = _crudManager.RetrieveAllFeatures();
+                _featureList = _crudFeatureManager.RetrieveAllFeatures();
 
                 Assert.IsNotEmpty(_featureList);
             }
@@ -156,16 +157,16 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Features.Add(_testFeat);
 
                 pc.SaveChanges();
 
-                _crudManager.SetSelectedFeature(_testFeat);
+                _crudFeatureManager.SetSelectedFeature(_testFeat);
 
-                Assert.AreEqual(_testFeat, _crudManager.SelectedFeature);
+                Assert.AreEqual(_testFeat, _crudFeatureManager.SelectedFeature);
             }
         }
 
@@ -181,22 +182,22 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Features.Add(_testFeat);
 
                 pc.SaveChanges();
 
-                _crudManager.SetSelectedFeature(_testFeat);
+                _crudFeatureManager.SetSelectedFeature(_testFeat);
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual("TestFeat", _crudManager.SelectedFeature.Title);
-                    Assert.AreEqual("This is a test feature", _crudManager.SelectedFeature.Description);
-                    Assert.AreEqual(1, _crudManager.SelectedFeature.Status);
-                    Assert.AreEqual(1, _crudManager.SelectedFeature.Priority);
-                    Assert.AreEqual("No notes needed", _crudManager.SelectedFeature.Notes);
+                    Assert.AreEqual("TestFeat", _crudFeatureManager.SelectedFeature.Title);
+                    Assert.AreEqual("This is a test feature", _crudFeatureManager.SelectedFeature.Description);
+                    Assert.AreEqual(1, _crudFeatureManager.SelectedFeature.Status);
+                    Assert.AreEqual(1, _crudFeatureManager.SelectedFeature.Priority);
+                    Assert.AreEqual("No notes needed", _crudFeatureManager.SelectedFeature.Notes);
                 });
             }
         }
@@ -216,7 +217,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Features.Add(_testFeat);
@@ -224,7 +225,7 @@ namespace ProjectPlannerTESTS
                 pc.SaveChanges();
 
                 _firstFeatureID = _testFeat.FeatureId;
-                _firstProjectID = _crudManager.SelectedProject.ProjectId;
+                _firstProjectID = _crudProjectManager.SelectedProject.ProjectId;
             }
 
             using (PlannerContext pc = new PlannerContext())
@@ -240,7 +241,7 @@ namespace ProjectPlannerTESTS
                 pc.Projects.Add(_secondProj);
                 pc.SaveChanges();
 
-                _crudManager.SelectedProject = _secondProj;
+                _crudProjectManager.SelectedProject = _secondProj;
             }
 
             using (PlannerContext pc = new PlannerContext())
@@ -252,7 +253,7 @@ namespace ProjectPlannerTESTS
                     Status = 2,
                     Priority = 2,
                     Notes = "No notes",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Features.Add(_secondFeat);
@@ -261,7 +262,7 @@ namespace ProjectPlannerTESTS
 
                 string _title = ""; string _desc = ""; int _status = 0; int _priority = 0; string _notes = "";
 
-                foreach (var item in _crudManager.RetrieveProjectFeatures())
+                foreach (var item in _crudFeatureManager.RetrieveProjectFeatures(_crudProjectManager))
                 {
                     _title = item.Title;
                     _desc = item.Description;
@@ -272,13 +273,13 @@ namespace ProjectPlannerTESTS
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual(1, _crudManager.RetrieveProjectFeatures().Count);
+                    Assert.AreEqual(1, _crudFeatureManager.RetrieveProjectFeatures(_crudProjectManager).Count);
                     Assert.AreEqual("TestFeat2", _title);
                     Assert.AreEqual("This is the 2nd test feature", _desc);
                     Assert.AreEqual(2, _status);
                     Assert.AreEqual(2, _priority);
                     Assert.AreEqual("No notes", _notes);
-                    Assert.AreEqual(_crudManager.SelectedProject.ProjectId, _secondFeat.ProjectId);
+                    Assert.AreEqual(_crudProjectManager.SelectedProject.ProjectId, _secondFeat.ProjectId);
                     Assert.AreNotEqual(_firstFeatureID, _secondFeat.FeatureId);
                     Assert.AreNotEqual(_firstProjectID, _secondFeat.ProjectId);
                 });
@@ -297,7 +298,7 @@ namespace ProjectPlannerTESTS
                     Status = 3,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 Feature _incompleteFeat = new Feature()
@@ -307,7 +308,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 2,
                     Notes = "No notes",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Features.Add(_completeFeat);
@@ -317,7 +318,7 @@ namespace ProjectPlannerTESTS
 
                 string _title = ""; string _desc = ""; int _status = 0; int _priority = 0; string _notes = ""; int _featureID = 0;
 
-                foreach (var item in _crudManager.RetrieveToDoFeatures())
+                foreach (var item in _crudFeatureManager.RetrieveToDoFeatures(_crudProjectManager))
                 {
                     _title = item.Title;
                     _desc = item.Description;
@@ -329,7 +330,7 @@ namespace ProjectPlannerTESTS
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual(1, _crudManager.RetrieveToDoFeatures().Count);
+                    Assert.AreEqual(1, _crudFeatureManager.RetrieveToDoFeatures(_crudProjectManager).Count);
                     Assert.AreEqual("This is the incomplete test feature", _desc);
                     Assert.AreEqual(1, _status);
                     Assert.AreEqual(2, _priority);
@@ -351,7 +352,7 @@ namespace ProjectPlannerTESTS
                     Status = 3,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 Feature _incompleteFeat = new Feature()
@@ -361,7 +362,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 2,
                     Notes = "No notes",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Features.Add(_completeFeat);
@@ -371,7 +372,7 @@ namespace ProjectPlannerTESTS
 
                 string _title = ""; string _desc = ""; int _status = 0; int _priority = 0; string _notes = ""; int _featureID = 0;
 
-                foreach (var item in _crudManager.RetrieveCompleteFeatures())
+                foreach (var item in _crudFeatureManager.RetrieveCompleteFeatures(_crudProjectManager))
                 {
                     _title = item.Title;
                     _desc = item.Description;
@@ -383,7 +384,7 @@ namespace ProjectPlannerTESTS
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual(1, _crudManager.RetrieveCompleteFeatures().Count);
+                    Assert.AreEqual(1, _crudFeatureManager.RetrieveCompleteFeatures(_crudProjectManager).Count);
                     Assert.AreEqual("This is the complete test feature", _desc);
                     Assert.AreEqual(3, _status);
                     Assert.AreEqual(1, _priority);
@@ -405,7 +406,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Features.Add(_testFeat);
@@ -414,18 +415,18 @@ namespace ProjectPlannerTESTS
 
                 int _key = _testFeat.FeatureId;
 
-                _crudManager.SelectedFeature = _testFeat;
+                _crudFeatureManager.SelectedFeature = _testFeat;
 
-                _crudManager.UpdateFeature("TestFeat", "This is an updated test feature", 1, 1, "No notes needed");
+                _crudFeatureManager.UpdateFeature("TestFeat", "This is an updated test feature", 1, 1, "No notes needed");
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual("TestFeat", _crudManager.SelectedFeature.Title);
-                    Assert.AreEqual("This is an updated test feature", _crudManager.SelectedFeature.Description);
-                    Assert.AreEqual(1, _crudManager.SelectedFeature.Status);
-                    Assert.AreEqual(1, _crudManager.SelectedFeature.Priority);
-                    Assert.AreEqual("No notes needed", _crudManager.SelectedFeature.Notes);
-                    Assert.AreEqual(_key, _crudManager.SelectedFeature.FeatureId);
+                    Assert.AreEqual("TestFeat", _crudFeatureManager.SelectedFeature.Title);
+                    Assert.AreEqual("This is an updated test feature", _crudFeatureManager.SelectedFeature.Description);
+                    Assert.AreEqual(1, _crudFeatureManager.SelectedFeature.Status);
+                    Assert.AreEqual(1, _crudFeatureManager.SelectedFeature.Priority);
+                    Assert.AreEqual("No notes needed", _crudFeatureManager.SelectedFeature.Notes);
+                    Assert.AreEqual(_key, _crudFeatureManager.SelectedFeature.FeatureId);
                 });
             }
         }
@@ -442,7 +443,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Features.Add(_testFeat);
@@ -451,18 +452,18 @@ namespace ProjectPlannerTESTS
 
                 int _key = _testFeat.FeatureId;
 
-                _crudManager.SelectedFeature = _testFeat;
+                _crudFeatureManager.SelectedFeature = _testFeat;
 
-                _crudManager.UpdateFeature("TestFeat", "This is an updated test feature", 2, 3, "No notes here");
+                _crudFeatureManager.UpdateFeature("TestFeat", "This is an updated test feature", 2, 3, "No notes here");
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual("TestFeat", _crudManager.SelectedFeature.Title);
-                    Assert.AreEqual("This is an updated test feature", _crudManager.SelectedFeature.Description);
-                    Assert.AreEqual(2, _crudManager.SelectedFeature.Status);
-                    Assert.AreEqual(3, _crudManager.SelectedFeature.Priority);
-                    Assert.AreEqual("No notes here", _crudManager.SelectedFeature.Notes);
-                    Assert.AreEqual(_key, _crudManager.SelectedFeature.FeatureId);
+                    Assert.AreEqual("TestFeat", _crudFeatureManager.SelectedFeature.Title);
+                    Assert.AreEqual("This is an updated test feature", _crudFeatureManager.SelectedFeature.Description);
+                    Assert.AreEqual(2, _crudFeatureManager.SelectedFeature.Status);
+                    Assert.AreEqual(3, _crudFeatureManager.SelectedFeature.Priority);
+                    Assert.AreEqual("No notes here", _crudFeatureManager.SelectedFeature.Notes);
+                    Assert.AreEqual(_key, _crudFeatureManager.SelectedFeature.FeatureId);
                 });
             }
         }
@@ -479,7 +480,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Features.Add(_testFeat);
@@ -488,18 +489,18 @@ namespace ProjectPlannerTESTS
 
                 int _key = _testFeat.FeatureId;
 
-                _crudManager.SelectedFeature = _testFeat;
+                _crudFeatureManager.SelectedFeature = _testFeat;
 
-                _crudManager.UpdateFeature("TestFeat", "This is a test feature", 1, 1, "No notes needed");
+                _crudFeatureManager.UpdateFeature("TestFeat", "This is a test feature", 1, 1, "No notes needed");
 
                 Assert.Multiple(() =>
                 {
-                    Assert.AreEqual("TestFeat", _crudManager.SelectedFeature.Title);
-                    Assert.AreEqual("This is a test feature", _crudManager.SelectedFeature.Description);
-                    Assert.AreEqual(1, _crudManager.SelectedFeature.Status);
-                    Assert.AreEqual(1, _crudManager.SelectedFeature.Priority);
-                    Assert.AreEqual("No notes needed", _crudManager.SelectedFeature.Notes);
-                    Assert.AreEqual(_key, _crudManager.SelectedFeature.FeatureId);
+                    Assert.AreEqual("TestFeat", _crudFeatureManager.SelectedFeature.Title);
+                    Assert.AreEqual("This is a test feature", _crudFeatureManager.SelectedFeature.Description);
+                    Assert.AreEqual(1, _crudFeatureManager.SelectedFeature.Status);
+                    Assert.AreEqual(1, _crudFeatureManager.SelectedFeature.Priority);
+                    Assert.AreEqual("No notes needed", _crudFeatureManager.SelectedFeature.Notes);
+                    Assert.AreEqual(_key, _crudFeatureManager.SelectedFeature.FeatureId);
                 });
             }
         }
@@ -516,7 +517,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Features.Add(_testFeat);
@@ -525,9 +526,9 @@ namespace ProjectPlannerTESTS
 
                 int _key = _testFeat.FeatureId;
 
-                _crudManager.SelectedFeature = _testFeat;
+                _crudFeatureManager.SelectedFeature = _testFeat;
 
-                _crudManager.DeleteFeature();
+                _crudFeatureManager.DeleteFeature();
 
                 var _containsDeleted =
                     from f in pc.Features
@@ -550,7 +551,7 @@ namespace ProjectPlannerTESTS
                     Status = 1,
                     Priority = 1,
                     Notes = "No notes needed",
-                    ProjectId = _crudManager.SelectedProject.ProjectId
+                    ProjectId = _crudProjectManager.SelectedProject.ProjectId
                 };
 
                 pc.Features.Add(_testFeat);
@@ -559,9 +560,9 @@ namespace ProjectPlannerTESTS
 
                 int _key = _testFeat.FeatureId;
 
-                _crudManager.SelectedFeature = _testFeat;
+                _crudFeatureManager.SelectedFeature = _testFeat;
 
-                _crudManager.DeleteProject();
+                _crudProjectManager.DeleteProject();
 
                 var _containsDeleted =
                     from f in pc.Features
