@@ -113,7 +113,7 @@ namespace ProjectPlannerGUI
             {
                 _expander.Header = relatedFeature.Title;
                 _expander.Tag = relatedFeature;
-                _expander.AddHandler(Expander.ExpandedEvent, new RoutedEventHandler(_expander_Feature_Expanded));
+                _expander.AddHandler(Expander.ExpandedEvent, new RoutedEventHandler(Expander_Feature_Expanded));
 
                 StackPanel _updateFeatureStackPanel = new StackPanel() { Orientation = Orientation.Horizontal };
                 StackPanel _deleteFeatureStackPanel = new StackPanel() { Orientation = Orientation.Horizontal };
@@ -202,7 +202,7 @@ namespace ProjectPlannerGUI
             {
                 _expander.Header = relatedIssue.Title;
                 _expander.Tag = relatedIssue;
-                _expander.AddHandler(Expander.ExpandedEvent, new RoutedEventHandler(_expander_Issue_Expanded));
+                _expander.AddHandler(Expander.ExpandedEvent, new RoutedEventHandler(Expander_Issue_Expanded));
 
                 StackPanel _updateIssueStackPanel = new StackPanel() { Orientation = Orientation.Horizontal };
                 StackPanel _deleteIssueStackPanel = new StackPanel() { Orientation = Orientation.Horizontal };
@@ -271,7 +271,7 @@ namespace ProjectPlannerGUI
                 _expander.Tag = note;
                 _expander.Margin = Margin = new Thickness(0, 0, 0, 10);
 
-                _expander.AddHandler(Expander.ExpandedEvent, new RoutedEventHandler(_expander_Note_Expanded));
+                _expander.AddHandler(Expander.ExpandedEvent, new RoutedEventHandler(Expander_Note_Expanded));
 
                 StackPanel _buttonStackPanel = new StackPanel { Name = "BaseStackPanel", Orientation = Orientation.Horizontal };
 
@@ -315,17 +315,17 @@ namespace ProjectPlannerGUI
             panelToAddTo.Children.Add(_expander);
         }
 
-        public void _expander_Feature_Expanded(object sender, RoutedEventArgs e)
+        public void Expander_Feature_Expanded(object sender, RoutedEventArgs e)
         {
             ProjectPlannerMain.window.CrudManager.SetSelectedFeature(((Expander)sender).Tag);
         }
 
-        public void _expander_Issue_Expanded(object sender, RoutedEventArgs e)
+        public void Expander_Issue_Expanded(object sender, RoutedEventArgs e)
         {
             ProjectPlannerMain.window.CrudManager.SetSelectedIssue(((Expander)sender).Tag);
         }
 
-        public void _expander_Note_Expanded(object sender, RoutedEventArgs e)
+        public void Expander_Note_Expanded(object sender, RoutedEventArgs e)
         {
             ProjectPlannerMain.window.CrudManager.SetSelectedNote(((Expander)sender).Tag);
         }
