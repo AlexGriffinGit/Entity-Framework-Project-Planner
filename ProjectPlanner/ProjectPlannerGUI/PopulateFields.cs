@@ -151,19 +151,19 @@ namespace ProjectPlannerGUI
             {
                 if (item.Status == 0)
                 {
-                    _addExtender.CreateExpander(ProjectPlannerMain.window.PlannedFeatures, item);
+                    _addExtender.CreateExpander(ProjectPlannerMain.window.PlannedFeatures, item, false);
                 }
                 else if (item.Status == 1)
                 {
-                    _addExtender.CreateExpander(ProjectPlannerMain.window.InProgressFeatures, item);
+                    _addExtender.CreateExpander(ProjectPlannerMain.window.InProgressFeatures, item, false);
                 }
                 else if (item.Status == 2)
                 {
-                    _addExtender.CreateExpander(ProjectPlannerMain.window.TestingFeatures, item);
+                    _addExtender.CreateExpander(ProjectPlannerMain.window.TestingFeatures, item, false);
                 }
                 else
                 {
-                    _addExtender.CreateExpander(ProjectPlannerMain.window.CompleteFeatures, item);
+                    _addExtender.CreateExpander(ProjectPlannerMain.window.CompleteFeatures, item, false);
                 }
             }
         }
@@ -174,19 +174,19 @@ namespace ProjectPlannerGUI
             {
                 if (item.Status == 0)
                 {
-                    _addExtender.CreateExpander(ProjectPlannerMain.window.KnownIssues, item);
+                    _addExtender.CreateExpander(ProjectPlannerMain.window.KnownIssues, item, false);
                 }
                 else if (item.Status == 1)
                 {
-                    _addExtender.CreateExpander(ProjectPlannerMain.window.InProgressIssues, item);
+                    _addExtender.CreateExpander(ProjectPlannerMain.window.InProgressIssues, item, false);
                 }
                 else if (item.Status == 2)
                 {
-                    _addExtender.CreateExpander(ProjectPlannerMain.window.TestingIssues, item);
+                    _addExtender.CreateExpander(ProjectPlannerMain.window.TestingIssues, item, false);
                 }
                 else if (item.Status == 3)
                 {
-                    _addExtender.CreateExpander(ProjectPlannerMain.window.ResolvedIssues, item);
+                    _addExtender.CreateExpander(ProjectPlannerMain.window.ResolvedIssues, item, false);
                 }
             }
         }
@@ -195,7 +195,7 @@ namespace ProjectPlannerGUI
         {
             foreach (var item in ProjectPlannerMain.window.CrudManager.RetrieveAllNotes())
             {
-                _addExtender.CreateExpander(item);
+                _addExtender.CreateExpander(ProjectPlannerMain.window.NoteStackPanel, item, false);
             }
         }
     }

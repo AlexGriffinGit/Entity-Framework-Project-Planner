@@ -867,7 +867,7 @@ namespace ProjectPlannerGUI
             {
                 foreach (var item in _searcher.SearchProjects(SearchTextBox.Text))
                 {
-                    _addExtender.CreateSearchExpander(item);
+                    _addExtender.CreateExpander(item);
                 }
             }
 
@@ -875,7 +875,7 @@ namespace ProjectPlannerGUI
             {
                 foreach (var item in _searcher.SearchFeatures(SearchTextBox.Text))
                 {
-                    _addExtender.CreateSearchExpander(item);
+                    _addExtender.CreateExpander(SearchStackPanel, item, true);
                 }
             }
 
@@ -883,7 +883,7 @@ namespace ProjectPlannerGUI
             {
                 foreach (var item in _searcher.SearchIssues(SearchTextBox.Text))
                 {
-                    _addExtender.CreateSearchExpander(item);
+                    _addExtender.CreateExpander(SearchStackPanel, item, true);
                 }
             }
 
@@ -891,7 +891,7 @@ namespace ProjectPlannerGUI
             {
                 foreach (var item in _searcher.SearchNotes(SearchTextBox.Text))
                 {
-                    _addExtender.CreateSearchExpander(item);
+                    _addExtender.CreateExpander(SearchStackPanel, item, true);
                 }
             }
         }
