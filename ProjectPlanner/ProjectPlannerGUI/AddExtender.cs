@@ -266,7 +266,7 @@ namespace ProjectPlannerGUI
             _expander.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF"));
             _expander.Background = new SolidColorBrush(Colors.Transparent);
             _expander.IsExpanded = false;
-            _expander.FontSize = 32;
+            _expander.FontSize = 30;
 
             Style style = this.FindResource("ExpanderStyle") as Style;
             _expander.Style = style;
@@ -309,7 +309,7 @@ namespace ProjectPlannerGUI
             _expander.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF"));
             _expander.Background = new SolidColorBrush(Colors.Transparent);
             _expander.IsExpanded = false;
-            _expander.FontSize = 32;
+            _expander.FontSize = 30;
 
             Style style = this.FindResource("ExpanderStyle") as Style;
             _expander.Style = style;
@@ -360,7 +360,7 @@ namespace ProjectPlannerGUI
             _expander.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF"));
             _expander.Background = new SolidColorBrush(Colors.Transparent);
             _expander.IsExpanded = false;
-            _expander.FontSize = 32;
+            _expander.FontSize = 30;
 
             Style style = this.FindResource("ExpanderStyle") as Style;
             _expander.Style = style;
@@ -411,7 +411,7 @@ namespace ProjectPlannerGUI
             _expander.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFEFEF"));
             _expander.Background = new SolidColorBrush(Colors.Transparent);
             _expander.IsExpanded = false;
-            _expander.FontSize = 32;
+            _expander.FontSize = 30;
 
             Style style = this.FindResource("ExpanderStyle") as Style;
             _expander.Style = style;
