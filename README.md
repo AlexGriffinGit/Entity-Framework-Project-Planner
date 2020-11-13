@@ -20,9 +20,31 @@
     * [Sprint Retrospective](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#sprint-retrospective-2)
 * [Project Retrospective](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#project-retrospective)
 * [Class Diagrams](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#class-diagrams)
+  * [Entity Relationship Diagram](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#entity-relationship-diagram)
+  * [Model Class Diagram](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#model-class-diagram)
+  * [Business Class Diagram](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#business-class-diagram)
+  * [GUI Class Diagram](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#gui-class-diagram)
+  * [Test Class Diagram](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#test-class-diagram)
 * [Kanban Board](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#project-board)
-* [Wireframes](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#wireframes)
+  * [Start of Sprint 1](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#start-of-sprint-1)
+  * [End of Sprint 1](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#end-of-sprint-1)
+  * [Start of Sprint 2](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#start-of-sprint-2)
+  * [End of Sprint 2](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#end-of-sprint-2)
+  * [Start of Sprint 3](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#start-of-sprint-3)
+  * [End of Sprint 3](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#end-of-sprint-3)
+* [Mockups](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#mockups)
+  * [Default View](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#default-view)
+  * [Project Overview](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#project-overview)
+  * [Features View](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#features-view)
+  * [Issues View](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#issues-view)
+  * [Notes View](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#note-view)
 * [Screenshots](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#screenshots)
+  * [Project Overview Screens](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#project-overview-screens)
+  * [Project Features Screens](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#project-features-screens)
+  * [Project Issues Screens](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#project-issues-screens)
+  * [Note Screens](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#note-screens)
+  * [Search Screens](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#search-screens)
+  * [Export Screens](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#export-screens)
 * [Download](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#download)
 
 ## Summary ##
@@ -174,11 +196,119 @@ In addition to this I would not create the GUI project until later on in the pro
 The next step for the project planner is to be able to drag and drop items from the feature and issue lists to different columns which would change their status, I would then probably extend this and have the projects listed in a similar way. Further than that I would extend the customisability of the program and allow changes for fonts and colours. This is a major step and would require rewriting a lot of the XAML code.
 
 ## Class Diagrams ##
+  ### Entity Relationship Diagram ###
+  ![Entity Relationship Diagram](/Images/Project%20Database%20ERD.png)
+  ### Model Class Diagram ###
+  ![Model Class Diagram](/Images/Model%20Class%20Diagram.png)
+  ### Business Class Diagram ###
+  ![Business Class Diagram](/Images/Business%20Class%20Diagram.png)
+  ### GUI Class Diagram ###
+  ![GUI Class Diagram](/Images/GUI%20Class%20Diagram.png)
+  ### Test Class Diagram ###
+  ![Tests Class Diagram](/Images/Tests%20Class%20Diagram.png)
 
 ## Project Board ## 
-
-## Wireframes ## 
-
+  ### Start of Sprint 1 ###
+  ![Start of Sprint 1 Project Board](/Images/Start%20of%20Sprint%201.png)
+  ### End of Sprint 1 ###
+  ![End of Sprint 1 Project Board](/Images/End%20of%20Sprint%201.png)
+  ### Start of Sprint 2 ###
+  ![Start of Sprint 2 Project Board](/Images/Start%20of%20Sprint%202.png)
+  ### End of Sprint 2 ###
+  ![End of Sprint 2 Project Board](/Images/End%20of%20Sprint%202.png)
+  ### Start of Sprint 3 ###
+  ![Start of Sprint 3 Project Board](/Images/Start%20of%20Sprint%203.png)
+  ### End of Sprint 3 ###
+  ![End of Sprint 3 Project Board](/Images/End%20of%20Sprint%203.png)
+  
+## Mockups ## 
+ ### Default View ###
+ ![Default Mockup View](/Images/ProjectWireframeBase.png)
+ ### Project Overview ###
+ ![Project Overview Mockup](/Images/ProjectWireframeProjectView.png)
+ ### Features View ###
+ ![Features Mockup View](/Images/ProjectWireframeFeaturesView.png)
+ ### Issues View ###
+ ![Issues Mockup View](/Images/ProjectWireframeIssuesView.png)
+ ### Note View ###
+ ![Note Mockup View](/Images/ProjectWireframeNotesView.png)
+ 
 ## Screenshots ## 
-
+ ### Project Overview Screens ###
+   #### No Project Selected ####
+   ![No Project Selected View](/Images/NoProjectSelectedView.png)
+   #### Add Project ####
+   ![Add Project View](/Images/AddProjectView.png)
+   #### Added Project ####
+   ![Added Project View](/Images/AddedProjectView.png)
+   #### Project With Issues And Features ####
+   ![Added Project With Issues And Features View](/Images/AddedProjectWithIssuesAndFeaturesView.png)
+   
+ ### Project Features Screens ###
+   #### No Features Added ####
+   ![No Features Added View](/Images/BlankFeaturesView.png)
+   #### Add Feature ####
+   ![Add Feature View](/Images/AddFeatureView.png)
+   #### Features Added ####
+   ![Features Added View](/Images/PopulatedFeaturesView.png)
+   #### Features Expanded ####
+   ![Features Expanded View](/Images/PopulatedFeaturesExpandedView.png)
+   
+ ### Project Issues Screens ###
+   #### No Issues Added ####
+   ![No Issues Added View](/Images/BlankIssuesView.png)
+   #### Add Issue ####
+   ![Add Issue View](/Images/AddIssueView.png)
+   #### Issues Added ####
+   ![Issues Added View](/Images/PopulatedIssuesView.png)
+   #### Issues Expanded ####
+   ![Issues Expanded View](/Images/PopulatedIssuesExpandedView.png)
+   
+ ### Note Screens ###
+   #### No Notes Added ####
+   ![No Notes Added View](/Images/BlankNotesView.png)
+   #### Add Note ####
+   ![Add Note View](/Images/AddNoteView.png)
+   #### Notes Added ####
+   ![Notes Added View](/Images/PopulatedNotesView.png)
+   #### Notes Expanded ####
+   ![Notes Expanded View](/Images/PopulatedNotesExpandedView.png)
+   
+ ### Search Screens ###
+   #### Empty Search ####
+   ![Empty Search View](/Images/EmptySearchView.png)
+   #### Populated Search ####
+   ![Populated Search View](/Images/PopulatedSearchView.png)
+   #### Populated Search Expanded ####
+   ![Populated Expanded Search View](/Images/PopulatedSearchExpandedView.png)
+   #### Case Insensitive Search ####
+   ![Case Insensitive Search View](/Images/CaseInsensitiveSearch.png)
+   #### Part Search ####
+   ![Part Search View](/Images/PartOfSearchView.png)
+   
+ ### Export Screens ###
+   #### Empty Export ####
+   ![Empty Export View](/Images/BlankExportView.png)
+   #### XML Export ####
+   ![XML Export View](/Images/XMLExportView.png)
+   #### JSON Export ####
+   ![JSON Export View](/Images/JSONExportView.png)
+   #### Case Insensitive Search ####
+   ![Case Insensitive Search View](/Images/CaseInsensitiveSearch.png)
+   #### Folder Pre Export ####
+   ![Folder Pre Export](/Images/FolderViewNoExport.png)
+   #### Folder Post Export ####
+   ![Folder Post Export](/Images/FolderViewExport.png)
+   #### XML Projects Export ####
+   ![XML Notepad After Export](/Images/XMLProjectsExport.png)
+   #### JSON Features Export ####
+   ![JSON Notepad After Export](/Images/JSONFeaturesExport.png)
+   
 ## Download ##
+[Download Project Planner.exe](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/raw/main/ProjectPlanner.exe)
+
+
+
+[Download Whole Repository](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner/archive/main.zip)
+
+[Back To Top](https://github.com/AlexGriffinGit/Entity-Framework-Project-Planner#entity-framework-project-planner)
