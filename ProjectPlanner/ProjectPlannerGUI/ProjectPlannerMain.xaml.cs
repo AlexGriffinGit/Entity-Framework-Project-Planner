@@ -983,5 +983,10 @@ namespace ProjectPlannerGUI
                 ExportOutPutStackPanel.Children.Add(_noteOutput);
             }
         }
+
+        void ProjectPlannerMain_Closing(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
